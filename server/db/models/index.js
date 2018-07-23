@@ -1,5 +1,8 @@
-const User = require('./user')
-
+const User = require('./user');
+const Order = require('./order');
+const Product = require('./product');
+const Review = require('./review');
+const Category = require('./category')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -13,6 +16,19 @@ const User = require('./user')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+// - Orders must belong to a user OR guest session (authenticated vs unauthenticated)
+
+Product.belongsTo(Category)
+Category.hasMany(Product)
+
+Review.belongsTo(Product)
+Review.belongsTo(User)
+
 module.exports = {
-  User
+  User,
+  Order,
+  Product,
+  Review,
+  Category
 }
