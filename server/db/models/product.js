@@ -30,7 +30,3 @@ const Product = db.define('product', {
 })
 
 module.exports = Product
-
-// class methods
-
-// create a function to filter based on category
