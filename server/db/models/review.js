@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Review = db.define('review', {
-    body: {
+    title: {
         type: Sequelize.STRING,
         validate: {
             len: [0, 30]
@@ -18,9 +18,11 @@ const Review = db.define('review', {
     comment: {
         type: Sequelize.TEXT,
         validate: {
-            len: [10, 200]
+            len: [10, 500]
         }
     }
 })
+
+// create a hook to populate title if it is not user generated.
 
 module.exports = Review

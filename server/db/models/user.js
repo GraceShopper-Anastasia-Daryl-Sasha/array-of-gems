@@ -3,6 +3,14 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -36,6 +44,10 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  userImage: {
+    type: Sequelize.STRING,
+    defaultValue: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png",
   }
 })
 
