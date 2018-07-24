@@ -5,11 +5,11 @@ const Review = require('./review')
 
 // - Orders must belong to a user OR guest session (authenticated vs unauthenticated)
 
-Review.belongsTo(Product, { foreignKey: 'ReviewProductId' })
-Product.hasMany(Review, { foreignKey: 'ReviewProductId' })
+Review.belongsTo(Product)
+Product.hasMany(Review)
 
-Review.belongsTo(User, { foreignKey: 'ReviewUserId' })
-User.hasMany(Review, { foreignKey: 'ReviewUserId' })
+Review.belongsTo(User)
+User.hasMany(Review)
 
 Order.belongsToMany(Product, { through: 'OrderProducts' })
 Product.belongsToMany(Order, { through: 'OrderProducts' })

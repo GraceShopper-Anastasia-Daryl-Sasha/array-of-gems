@@ -30,8 +30,8 @@ const reviews = [
       title: "Perfect!",
       rating: 3,
       comment: "This gemstone is SO Perfect. I received this last week.",
-      ReviewUserId: 2,
-      ReviewProductId: 9
+      userId: 2,
+      productId: 9
   },
   {
       title: "Awesome Service",
@@ -47,8 +47,8 @@ const reviews = [
       title: "Perfect alternative to Expensive birthstones",
       rating: 5,
       comment: "These are identical to size and cut. The colors are very vibrant. Great value at $7.99 for 12 vs. $5 each at Origami Owl. Highly recommend!",
-      ReviewUserId: 2,
-      ReviewProductId: 13
+      userId: 2,
+      productId: 13
   },
   {
       title: "Great!",
@@ -59,8 +59,8 @@ const reviews = [
       title: "Better than expected!",
       rating: 5,
       comment: "I just received my order on time and the beads are gorgeous! I will definitely order again.",
-      ReviewUserId: 1,
-      ReviewProductId: 3
+      userId: 1,
+      productId: 3
   },
   {
       title: "pretty rock",
@@ -81,8 +81,8 @@ const reviews = [
       title: "Wowee Wow Wow",
       rating: 5,
       comment: "Exceeds expectations. I purchased this to upgrade my engagement ring and boy is it an upgrade! (I overshot the size a bit, but it was a happy mistake)",
-      ReviewUserId: 2,
-      ReviewProductId: 3
+      userId: 2,
+      productId: 3
   },
   {
       title: "Blarg!",
@@ -156,9 +156,9 @@ async function seed() {
     User.create({firstName: 'Murph', lastName: 'Soap', email: 'murphy@email.com', isAdmin: true, password: '123'})
   ])
 
-  await Promise.all(reviews.map(review => Review.create(review)))
-  await Promise.all(products.map(product => Product.create(product)))
 
+  await Promise.all(products.map(product => Product.create(product)))
+  await Promise.all(reviews.map(review => Review.create(review)))
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
