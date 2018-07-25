@@ -1,5 +1,5 @@
 import React from 'react';
-
+// https://stackoverflow.com/questions/45360519/filter-multiple-values-in-react
 class SearchBar extends React.Component {
     constructor() {
         super();
