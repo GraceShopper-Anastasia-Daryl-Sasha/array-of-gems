@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const Sequelize = require('../../../../../../Library/Caches/typescript/2.9/node_modules/@types/sequelize')
+const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
