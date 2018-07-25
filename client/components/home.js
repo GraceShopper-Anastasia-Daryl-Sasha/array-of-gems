@@ -43,11 +43,7 @@ const MainHome = () => {
     ]
     return (
         <div className="main-home">
-            <div className="main-nav">
-                <h3><Link to='/products'>View All Products</Link></h3>
-                <SearchBar />
 
-            </div>
             <div className="my-carousel">
                 <Carousel images={images}
                     // thumb={true}
