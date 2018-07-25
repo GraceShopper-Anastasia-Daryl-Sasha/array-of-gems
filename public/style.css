@@ -25,13 +25,15 @@ form div {
 /* Sidebar Start */
 #sidebar {
 	background-color: #fff;
-	border: 1px solid #ddd;
+
 	margin-left: 1.5em;
 	width: 25%;
 }
 
 #sidebar h5 {
 	padding: 1em;
+	border: 1px solid #ddd;
+	margin-bottom: 0;
 }
 
 .options {
