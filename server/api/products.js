@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const {Product, Review} = require('../db/models')
+const { Product, Review } = require('../db/models')
 
 // GET /api/products
 router.get('/', async (req, res, next) => {
   try {
-    const allProducts = await Product.findAll({})
+    const allProducts = await Product.findAll({ include: [{ all: true }] })
     res.json(allProducts)
   } catch (err) {
     next(err)
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 // GET /api/products/productId
 router.get('/:productId', async (req, res, next) => {
   try {
-    const singleProduct = await Product.findById(req.params.productId, {include: [{model: Review}]})
+    const singleProduct = await Product.findById(req.params.productId, { include: [{ model: Review }] })
     if (!singleProduct) {
       res.sendStatus(404)
     }

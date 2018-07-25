@@ -4,10 +4,12 @@ import axios from 'axios'
 // //Action Type
 const GET_PRODUCTS = 'GET_PRODUCTS'
 // const GET_PRODUCT = 'GET_PRODUCT'
+const GET_CATEGORIES = 'GET_CATEGORIES'
 
 //Initial State
 const initialState = {
-  allProducts: []
+  allProducts: [],
+  selectedCategories: {}
 }
 
 // //Action Creators
@@ -16,7 +18,11 @@ const initialState = {
 // }
 
 export const getProducts = (products) => {
-  return { type: GET_PRODUCTS, products}
+  return { type: GET_PRODUCTS, products }
+}
+
+export const getCategories = (categories) => {
+  return { type: GET_CATEGORIES, categories }
 }
 
 // //Thunk Creator
@@ -38,10 +44,14 @@ export const fetchProducts = () => {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS: {
-      return {...state, allProducts: action.products}
+      return { ...state, allProducts: action.products }
     }
+    case GET_CATEGORIES: {
+      return { ...state, selectedCategories: action.categories }
+    }
+    default:
+      return state
   }
-  return state
 }
 
 export default productsReducer
