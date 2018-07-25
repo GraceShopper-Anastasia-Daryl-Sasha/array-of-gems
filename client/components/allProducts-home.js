@@ -1,34 +1,32 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import AllProducts from './allProducts'
-import {fetchProducts} from '../store/product'
+import { fetchProducts } from '../store/action-creators'
 
 class GetProducts extends Component {
-  componentDidMount () {
-    this.props.fetchProducts()
-  }
+	componentDidMount() {
+		this.props.fetchProducts()
+	}
 
-  render () {
-    const allProducts = this.props.allProducts
-    return (
-      <AllProducts allProducts={allProducts} />
-    )
-  }
+	render() {
+		const products = this.props.products
+		return <AllProducts products={products} />
+	}
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allProducts: state.product.allProducts
-  }
+const mapStateToProps = state => {
+	return {
+		products: state.products
+	}
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchProducts: () => {
-      const thunk = fetchProducts()
-      dispatch(thunk)
-    }
-  }
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchProducts: () => {
+			const thunk = fetchProducts()
+			dispatch(thunk)
+		}
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GetProducts)
