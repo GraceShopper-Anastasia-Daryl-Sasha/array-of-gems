@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Navbar, Footer } from './components'
 import Routes from './routes'
-import Sidebar from './components/sidebar'
+
 
 const App = () => {
 
@@ -11,7 +11,6 @@ const App = () => {
     <div>
       <Navbar />
       <Routes />
-    <Sidebar />
       <Footer />
     </div>
   )
