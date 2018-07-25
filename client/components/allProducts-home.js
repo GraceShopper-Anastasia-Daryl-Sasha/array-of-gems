@@ -1,24 +1,27 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import AllProducts from './allProducts'
-import {fetchProducts} from '../store/product'
+import { fetchProducts } from '../store/product'
 
 class GetProducts extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchProducts()
   }
 
-  render () {
+  render() {
     const allProducts = this.props.allProducts
+    const selectedCategories = this.props.selectedCategories
+    console.log(allProducts)
     return (
-      <AllProducts allProducts={allProducts} />
+      <AllProducts allProducts={allProducts} selectedCategories={selectedCategories} />
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    allProducts: state.product.allProducts
+    allProducts: state.product.allProducts,
+    selectedCategories: state.product.selectedCategories
   }
 }
 
