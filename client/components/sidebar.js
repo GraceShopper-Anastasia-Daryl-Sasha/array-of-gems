@@ -1,23 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { getCategories } from "../store/product"
+import { getCategories } from "../store/action-creators"
 
-const sizes = ['0.5 mm', '1.0 mm', '1.25 mm', '1 in', '2 in']
-const types = ['Birthstone', 'Raw', 'Polished']
-const colors = [
-	'Blue',
-	'Green',
-	'Purple',
-	'Red',
-	'Yellow',
-	'Black',
-	'Pink',
-	'White',
-	'Brown'
-]
-
-// Get all products from state and filter their properties to render checkboxes
 
 class Sidebar extends Component {
 	constructor() {
