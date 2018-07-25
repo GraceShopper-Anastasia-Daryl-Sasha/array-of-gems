@@ -22,8 +22,6 @@ label {
   width: 100%;
   margin: 0 auto 78px auto;
   padding-top: 100px;
-  justify-content: center;
- 
 }
 
 /* Navbar */
@@ -176,9 +174,17 @@ form div {
 	align-items: center;
 	padding: 0 0 2rem 0;
 }
+
 .product-image img {
 	height: 125px;
 	width: 125px
+}
+
+.single-product-images {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 0 2rem 0;
 }
 /*
 .product-info {
