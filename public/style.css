@@ -175,13 +175,14 @@ form div {
 	padding: 0 0 2rem 0;
 }
 
+.product-image img {
+	height: 125px;
+	width: 125px;
+}
+
 .single-product-main {
 	margin-left: 70px;
 	margin-right: 70px;
-
-.product-image img {
-	height: 125px;
-	width: 125px
 }
 
 .single-product-images {
@@ -240,11 +241,6 @@ form div {
 .top-view button {
 	margin: 1em;
 }
-
-.top-view h6 {
-	margin: 1em;
-}
-
 .table thead {
 	background-color: #c1c1c1;
 }
@@ -252,22 +248,10 @@ form div {
 .table thead th {
 	border: none;
 }
-
-#form {
-	width: 60%;
-}
-
-#form h3 {
-	text-align: center;
-}
-.form div {
-	width: 100%;
-}
-
-.form-button {
-	display: flex;
-	justify-content: center;
-}
+/* .table-striped tr:hover,
+.table-striped tbody tr:nth-of-type(odd):hover {
+	background-color: #dddddd;
+} */
 
 /* Admin End */
 
