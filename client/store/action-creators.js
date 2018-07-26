@@ -68,6 +68,9 @@ export const postProduct = (product, history) => {
 			history.push('/admin')
 		} catch (err) {
 			console.log('Product was not created...', err)
+		}
+	}
+}
 
 export const fetchProduct = (productId) => {
 	return async dispatch => {
