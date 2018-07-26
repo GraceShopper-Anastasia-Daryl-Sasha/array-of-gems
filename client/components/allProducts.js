@@ -10,61 +10,32 @@ const AllProducts = (props) => {
 	if (categories.length === 0) {
 		activeProducts = products
 	} else {
+		// filter logic based on side bar category choices
+		// OR within any category, AND across categories
 		products.forEach(product => {
-			// categories.color.forEach(color => {
-			// 	if (product.color === color && product.type) 
-			// })
-			if (categories.color.includes(product.color)) {
-				activeProducts.push(product);
-			} else if (categories.type.includes(product.type) && activeProducts.includes(product)) {
-				activeProducts.push(product);
-			} else if (categories.size.includes(product.size) && activeProducts.includes(product)) {
-				activeProducts.push(product);
+			let isFirstEntry = true;
+			for (let key in categories) {
+				if (categories[key].length > 0) {
+					if (isFirstEntry) {
+						if (categories[key].includes(product[key])) {
+							activeProducts.push(product)
+						}
+						isFirstEntry = false;
+					} else if (activeProducts.includes(product) && !categories[key].includes(product[key])) {
+						activeProducts.splice(activeProducts.indexOf(product), 1)
+					}
+				}
+
 			}
 
 		})
-
 	}
 
-export default class AllProducts extends Component {
-	render() {
-		const { products, categories } = this.props
-		return (
-			<div className="main-container">
-				<Sidebar products={products} categories={categories} />
-				<div>
-				{
-                        products.map(product => {
-                            return (
-                                <div className="product" key={product.id}>
-                                    <div className="product-image">
-                                        <img src={product.photo} />
-                                    </div>
-                                    <div className="product-info">
-                                        <Link to={`/products/${product.id}`}>{product.title}</Link> <br />
-                                        <a>Price: ${product.price}</a>
-                                    </div>
-                                    <div className='product-buttons'>
-                                        <button>Add to Cart</button>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-				</div>
-			</div>
-		)
-    
 	if (categories.length >= 1 && activeProducts.length === 0) {
 		console.log("NO PRODUCTS")
 	}
 
-
-	console.log(props)
-	console.log('ACTIVE PRODUCTS', activeProducts)
-
 	return (
-
 		<div className="products-box" >
 			<Sidebar products={products} categories={categories} />
 			<div className="products">
@@ -73,9 +44,7 @@ export default class AllProducts extends Component {
 					: activeProducts.map(product => <SingleProductCard product={product} key={product.id} />)}
 			</div>
 		</div>
-
 	)
-
 }
 
 export default AllProducts
