@@ -15,10 +15,12 @@ class Sidebar extends Component {
 	}
 
 	handleSubmit = (evt) => {
+		console.log(evt.target.name)
 		evt.preventDefault();
 		const selected = this.state;
 		this.props.getCategories(selected)
 	}
+
 
 	handleClick = (evt) => {
 		const category = evt.target.name;
@@ -43,7 +45,6 @@ class Sidebar extends Component {
 
 	render() {
 		const allProducts = this.props.products;
-		console.log('ALLPRODUCTS', allProducts)
 		let categories = {
 			colors: [],
 			types: [],
@@ -97,8 +98,10 @@ class Sidebar extends Component {
 							</div>
 						))}
 					</div>
-					<button className='btn btn-default' type="submit">Search</button>
+					<button className='btn btn-default' name="submit" type="submit">Search</button>
+					<button className='btn btn-default' name="clear" type="submit" >Clear</button>
 				</form >
+
 			</div >
 		)
 	}

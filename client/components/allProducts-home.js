@@ -10,13 +10,15 @@ class GetProducts extends Component {
 
 	render() {
 		const products = this.props.products
-		return <AllProducts products={products} />
+		const categories = this.props.categories
+		return <AllProducts products={products} categories={categories} />
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		products: state.products
+		products: state.products,
+		categories: state.categories
 	}
 }
 

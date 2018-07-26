@@ -1,9 +1,3 @@
-// featured Products
-
-// link to products
-
-
-
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from './searchBar'
@@ -52,7 +46,7 @@ const MainHome = () => {
             </div>
 
 
-            <div id="featured-products-container">
+            <div className="products-container">
                 <h2>Featured Products</h2>
                 <div className="products">
                     {
