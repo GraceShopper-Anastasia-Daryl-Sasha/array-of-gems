@@ -173,23 +173,27 @@ form div {
 	padding: 0 0 2rem 0;
 }
 
+.single-product-main {
+	margin-left: 70px;
+	margin-right: 70px;
+}
 
 .single-product-images {
-display: flex;
-justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 #main-product-photo img {
-vertical-align: middle;
-border-style: none;
-width: 350px;
+	vertical-align: middle;
+	border-style: none;
+	width: 350px;
 }
 
 #thumbnails img{
-vertical-align: middle;
-border-style: none;
-width: 80px;
-padding: 10px;
+	vertical-align: middle;
+	border-style: none;
+	width: 80px;
+	padding: 10px;
 }
 
 /*

@@ -7,7 +7,7 @@ export default class SingleProduct extends Component {
     const reviews = this.props.product.reviews
     console.log(reviews)
     return (
-      <div>
+      <div className="single-product-main">
 
         {
           product.photos ?
