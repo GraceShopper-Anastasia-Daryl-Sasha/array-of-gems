@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
+import Reviews from './reviews'
 
 export default class SingleProduct extends Component {
   render () {
     const { product } = this.props
-    console.log(product)
+    const reviews = this.props.product.reviews
+    console.log(reviews)
     return (
-      <div className="product">
-        <div className="single-product-images">
+      <div>
+
         {
-          product.photos ? product.photos.map(photo => {
-            return <img key={photo} src={photo} />
-          }) : console.log('loading.')
+          product.photos ?
+          <div className="single-product-images">
+            <div id="main-product-photo">
+              <img src={product.photos[0]} />
+            </div>
+
+            <div id="thumbnails">
+            {
+              product.photos.map(photo => {
+              return <img key={photo} src={photo} />
+            })
+            }
+            </div>
+        </div> : console.log('loading')
+
         }
-        </div>
+
+
         <div className="product-info">
           <h1><a>{product.title}</a></h1> <br />
           <h2>Description</h2>
@@ -26,6 +41,7 @@ export default class SingleProduct extends Component {
             </form>
             <button>Add to Cart</button>
         </div>
+        <Reviews reviews={reviews} />
       </div>
     )
   }
