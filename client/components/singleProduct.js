@@ -36,6 +36,9 @@ export default class SingleProduct extends Component {
         </div>
         <div className='product-buttons'>
             <form>
+              <select name="size">
+                <option value="1.0 mm">1.0 mm</option>
+              </select> <br/>
               <input type='text' name='quantity' value='0' />
               <input type='submit' value='Submit' />
             </form>
