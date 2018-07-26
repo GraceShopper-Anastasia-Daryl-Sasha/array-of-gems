@@ -43,9 +43,13 @@ class AdminView extends Component {
 									<td>
 										<img src={product.photos[0]} />
 									</td>
-									<Link to={'/admin-single-product/' + product.id}>
-										<td>{product.title}</td>
-									</Link>
+
+									<td>
+										<Link to={'/admin-single-product/' + product.id}>
+											{product.title}
+										</Link>
+									</td>
+
 									<td>{product.quantity}</td>
 									<td>${product.price}</td>
 								</tr>
