@@ -22,14 +22,6 @@ const Product = db.define('product', {
 		type: Sequelize.INTEGER,
 		allowNull: false
 	},
-	photos: {
-		type: Sequelize.ARRAY(Sequelize.STRING),
-		defaultValue: [
-			[
-				'https://cdn.tutsplus.com/vector/uploads/2014/03/0a_Gems_tutorial_ruby.jpg'
-			]
-		]
-	},
 	type: {
 		type: Sequelize.ENUM,
 		values: ['Birthstone', 'Raw', 'Polished']
@@ -52,17 +44,6 @@ const Product = db.define('product', {
 			'Brown'
 		]
 	}
-})
-
-Product.beforeCreate(product => {
-	if (!product.photos) {
-		product.photos = []
-	}
-
-	product.photos = product.photos[0].split(',')
-	// product.photos = product.photos.forEach(photo => {
-	// 	return photo.replace(/\s+/, '')
-	// })
 })
 
 module.exports = Product
