@@ -31,7 +31,7 @@ export default class SingleProduct extends Component {
         <div className="product-info">
           <h1><a>{product.title}</a></h1> <br />
           <h2>Description</h2>
-          <a>{product.description}</a>
+          <a>{product.description}</a> <br/>
           <a>Price: ${product.price}</a>
         </div>
         <div className='product-buttons'>
