@@ -31,7 +31,7 @@ const ProductForm = props => {
 					rows="3"
 				/>
 			</div>
-			<div className="form-group">
+			{/* <div className="form-group">
 				<label htmlFor="title">Images: </label>
 				<textarea
 					className="form-control"
@@ -40,7 +40,7 @@ const ProductForm = props => {
 					value={props.photos}
 					rows="3"
 				/>
-			</div>
+			</div> */}
 
 			<div className="form-row">
 				<div className="form-group col-sm-5">

@@ -12,9 +12,6 @@ class NewProduct extends Component {
 				description: '',
 				price: 0.0,
 				quantity: 0,
-				photos: [
-					'https://cdn.tutsplus.com/vector/uploads/2014/03/0a_Gems_tutorial_ruby.jpg'
-				],
 				type: '',
 				size: '',
 				color: ''
@@ -46,13 +43,12 @@ const mapDispatch = (dispatch, ownProps) => {
 			const description = evt.target.description.value
 			const price = evt.target.price.value
 			const quantity = evt.target.quantity.value
-			const photos = [evt.target.photos.value]
 			const type = evt.target.type.value
 			const size = evt.target.size.value
 			const color = evt.target.color.value
 			dispatch(
 				postProduct(
-					{ title, description, price, quantity, photos, type, size, color },
+					{ title, description, price, quantity, type, size, color },
 					ownProps.history
 				)
 			)
