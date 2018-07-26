@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 import { fetchProducts } from '../store/action-creators'
 
 class AdminView extends Component {
@@ -12,12 +13,17 @@ class AdminView extends Component {
 			<div id="admin">
 				<h3>Dashboard</h3>
 				<div className="top-view">
-					<button type="submit" className="btn btn-primary">
-						Add new product
-					</button>
-					<button type="submit" className="btn btn-primary">
-						Manage Users
-					</button>
+					<Link to="/new-product">
+						<button type="submit" className="btn btn-primary">
+							Add new product
+						</button>
+					</Link>
+					<Link to="/new-product">
+						<h6>Manage Users</h6>
+					</Link>
+					<Link to="/new-product">
+						<h6>Manage Orders</h6>
+					</Link>
 				</div>
 				<div>
 					<table className="table table-striped table-hover">
@@ -37,7 +43,13 @@ class AdminView extends Component {
 									<td>
 										<img src={product.photos[0]} />
 									</td>
-									<td>{product.title}</td>
+
+									<td>
+										<Link to={'/admin-single-product/' + product.id}>
+											{product.title}
+										</Link>
+									</td>
+
 									<td>{product.quantity}</td>
 									<td>${product.price}</td>
 								</tr>
