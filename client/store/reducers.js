@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux'
 import user from './user'
-
 import {
 	GET_PRODUCTS,
 	GET_SELECTED_CATEGORIES,
 	CREATE_PRODUCT,
 	UPDATE_PRODUCT,
 	DELETE_PRODUCT,
-  GET_SINGLE_PRODUCT, 
-  GET_REVIEWS
+  GET_SINGLE_PRODUCT
 } from './action-creators'
 
 
@@ -50,22 +48,11 @@ const singleProductReducer = (state = {}, action) => {
 	}
 }
 
-const reviewReducer = (state = {}, action) => {
-	switch (action.type) {
-		case GET_REVIEWS: {
-			return action.reviews
-		}
-		default:
-			return state
-	}
-}
-
 const rootReducer = combineReducers({
 	products: productsReducer,
 	user: user,
 	product: singleProductReducer,
-	categories: categoriesReducer,
-	reviews: reviewReducer
+	categories: categoriesReducer
 })
 
 export default rootReducer

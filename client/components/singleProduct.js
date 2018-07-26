@@ -5,7 +5,7 @@ export default class SingleProduct extends Component {
   render () {
     const { product } = this.props
     const reviews = this.props.product.reviews
-    console.log(reviews)
+
     return (
       <div className="single-product-main">
 
@@ -29,8 +29,8 @@ export default class SingleProduct extends Component {
 
 
         <div className="product-info">
-          <h1><a>{product.title}</a></h1> <br />
-          <h2>Description</h2>
+          <h2><a>{product.title}</a></h2> <br />
+          <h4>Description</h4>
           <a>{product.description}</a> <br/>
           <a>Price: ${product.price}</a>
         </div>

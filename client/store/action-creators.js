@@ -2,13 +2,11 @@ import axios from 'axios'
 
 //Action Type
 export const GET_PRODUCTS = 'GET_PRODUCTS'
-
 export const GET_SELECTED_CATEGORIES = 'GET_SELECTED_CATEGORIES'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
-export const GET_REVIEWS = 'GET_REVIEWS'
 
 
 //Action Creators
@@ -20,6 +18,7 @@ const getProducts = products => {
 export const getCategories = categories => {
 	return { type: GET_SELECTED_CATEGORIES, categories }
 }
+
 
 const createProduct = product => ({
 	type: CREATE_PRODUCT,
@@ -38,10 +37,6 @@ const deleteProduct = productId => ({
 
 const getSingleProduct = product => {
 	return { type: GET_SINGLE_PRODUCT, product}
-}
-
-const getReviews = reviews => {
-	return { type: GET_REVIEWS, reviews }
 }
 
 // Thunk Creators
@@ -85,15 +80,3 @@ export const fetchProduct = (productId) => {
 	}
 }
 
-export const fetchReviews = (productId) => {
-	return async dispatch => {
-		try {
-			const response = await axios.get(`/api/products/${productId}/reviews`)
-			const reviews = response.data
-			const action = getReviews(reviews)
-			dispatch(action)
-		} catch (err) {
-			console.log(err)
-		}
-	}
-}

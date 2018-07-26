@@ -5,6 +5,7 @@ export default class SingleProduct extends Component {
     const { reviews } = this.props
     return (
       <div className="info">
+      <h3>Reviews</h3>
         {
           reviews ?
           reviews.map(review => {
