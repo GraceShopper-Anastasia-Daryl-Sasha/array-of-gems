@@ -11,18 +11,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//GET /api/products/productId/reviews
-router.get('/:productId/reviews', async (req, res, next) => {
-  try {
-    const reviews = await Review.findAll({where: {productId: req.params.productId}})
-    if (!reviews) {
-      res.sendStatus(404)
-    }
-    res.json(reviews)
-  } catch (err) {
-    next(err)
-  }
-})
 
 // GET /api/products/productId
 router.get('/:productId', async (req, res, next) => {
