@@ -53,13 +53,13 @@ class SingleProduct extends Component {
           product.photos ?
             <div className="single-product-images">
               <div id="main-product-photo">
-                <img src={product.photos[0]} />
+                <img src={product.photos[0].image} />
               </div>
 
               <div id="thumbnails">
                 {
                   product.photos.map(photo => {
-                    return <img key={photo} src={photo} />
+                    return <img key={photo.id} src={photo.image} />
                   })
                 }
               </div>

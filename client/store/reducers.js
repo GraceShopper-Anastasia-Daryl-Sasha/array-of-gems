@@ -67,11 +67,11 @@ const orderProducts = {
 
 const orderReducer = (state = orderProducts, action) => {
 	switch (action.type) {
-		case GET_CART: {
-			return state
-		}
+		// case GET_CART: {
+		// 	return state
+		// }
 		case ADD_TO_CART: {
-			let updatedProducts = state.products;
+			let updatedProducts = [...state.products];
 			let isIncluded = false, productToUpdate;
 			state.products.map(product => {
 				if (product.id === action.product.id) {
@@ -83,14 +83,14 @@ const orderReducer = (state = orderProducts, action) => {
 
 			if (state.products.length > 0 && isIncluded === true) {
 				action.product.quantity = productToUpdate.quantity + action.product.quantity
-				// action.product.subTotal = action.product.quantity * action.product.price
-				updatedProducts.splice(updatedProducts[productToUpdate], 1, productToUpdate)
-				console.log
+				action.product.subtotal = action.product.quantity * action.product.price
+				updatedProducts.splice(updatedProducts[productToUpdate], 1, action.product)
+			} else {
+				updatedProducts.push(action.product)
 			}
-
 			return {
 				...state,
-				products: [...state.products, action.product]
+				products: updatedProducts
 			}
 		}
 		// case UPDATE_CART: {
