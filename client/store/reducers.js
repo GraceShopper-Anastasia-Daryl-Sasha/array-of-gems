@@ -9,7 +9,8 @@ import {
 	GET_SINGLE_PRODUCT,
 	GET_REVIEWS,
 	ADD_TO_CART,
-	GET_CART
+	GET_CART,
+	UPDATE_CART
 } from './action-creators'
 
 
@@ -70,11 +71,42 @@ const orderReducer = (state = orderProducts, action) => {
 			return state
 		}
 		case ADD_TO_CART: {
+			let updatedProducts = state.products;
+			let isIncluded = false, productToUpdate;
+			state.products.map(product => {
+				if (product.id === action.product.id) {
+					isIncluded = true;
+					productToUpdate = product
+				}
+			})
+
+
+			if (state.products.length > 0 && isIncluded === true) {
+				action.product.quantity = productToUpdate.quantity + action.product.quantity
+				// action.product.subTotal = action.product.quantity * action.product.price
+				updatedProducts.splice(updatedProducts[productToUpdate], 1, productToUpdate)
+				console.log
+			}
+
 			return {
 				...state,
 				products: [...state.products, action.product]
 			}
 		}
+		// case UPDATE_CART: {
+		// 	const updatedProducts = state.products.map(product => {
+		// 		if (product.id !== action.product.id) {
+		// 			console.log("if", product)
+		// 			updatedProducts.push(product)
+		// 		} else {
+		// 			product.quantity = action.product.quantity
+		// 		}
+		// 	})
+		// 	return {
+		// 		...state,
+		// 		products: updatedProducts
+		// 	}
+		// }
 		default:
 			return state
 	}

@@ -10,6 +10,7 @@ export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 export const GET_REVIEWS = 'GET_REVIEWS'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
+export const UPDATE_CART = 'UPDATE_CART'
 
 //Action Creators
 const getProducts = products => {
@@ -45,6 +46,10 @@ export const getCart = () => {
 
 export const addToCart = product => {
 	return { type: ADD_TO_CART, product }
+}
+
+export const updateCart = product => {
+	return { type: UPDATE_CART, product }
 }
 
 // Thunk Creators

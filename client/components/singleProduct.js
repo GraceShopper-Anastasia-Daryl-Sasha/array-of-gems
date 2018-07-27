@@ -17,13 +17,11 @@ class SingleProduct extends Component {
     this.setState({
       quantity: evt.target.value
     })
-
   }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { product } = this.props
-    console.log('PRODUCT', product)
     const productToAdd = {
       id: product.id,
       title: product.title,
@@ -104,7 +102,7 @@ class SingleProduct extends Component {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    addToCart: (product) => dispatch(addToCart(product))
+    addToCart: (newProduct) => dispatch(addToCart(newProduct))
   }
 }
 
