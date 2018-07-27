@@ -3,6 +3,7 @@ const Photo = require('./photo')
 const Product = require('./product')
 const Review = require('./review')
 const User = require('./user')
+const OrderProducts = require('./orderproducts')
 // - Orders must belong to a user OR guest session (authenticated vs unauthenticated)
 
 Review.belongsTo(Product)
@@ -21,6 +22,7 @@ User.hasMany(Order)
 
 module.exports = {
 	Order,
+	OrderProducts,
 	Photo,
 	Product,
 	Review,

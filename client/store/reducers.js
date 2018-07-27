@@ -6,7 +6,10 @@ import {
 	CREATE_PRODUCT,
 	UPDATE_PRODUCT,
 	DELETE_PRODUCT,
-  GET_SINGLE_PRODUCT
+	GET_SINGLE_PRODUCT,
+	GET_REVIEWS,
+	ADD_TO_CART,
+	GET_CART
 } from './action-creators'
 
 
@@ -48,11 +51,42 @@ const singleProductReducer = (state = {}, action) => {
 	}
 }
 
+const reviewReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_REVIEWS: {
+			return action.reviews
+		}
+		default:
+			return state
+	}
+}
+const orderProducts = {
+	products: []
+};
+
+const orderReducer = (state = orderProducts, action) => {
+	switch (action.type) {
+		case GET_CART: {
+			return state
+		}
+		case ADD_TO_CART: {
+			return {
+				...state,
+				products: [...state.products, action.product]
+			}
+		}
+		default:
+			return state
+	}
+}
+
 const rootReducer = combineReducers({
 	products: productsReducer,
 	user: user,
 	product: singleProductReducer,
-	categories: categoriesReducer
+	categories: categoriesReducer,
+	reviews: reviewReducer,
+	order: orderReducer
 })
 
 export default rootReducer
