@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Product, Review } = require('../db/models')
+const { Product, Review, Photo } = require('../db/models')
 
 // GET /api/products
 router.get('/', async (req, res, next) => {
@@ -11,12 +11,11 @@ router.get('/', async (req, res, next) => {
 	}
 })
 
-
 // GET /api/products/productId
 router.get('/:productId', async (req, res, next) => {
 	try {
 		const singleProduct = await Product.findById(req.params.productId, {
-			include: [{ model: Review }]
+			include: [{ model: Review }, { model: Photo }]
 		})
 		if (!singleProduct) {
 			res.sendStatus(404)
@@ -30,8 +29,13 @@ router.get('/:productId', async (req, res, next) => {
 // POST /api/products
 router.post('/', async (req, res, next) => {
 	try {
-		const newProduct = await Product.create(req.body)
-		res.status(200).json(newProduct)
+		const newProduct = await Product.create(req.body.product)
+		const photos = await Promise.all(
+			req.body.photos.map(photo =>
+				Photo.create({ image: photo, productId: newProduct.id })
+			)
+		)
+		res.status(200).json({ product: newProduct, photos: photos })
 	} catch (err) {
 		res.sendStatus(500)
 	}

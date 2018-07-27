@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { MainHome, Login, Signup, UserHome} from './components'
+import { MainHome, Login, Signup, UserHome } from './components'
 import AllProducts from './components/allProducts-home'
 import SingleProduct from './components/singleProduct-home'
+import { me } from './store'
 import AdminView from './components/adminview'
 import NewProduct from './components/newproduct'
-import { me } from './store'
-
+import AdminSingleProduct from './components/adminsingleproduct'
+import UpdateProduct from './components/updateproduct'
 /**
  * COMPONENT
  */
@@ -35,6 +36,11 @@ class Routes extends Component {
 							<Route path="/home" component={UserHome} />
 							<Route path="/admin" component={AdminView} />
 							<Route path="/new-product" component={NewProduct} />
+							<Route
+								path="/admin-single-product/:id"
+								component={AdminSingleProduct}
+							/>
+							<Route path="/update-product/:id" component={UpdateProduct} />
 						</Switch>
 					)}
 					{/* Displays our Login component as a fallback */}

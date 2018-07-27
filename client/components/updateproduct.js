@@ -1,31 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { editProduct } from '../store/action-creators'
 import ProductForm from './productform'
-import { postProduct } from '../store/action-creators'
 
-class NewProduct extends Component {
-	constructor() {
-		super()
-		this.state = {
-			product: {
-				title: '',
-				description: '',
-				price: 0.0,
-				quantity: 0,
-				type: '',
-				size: '',
-				color: ''
-			}
-		}
-	}
-
+class UpdateProduct extends Component {
 	render() {
+		const { product } = this.props
 		return (
 			<div id="form">
-				<h3>Create New Product</h3>
+				<h3>Update Product</h3>
 				<div className="form">
 					<ProductForm
-						product={this.state.product}
+						product={product}
 						handleSubmit={this.props.handleSubmit}
 					/>
 				</div>
@@ -34,7 +20,15 @@ class NewProduct extends Component {
 	}
 }
 
+const mapState = (state, ownProps) => {
+	return {
+		product: state.product,
+		id: ownProps.match.params.id
+	}
+}
+
 const mapDispatch = (dispatch, ownProps) => {
+	const id = ownProps.match.params.id
 	return {
 		handleSubmit(evt) {
 			evt.preventDefault()
@@ -45,14 +39,18 @@ const mapDispatch = (dispatch, ownProps) => {
 			const type = evt.target.type.value
 			const size = evt.target.size.value
 			const color = evt.target.color.value
-			const photo1 = evt.target.image1.value
-			const photo2 = evt.target.image2.value
-			const photo3 = evt.target.image3.value
+
 			dispatch(
-				postProduct(
+				editProduct(
 					{
-						product: { title, description, price, quantity, type, size, color },
-						photos: [photo1, photo2, photo3]
+						id,
+						title,
+						description,
+						price,
+						quantity,
+						type,
+						size,
+						color
 					},
 					ownProps.history
 				)
@@ -61,4 +59,4 @@ const mapDispatch = (dispatch, ownProps) => {
 	}
 }
 
-export default connect(null, mapDispatch)(NewProduct)
+export default connect(mapState, mapDispatch)(UpdateProduct)

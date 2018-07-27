@@ -41,7 +41,7 @@ class AdminView extends Component {
 								<tr key={product.id}>
 									<th scope="row">{product.id}</th>
 									<td>
-										<img src={product.photos[0]} />
+										<img src={product.photos[0].image} />
 									</td>
 
 									<td>

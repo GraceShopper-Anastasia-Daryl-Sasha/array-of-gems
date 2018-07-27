@@ -8,17 +8,14 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
-
 //Action Creators
 const getProducts = products => {
 	return { type: GET_PRODUCTS, products }
 }
 
-
 export const getCategories = categories => {
 	return { type: GET_SELECTED_CATEGORIES, categories }
 }
-
 
 const createProduct = product => ({
 	type: CREATE_PRODUCT,
@@ -32,11 +29,11 @@ const updateProduct = product => ({
 
 const deleteProduct = productId => ({
 	type: DELETE_PRODUCT,
-	id: productId
+	id: +productId
 })
 
 const getSingleProduct = product => {
-	return { type: GET_SINGLE_PRODUCT, product}
+	return { type: GET_SINGLE_PRODUCT, product }
 }
 
 // Thunk Creators
@@ -53,6 +50,18 @@ export const fetchProducts = () => {
 	}
 }
 
+export const fetchProduct = productId => {
+	return async dispatch => {
+		try {
+			const response = await axios.get(`/api/products/${productId}`)
+			const product = response.data
+			const action = getSingleProduct(product)
+			dispatch(action)
+		} catch (err) {
+			console.log(err)
+		}
+	}
+}
 
 export const postProduct = (product, history) => {
 	return async dispatch => {
@@ -67,16 +76,29 @@ export const postProduct = (product, history) => {
 	}
 }
 
-export const fetchProduct = (productId) => {
+export const editProduct = (product, history) => {
 	return async dispatch => {
 		try {
-			const response = await axios.get(`/api/products/${productId}`)
-			const product = response.data
-			const action = getSingleProduct(product)
-			dispatch(action)
+			const updatedProduct = await axios.put(
+				`/api/products/${product.id}`,
+				product
+			)
+			dispatch(updateProduct(updatedProduct))
+			history.push(`/admin-single-product/${product.id}`)
 		} catch (err) {
-			console.log(err)
+			console.log('Product was not updated...', err)
 		}
 	}
 }
 
+export const removeProduct = (productId, history) => {
+	return async dispatch => {
+		try {
+			await axios.delete(`/api/products/${productId}`)
+			dispatch(deleteProduct(productId))
+			history.push('/admin')
+		} catch (err) {
+			console.log('There was an error removing product', err)
+		}
+	}
+}
