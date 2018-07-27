@@ -45,9 +45,17 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  isGuest: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
+  },
   userImage: {
     type: Sequelize.STRING,
-    defaultValue: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png",
+    defaultValue: "https://images.emojiterra.com/mozilla/512px/1f48e.png",
+  },
+  address: {
+    type: Sequelize.STRING,
+    defaultValue: "5 Hanover Sq., New York, NY 10005"
   }
 })
 

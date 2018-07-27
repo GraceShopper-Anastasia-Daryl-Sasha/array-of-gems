@@ -10,6 +10,8 @@ import AdminView from './components/adminview'
 import NewProduct from './components/newproduct'
 import AdminSingleProduct from './components/adminsingleproduct'
 import UpdateProduct from './components/updateproduct'
+import Cart from './components/cart'
+
 /**
  * COMPONENT
  */
@@ -26,6 +28,7 @@ class Routes extends Component {
 				<Switch>
 					{/* Routes placed here are available to all visitors */}
 					<Route exact path="/" component={MainHome} />
+					<Route path="/cart" component={Cart} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />
 					<Route exact path="/products" component={AllProducts} />
