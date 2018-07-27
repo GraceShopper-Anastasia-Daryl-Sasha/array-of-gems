@@ -18,10 +18,10 @@ label {
 /* Universal Styles - Main Container */
 
 .main-container {
-  display: flex;
-  width: 100%;
-  margin: 0 auto 78px auto;
-  padding-top: 100px;
+	display: flex;
+	width: 100%;
+	margin: 0 auto 78px auto;
+	padding-top: 100px;
 }
 
 /* Navbar */
@@ -147,16 +147,16 @@ form div {
 	flex-wrap: wrap;
 	justify-content: center;
 }
-.products-box{
+.products-box {
 	display: flex;
 	flex-direction: row wrap;
-	width: 100%
+	width: 100%;
 }
 .products {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	width: 100%
+	width: 100%;
 }
 
 .product {
@@ -196,7 +196,7 @@ form div {
 	width: 350px;
 }
 
-#thumbnails img{
+#thumbnails img {
 	vertical-align: middle;
 	border-style: none;
 	width: 80px;
@@ -219,7 +219,7 @@ form div {
 
 /* Admin Start */
 #admin {
-	width: 80%;
+	width: 100%;
 	padding: 1em;
 	background-color: #fff;
 }
@@ -248,10 +248,29 @@ form div {
 .table thead th {
 	border: none;
 }
-/* .table-striped tr:hover,
-.table-striped tbody tr:nth-of-type(odd):hover {
-	background-color: #dddddd;
-} */
+
+#form {
+	width: 100% !important;
+}
+
+#admin-single-product {
+	padding: 2em;
+}
+
+.list {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	/* width: 30%; */
+}
+
+.list img {
+	width: 100%;
+}
+
+.card {
+	width: 18em;
+}
 
 /* Admin End */
 

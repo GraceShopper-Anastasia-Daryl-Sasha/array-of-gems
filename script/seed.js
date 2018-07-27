@@ -107,12 +107,16 @@ const products = [
 		price: 6.95,
 <<<<<<< HEAD
 		stock: 25,
+=======
+<<<<<<< HEAD
+		stock: 25,
 		photos: [
 			'https://img.etsystatic.com/il/ad6e2b/1455198496/il_570xN.1455198496_sp58.jpg?version=1',
 			'https://img.etsystatic.com/il/eddf57/1455198532/il_570xN.1455198532_2rgd.jpg?version=0'
 		],
 =======
 		quantity: 25,
+>>>>>>> master
 >>>>>>> master
 		color: 'Green',
 		size: '1.0 mm',
@@ -125,12 +129,16 @@ const products = [
 		price: 5.55,
 <<<<<<< HEAD
 		stock: 72,
+=======
+<<<<<<< HEAD
+		stock: 72,
 		photos: [
 			'https://img.etsystatic.com/il/5fa555/1374425596/il_570xN.1374425596_9alc.jpg?version=1',
 			'https://img.etsystatic.com/il/5fa555/1374425596/il_570xN.1374425596_9alc.jpg?version=1'
 		],
 =======
 		quantity: 72,
+>>>>>>> master
 >>>>>>> master
 		color: 'Purple',
 		size: '1.0 mm',
@@ -143,12 +151,16 @@ const products = [
 		price: 14.5,
 <<<<<<< HEAD
 		stock: 15,
+=======
+<<<<<<< HEAD
+		stock: 15,
 		photos: [
 			'https://i.etsystatic.com/iap/46ee8b/1604051835/iap_300x300.1604051835_jvyrugke.jpg?version=0',
 			'https://i.etsystatic.com/iap/46ee8b/1604051835/iap_300x300.1604051835_jvyrugke.jpg?version=0'
 		],
 =======
 		quantity: 15,
+>>>>>>> master
 >>>>>>> master
 		color: 'Blue',
 		size: '1.0 mm',
@@ -161,12 +173,16 @@ const products = [
 		price: 270.75,
 <<<<<<< HEAD
 		stock: 7,
+=======
+<<<<<<< HEAD
+		stock: 7,
 		photos: [
 			'https://www.thediamondloupe.com/sites/awdcnewswall/files/Screen%20Shot%202016-09-09%20at%2013.07.44.png',
 			'https://cdn.shopify.com/s/files/1/0851/2360/products/DSCF0736.jpg?v=1510750618'
 		],
 =======
 		quantity: 7,
+>>>>>>> master
 >>>>>>> master
 		color: 'White',
 		size: '1.0 mm',
@@ -179,6 +195,9 @@ const products = [
 		price: 18.75,
 <<<<<<< HEAD
 		stock: 21,
+=======
+<<<<<<< HEAD
+		stock: 21,
 		photos: [
 			'https://img.etsystatic.com/il/c5d275/1372882974/il_570xN.1372882974_88v6.jpg?version=0',
 			'https://img.etsystatic.com/il/ce1e0f/1420152195/il_570xN.1420152195_9h0n.jpg?version=0',
@@ -186,6 +205,7 @@ const products = [
 		],
 =======
 		quantity: 21,
+>>>>>>> master
 >>>>>>> master
 		color: 'Green',
 		size: '1.0 mm',
@@ -198,12 +218,16 @@ const products = [
 		price: 15.72,
 <<<<<<< HEAD
 		stock: 27,
+=======
+<<<<<<< HEAD
+		stock: 27,
 		photos: [
 			'http://cdn.shopify.com/s/files/1/0825/7459/files/ruby_raw_large.jpg?11116142272450580674',
 			'http://cdn.shopify.com/s/files/1/0825/7459/files/ruby_raw_large.jpg?11116142272450580674'
 		],
 =======
 		quantity: 27,
+>>>>>>> master
 >>>>>>> master
 		color: 'Red',
 		size: '1.0 mm',
@@ -216,12 +240,16 @@ const products = [
 		price: 4.2,
 <<<<<<< HEAD
 		stock: 39,
+=======
+<<<<<<< HEAD
+		stock: 39,
 		photos: [
 			'https://i.etsystatic.com/7879975/r/il/844cdb/1084234876/il_570xN.1084234876_dvt3.jpg',
 			'https://i.etsystatic.com/7879975/r/il/78a64b/1084234888/il_570xN.1084234888_8xp2.jpg'
 		],
 =======
 		quantity: 39,
+>>>>>>> master
 >>>>>>> master
 		color: 'Green',
 		size: '1.0 mm',
@@ -234,12 +262,16 @@ const products = [
 		price: 3.75,
 <<<<<<< HEAD
 		stock: 52,
+=======
+<<<<<<< HEAD
+		stock: 52,
 		photos: [
 			'http://www.vettrigemsusa.com/image/cache/data/0Sapphire/zzzl111-800x800.jpg',
 			'https://www.worthy.com/blog/wp-content/uploads/2014/06/TitanicHeart-of-the-Ocean.jpg'
 		],
 =======
 		quantity: 52,
+>>>>>>> master
 >>>>>>> master
 		color: 'Blue',
 		size: '1.0 mm',
@@ -252,12 +284,16 @@ const products = [
 		price: 9.25,
 <<<<<<< HEAD
 		stock: 38,
+=======
+<<<<<<< HEAD
+		stock: 38,
 		photos: [
 			'https://www.antiqworld.com/blog/wp-content/uploads/2017/11/opal-833x713.png',
 			'https://www.antiqworld.com/blog/wp-content/uploads/2017/11/opal-833x713.png'
 		],
 =======
 		quantity: 38,
+>>>>>>> master
 >>>>>>> master
 		color: 'Black',
 		size: '1.0 mm',
@@ -270,12 +306,16 @@ const products = [
 		price: 17.5,
 <<<<<<< HEAD
 		stock: 64,
+=======
+<<<<<<< HEAD
+		stock: 64,
 		photos: [
 			'https://img.etsystatic.com/il/035732/856848544/il_570xN.856848544_cobh.jpg?version=1',
 			'https://img.etsystatic.com/il/035732/856848544/il_570xN.856848544_cobh.jpg?version=1'
 		],
 =======
 		quantity: 64,
+>>>>>>> master
 >>>>>>> master
 		color: 'Yellow',
 		size: '1.0 mm',
@@ -288,6 +328,9 @@ const products = [
 		price: 5.75,
 <<<<<<< HEAD
 		stock: 67,
+=======
+<<<<<<< HEAD
+		stock: 67,
 		photos: [
 			'https://i.etsystatic.com/16996458/r/il/cf5cab/1595754747/il_570xN.1595754747_e9a3.jpg',
 			'https://i.etsystatic.com/16996458/r/il/e4d86c/1548298034/il_570xN.1548298034_aysl.jpg',
@@ -295,6 +338,7 @@ const products = [
 		],
 =======
 		quantity: 67,
+>>>>>>> master
 >>>>>>> master
 		color: 'Black',
 		size: '1.0 mm',
@@ -307,12 +351,16 @@ const products = [
 		price: 3.45,
 <<<<<<< HEAD
 		stock: 10,
+=======
+<<<<<<< HEAD
+		stock: 10,
 		photos: [
 			'https://img.etsystatic.com/il/c8511a/1566584228/il_570xN.1566584228_kxah.jpg?version=0',
 			'https://img.etsystatic.com/il/c2135c/1614038293/il_570xN.1614038293_j6x8.jpg?version=0'
 		],
 =======
 		quantity: 10,
+>>>>>>> master
 >>>>>>> master
 		color: 'Pink',
 		size: '1.0 mm',
@@ -325,12 +373,16 @@ const products = [
 		price: 15.23,
 <<<<<<< HEAD
 		stock: 3,
+=======
+<<<<<<< HEAD
+		stock: 3,
 		photos: [
 			'https://img.etsystatic.com/il/c8511a/1566584228/il_570xN.1566584228_kxah.jpg?version=0',
 			'https://img.etsystatic.com/il/c2135c/1614038293/il_570xN.1614038293_j6x8.jpg?version=0'
 		],
 =======
 		quantity: 3,
+>>>>>>> master
 >>>>>>> master
 		color: 'Brown',
 		size: '1.0 mm',
@@ -343,12 +395,16 @@ const products = [
 		price: 6.78,
 <<<<<<< HEAD
 		stock: 8,
+=======
+<<<<<<< HEAD
+		stock: 8,
 		photos: [
 			'https://i.ebayimg.com/images/g/cLgAAOSwgY9Xe1BA/s-l300.jpg',
 			'https://i.ebayimg.com/images/g/cLgAAOSwgY9Xe1BA/s-l300.jpg'
 		],
 =======
 		quantity: 8,
+>>>>>>> master
 >>>>>>> master
 		color: 'Green',
 		size: '1.0 mm',
@@ -361,12 +417,16 @@ const products = [
 		price: 2.35,
 <<<<<<< HEAD
 		stock: 67,
+=======
+<<<<<<< HEAD
+		stock: 67,
 		photos: [
 			'https://i.etsystatic.com/14093570/r/il/af44b5/1365144441/il_570xN.1365144441_lzyo.jpg',
 			'https://img.etsystatic.com/il/2642ad/1132141037/il_570xN.1132141037_pslj.jpg?version=0'
 		],
 =======
 		quantity: 67,
+>>>>>>> master
 >>>>>>> master
 		color: 'Blue',
 		size: '1.0 mm',
@@ -379,12 +439,16 @@ const products = [
 		price: 35.2,
 <<<<<<< HEAD
 		stock: 17,
+=======
+<<<<<<< HEAD
+		stock: 17,
 		photos: [
 			'https://i.etsystatic.com/12396175/r/il/7fa548/1464057553/il_570xN.1464057553_sipt.jpg',
 			'https://i.etsystatic.com/12396175/r/il/78d8a5/1416791084/il_570xN.1416791084_tu2p.jpg'
 		],
 =======
 		quantity: 17,
+>>>>>>> master
 >>>>>>> master
 		color: 'Blue',
 		size: '1.0 mm',
@@ -397,12 +461,16 @@ const products = [
 		price: 22.15,
 <<<<<<< HEAD
 		stock: 13,
+=======
+<<<<<<< HEAD
+		stock: 13,
 		photos: [
 			'https://i.etsystatic.com/14050262/r/il/495040/1465610658/il_570xN.1465610658_erbz.jpg',
 			'https://i.etsystatic.com/14050262/r/il/da2675/1512864927/il_570xN.1512864927_sy91.jpg'
 		],
 =======
 		quantity: 13,
+>>>>>>> master
 >>>>>>> master
 		color: 'Green',
 		size: '1.0 mm',

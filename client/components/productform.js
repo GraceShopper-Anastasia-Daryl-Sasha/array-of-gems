@@ -2,6 +2,7 @@ import React from 'react'
 
 const ProductForm = props => {
 	const { handleSubmit, product } = props
+	console.log()
 	let isCreate = true
 	if (product.title !== '') {
 		isCreate = false
@@ -31,16 +32,29 @@ const ProductForm = props => {
 					rows="3"
 				/>
 			</div>
-			{/* <div className="form-group">
-				<label htmlFor="title">Images: </label>
-				<textarea
-					className="form-control"
-					defaultValue={product.photos[0]}
-					name="photos"
-					value={props.photos}
-					rows="3"
-				/>
-			</div> */}
+			{!product.photos ? (
+				<div className="form-group">
+					<label htmlFor="title">Images: </label>
+					<input
+						type="text"
+						className="form-control"
+						name="image1"
+						value={props.image1}
+					/>
+					<input
+						type="text"
+						className="form-control"
+						name="image2"
+						value={props.image2}
+					/>
+					<input
+						type="text"
+						className="form-control"
+						name="image3"
+						value={props.image3}
+					/>
+				</div>
+			) : null}
 
 			<div className="form-row">
 				<div className="form-group col-sm-5">
@@ -56,13 +70,13 @@ const ProductForm = props => {
 				</div>
 
 				<div className="form-group col-sm-5">
-					<label htmlFor="title">Quantity: </label>
+					<label htmlFor="title">Stock: </label>
 					<input
 						type="number"
 						className="form-control"
-						defaultValue={product.quantity}
-						name="quantity"
-						value={props.quantity}
+						defaultValue={product.stock}
+						name="stock"
+						value={props.stock}
 						required
 					/>
 				</div>

@@ -5,10 +5,12 @@ import PropTypes from 'prop-types'
 import { MainHome, Login, Signup, UserHome } from './components'
 import AllProducts from './components/allProducts-home'
 import SingleProduct from './components/singleProduct-home'
+import { me } from './store'
 import AdminView from './components/adminview'
 import NewProduct from './components/newproduct'
+import AdminSingleProduct from './components/adminsingleproduct'
+import UpdateProduct from './components/updateproduct'
 import Cart from './components/cart'
-import { me } from './store'
 
 /**
  * COMPONENT
@@ -37,6 +39,11 @@ class Routes extends Component {
 							<Route path="/home" component={UserHome} />
 							<Route path="/admin" component={AdminView} />
 							<Route path="/new-product" component={NewProduct} />
+							<Route
+								path="/admin-single-product/:id"
+								component={AdminSingleProduct}
+							/>
+							<Route path="/update-product/:id" component={UpdateProduct} />
 						</Switch>
 					)}
 					{/* Displays our Login component as a fallback */}

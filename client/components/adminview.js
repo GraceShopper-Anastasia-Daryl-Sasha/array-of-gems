@@ -9,6 +9,7 @@ class AdminView extends Component {
 	}
 	render() {
 		const { products } = this.props
+		console.log('Products', products)
 		return (
 			<div id="admin">
 				<h3>Dashboard</h3>
@@ -32,7 +33,7 @@ class AdminView extends Component {
 								<th scope="col">Id</th>
 								<th scope="col">Image</th>
 								<th scope="col">Product Title</th>
-								<th scope="col">Quantity</th>
+								<th scope="col">Stock</th>
 								<th scope="col">Price</th>
 							</tr>
 						</thead>
@@ -41,7 +42,7 @@ class AdminView extends Component {
 								<tr key={product.id}>
 									<th scope="row">{product.id}</th>
 									<td>
-										<img src={product.photos[0]} />
+										<img src={product.photos[0].image} />
 									</td>
 
 									<td>
@@ -50,7 +51,7 @@ class AdminView extends Component {
 										</Link>
 									</td>
 
-									<td>{product.quantity}</td>
+									<td>{product.stock}</td>
 									<td>${product.price}</td>
 								</tr>
 							))}
