@@ -70,13 +70,13 @@ const ProductForm = props => {
 				</div>
 
 				<div className="form-group col-sm-5">
-					<label htmlFor="title">Quantity: </label>
+					<label htmlFor="title">Stock: </label>
 					<input
 						type="number"
 						className="form-control"
-						defaultValue={product.quantity}
-						name="quantity"
-						value={props.quantity}
+						defaultValue={product.stock}
+						name="stock"
+						value={props.stock}
 						required
 					/>
 				</div>

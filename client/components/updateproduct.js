@@ -35,7 +35,7 @@ const mapDispatch = (dispatch, ownProps) => {
 			const title = evt.target.title.value
 			const description = evt.target.description.value
 			const price = evt.target.price.value
-			const quantity = evt.target.quantity.value
+			const stock = evt.target.stock.value
 			const type = evt.target.type.value
 			const size = evt.target.size.value
 			const color = evt.target.color.value
@@ -47,7 +47,7 @@ const mapDispatch = (dispatch, ownProps) => {
 						title,
 						description,
 						price,
-						quantity,
+						stock,
 						type,
 						size,
 						color

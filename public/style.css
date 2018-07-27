@@ -265,7 +265,11 @@ form div {
 }
 
 .list img {
-	width: 30%;
+	width: 100%;
+}
+
+.card {
+	width: 18em;
 }
 
 /* Admin End */

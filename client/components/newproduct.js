@@ -11,7 +11,7 @@ class NewProduct extends Component {
 				title: '',
 				description: '',
 				price: 0.0,
-				quantity: 0,
+				stock: 0,
 				type: '',
 				size: '',
 				color: ''
@@ -41,7 +41,7 @@ const mapDispatch = (dispatch, ownProps) => {
 			const title = evt.target.title.value
 			const description = evt.target.description.value
 			const price = evt.target.price.value
-			const quantity = evt.target.quantity.value
+			const stock = evt.target.stock.value
 			const type = evt.target.type.value
 			const size = evt.target.size.value
 			const color = evt.target.color.value
@@ -51,8 +51,8 @@ const mapDispatch = (dispatch, ownProps) => {
 			dispatch(
 				postProduct(
 					{
-						product: { title, description, price, quantity, type, size, color },
-						photos: [photo1, photo2, photo3]
+						product: { title, description, price, stock, type, size, color },
+						photos: [photo3, photo2, photo1]
 					},
 					ownProps.history
 				)

@@ -18,7 +18,7 @@ const Product = db.define('product', {
 			min: 0.01
 		}
 	},
-	quantity: {
+	stock: {
 		type: Sequelize.INTEGER,
 		allowNull: false
 	},

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchProduct, removeProduct } from '../store/action-creators'
+import AdminSingleImage from './adminsingleimage'
 
 class AdminSingleProduct extends Component {
 	componentDidMount() {
@@ -21,13 +22,11 @@ class AdminSingleProduct extends Component {
 					<p>Description: {product.description}</p>
 					<ul className="list">
 						{product.photos.map(photo => (
-							<li key={photo.id}>
-								<img src={photo.image} />
-							</li>
+							<AdminSingleImage key={photo.id} photo={photo} />
 						))}
 					</ul>
 					<p>Price: {product.price}</p>
-					<p>Quantity: {product.quantity}</p>
+					<p>Stock: {product.stock}</p>
 					<p>Type: {product.type}</p>
 					<p>Size: {product.size}</p>
 					<p>Color: {product.color}</p>
