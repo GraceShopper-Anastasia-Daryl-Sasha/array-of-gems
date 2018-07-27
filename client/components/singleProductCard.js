@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 const SingleProductCard = (props) => {
     const { product } = props
+
+
     return (
         <div className="product">
             <div className="product-image">
@@ -13,7 +15,6 @@ const SingleProductCard = (props) => {
                 <a>Price: ${product.price}</a>
             </div>
             <div className='product-buttons'>
-                <button>Add to Cart</button>
                 <button><Link to={`/products/${product.id}`}>More Info</Link></button>
             </div>
         </div>

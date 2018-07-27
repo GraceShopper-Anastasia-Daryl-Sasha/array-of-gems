@@ -2,20 +2,19 @@ import axios from 'axios'
 
 //Action Type
 export const GET_PRODUCTS = 'GET_PRODUCTS'
-
 export const GET_SELECTED_CATEGORIES = 'GET_SELECTED_CATEGORIES'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 export const GET_REVIEWS = 'GET_REVIEWS'
-
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const GET_CART = 'GET_CART'
 
 //Action Creators
 const getProducts = products => {
 	return { type: GET_PRODUCTS, products }
 }
-
 
 export const getCategories = categories => {
 	return { type: GET_SELECTED_CATEGORIES, categories }
@@ -37,11 +36,19 @@ const deleteProduct = productId => ({
 })
 
 const getSingleProduct = product => {
-	return { type: GET_SINGLE_PRODUCT, product}
+	return { type: GET_SINGLE_PRODUCT, product }
 }
 
 const getReviews = reviews => {
 	return { type: GET_REVIEWS, reviews }
+}
+
+export const getCart = () => {
+	return { type: GET_CART }
+}
+
+export const addToCart = product => {
+	return { type: ADD_TO_CART, product }
 }
 
 // Thunk Creators

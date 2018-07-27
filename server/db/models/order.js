@@ -4,7 +4,7 @@ const db = require('../db')
 const Order = db.define('order', {
 
     orderTotal: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.INTEGER,
         defaultValue: 0.00
     },
     quantity: {
@@ -13,6 +13,14 @@ const Order = db.define('order', {
     status: {
         type: Sequelize.ENUM('Created', 'Pending', 'Shipped', 'Delivered'),
         defaultValue: 'Pending'
+    },
+    datePlaced: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
+    },
+    shippingPrice: {
+        type: Sequelize.INTEGER,
+        default: 2.99
     }
 
 })
