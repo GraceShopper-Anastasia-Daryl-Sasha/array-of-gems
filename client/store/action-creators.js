@@ -6,6 +6,7 @@ export const GET_SELECTED_CATEGORIES = 'GET_SELECTED_CATEGORIES'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const UPDATE_PHOTO = 'UPDATE_PHOTO'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 export const GET_REVIEWS = 'GET_REVIEWS'
 export const ADD_TO_CART = 'ADD_TO_CART'
@@ -33,6 +34,11 @@ const updateProduct = product => ({
 const deleteProduct = productId => ({
 	type: DELETE_PRODUCT,
 	id: +productId
+})
+
+const updatePhoto = photo => ({
+	type: UPDATE_PHOTO,
+	photo
 })
 
 const getSingleProduct = product => {
