@@ -76,6 +76,10 @@ class SingleProduct extends Component {
           <a>{product.description}</a> <br />
           <a><strong>Price:</strong> ${product.price}</a><br />
           <a><strong>Size:</strong> {product.size}</a><br />
+          <h2><a>{product.title}</a></h2> <br />
+          <h4>Description</h4>
+          <a>{product.description}</a> <br />
+          <a>Price: ${product.price}</a>
         </div>
         <div className='product-buttons'>
 

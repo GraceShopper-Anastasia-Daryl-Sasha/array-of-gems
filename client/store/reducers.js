@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import user from './user'
-
 import {
 	GET_PRODUCTS,
 	GET_SELECTED_CATEGORIES,
@@ -67,9 +66,9 @@ const orderProducts = {
 
 const orderReducer = (state = orderProducts, action) => {
 	switch (action.type) {
-		// case GET_CART: {
-		// 	return state
-		// }
+		case GET_CART: {
+			return state
+		}
 		case ADD_TO_CART: {
 			return {
 				...state,
@@ -80,7 +79,6 @@ const orderReducer = (state = orderProducts, action) => {
 			return state
 	}
 }
-
 
 const rootReducer = combineReducers({
 	products: productsReducer,

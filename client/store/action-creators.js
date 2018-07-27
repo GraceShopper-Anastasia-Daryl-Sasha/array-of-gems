@@ -11,6 +11,7 @@ export const GET_REVIEWS = 'GET_REVIEWS'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
 
+
 //Action Creators
 const getProducts = products => {
 	return { type: GET_PRODUCTS, products }
@@ -19,6 +20,7 @@ const getProducts = products => {
 export const getCategories = categories => {
 	return { type: GET_SELECTED_CATEGORIES, categories }
 }
+
 
 const createProduct = product => ({
 	type: CREATE_PRODUCT,
@@ -92,15 +94,3 @@ export const fetchProduct = (productId) => {
 	}
 }
 
-export const fetchReviews = (productId) => {
-	return async dispatch => {
-		try {
-			const response = await axios.get(`/api/products/${productId}/reviews`)
-			const reviews = response.data
-			const action = getReviews(reviews)
-			dispatch(action)
-		} catch (err) {
-			console.log(err)
-		}
-	}
-}
