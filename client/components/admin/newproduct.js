@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './productform'
-import { postProduct } from '../store/action-creators'
+import AdminSidebar from './adminSidebar'
+import { postProduct } from '../../store/action-creators'
 
 class NewProduct extends Component {
 	constructor() {
@@ -21,13 +22,19 @@ class NewProduct extends Component {
 
 	render() {
 		return (
-			<div id="form">
-				<h3>Create New Product</h3>
-				<div className="form">
-					<ProductForm
-						product={this.state.product}
-						handleSubmit={this.props.handleSubmit}
-					/>
+			<div id="admin">
+				<div className="row">
+					<AdminSidebar />
+					<div className="admin-view">
+						<h3>Create New Product</h3>
+
+						<div className="form">
+							<ProductForm
+								product={this.state.product}
+								handleSubmit={this.props.handleSubmit}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		)

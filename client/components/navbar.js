@@ -9,36 +9,32 @@ import SearchBar from './searchBar'
 // include cart
 // my Account if logged in
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 	<div>
 		<nav>
 			<div className="logo">
-				<img
-					src={
-						'http://rgs.usu.edu/rd/wp-content/uploads/sites/17/2017/02/61326_154623_ruby_diamond_gem-300x300.png'
-					}
-				/>
-				<h1>
-					<Link to="/home">Array Of Gems</Link>
-				</h1>
-				<h3>
-					<Link to="/products">All Products</Link>
-				</h3>
-				<SearchBar />
+				<img src="http://rgs.usu.edu/rd/wp-content/uploads/sites/17/2017/02/61326_154623_ruby_diamond_gem-300x300.png" />
+				<Link to="/">
+					<h3>Array Of Gems</h3>
+				</Link>
+			</div>
+
+			<SearchBar />
+			<div className="navLinks">
+				<Link to="/products">Products</Link>
 			</div>
 			{isLoggedIn ? (
 				<div className="navLinks">
 					{/* The navbar will show these links after you log in */}
 					<Link to="/myAccount">My Account</Link>
+					{isAdmin && <Link to="/admin">Dashboard</Link>}
 					<a href="#" onClick={handleClick}>
 						Logout
 					</a>
-					<img
-						src={
-							'https://banner2.kisspng.com/20171217/337/shopping-cart-png-5a364b75338266.010470061513507701211.jpg'
-						}
-					/>
-					<span>0</span>
+					<Link to="/cart">
+						<img src="https://banner2.kisspng.com/20171217/337/shopping-cart-png-5a364b75338266.010470061513507701211.jpg" />
+						<span>0</span>
+					</Link>
 				</div>
 			) : (
 				<div className="navLinks">
@@ -63,7 +59,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
  */
 const mapState = state => {
 	return {
-		isLoggedIn: !!state.user.id
+		isLoggedIn: !!state.user.id,
+		isAdmin: state.user.isAdmin
 	}
 }
 
