@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Reviews from './reviews'
 import { connect } from 'react-redux';
 import history from '../history';
+import { Link } from 'react-router-dom'
 import { addToCart } from "../store/action-creators"
 
 class SingleProduct extends Component {
@@ -18,7 +19,7 @@ class SingleProduct extends Component {
     })
   }
 
-  handleSubmit = (evt) => {
+  handleSubmit = evt => {
     evt.preventDefault();
     const { product } = this.props
     const productToAdd = {
@@ -40,7 +41,9 @@ class SingleProduct extends Component {
     const { user } = this.props
 
     let num = product.stock
-    if (num > 10) { num = 10 }
+    if (num > 10) {
+      num = 10
+    }
 
     let quantityArr = []
     for (let i = 1; i <= num; i++) {
@@ -48,7 +51,18 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div className="single-product-main">
+      <div className="container">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/">Home</Link>
+					</li>
+					<li className="breadcrumb-item active" aria-current="page">
+						<Link to="/products">Products</Link>
+					</li>
+				</ol>
+
+        <div className="row ">
+					<div className="col-sm">
         {
           product.photos ?
             <div className="single-product-images">
@@ -63,39 +77,38 @@ class SingleProduct extends Component {
                   })
                 }
               </div>
-            </div> : console.log('loading')
-
-        }
-
-
-        <div className="product-info">
-          <h1><a>{product.title}</a></h1> <br />
-          <h2>Description</h2>
-          <a>{product.description}</a> <br />
-          <a><strong>Price:</strong> ${product.price}</a><br />
-          <a><strong>Size:</strong> {product.size}</a><br />
-          <h2><a>{product.title}</a></h2> <br />
-          <h4>Description</h4>
-          <a>{product.description}</a> <br />
-          <a>Price: ${product.price}</a>
+            </div> : (
+              console.log('loading')
+            )}
         </div>
-        <div className='product-buttons'>
+        <div className="col-sm">
+          <h1>{product.title}</h1>
+          <h2>Description</h2>
+          <p>{product.description}</p>
+          <p>
+            <strong>Price:</strong> ${product.price}
+          </p>
+          <p><strong>Size:</strong> {product.size}
+          </p>
 
+        <div className="product-buttons">
           <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
             <label>Quantity: </label>
-            <select name="quantity" onChange={this.handleChange}>
+            <select name="quantity" className="form-control" onChange={this.handleChange}>
               {
                 quantityArr.map(i => (
                   <option key={i} value={i}>{i}</option>
-                ))
-              }
+                ))}
             </select>
-            <button type="submit">Add to Cart</button>
+            </div>
+            <button type="submit" className="btn btn-primary search-btn">Add to Cart</button>
           </form>
         </div>
-        <Reviews reviews={reviews} product={product} user={user}/>
       </div>
-
+    </div>
+        <Reviews reviews={reviews} product={product} user={user}/>
+    </div>
     )
   }
 }
@@ -106,7 +119,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = (dispatch, ownProps) => {
+const mapDispatch = (dispatch) => {
 	return {
 		addToCart: newProduct => dispatch(addToCart(newProduct))
 	}
