@@ -1,30 +1,28 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
-import { connect } from 'react-redux';
-import { getCategories } from "../store/action-creators"
-
+import { connect } from 'react-redux'
+import { getCategories } from '../store/action-creators'
 
 class Sidebar extends Component {
 	constructor() {
 		super()
 		this.state = {
-			'color': [],
-			'type': [],
-			'size': []
+			color: [],
+			type: [],
+			size: []
 		}
 	}
 
-	handleSubmit = (evt) => {
+	handleSubmit = evt => {
 		console.log(evt.target.name)
-		evt.preventDefault();
-		const selected = this.state;
+		evt.preventDefault()
+		const selected = this.state
 		this.props.getCategories(selected)
 	}
 
-
-	handleClick = (evt) => {
-		const category = evt.target.name;
-		let newCategoryArr = [];
+	handleClick = evt => {
+		const category = evt.target.name
+		let newCategoryArr = []
 		if (this.state[category].includes(evt.target.value)) {
 			let cat = this.state[evt.target.name]
 			cat.forEach(currVal => {
@@ -44,7 +42,7 @@ class Sidebar extends Component {
 	}
 
 	render() {
-		const allProducts = this.props.products;
+		const allProducts = this.props.products
 		let categories = {
 			colors: [],
 			types: [],
@@ -65,14 +63,19 @@ class Sidebar extends Component {
 
 		return (
 			<div id="sidebar">
-				<h5>Select Options</h5>
-				<h6>All Products</h6>
 				<form onSubmit={this.handleSubmit}>
 					<div className="options">
+						<h5>Select Options</h5>
 						<p>Select by Color</p>
 						{categories.colors.map(color => (
 							<div key={color} className="form-group form-check">
-								<input type="checkbox" className="form-check-input" onChange={this.handleClick} name="color" value={color} />
+								<input
+									type="checkbox"
+									className="form-check-input"
+									onChange={this.handleClick}
+									name="color"
+									value={color}
+								/>
 								<label className="form-check-label" htmlFor="colors">
 									{color}
 								</label>
@@ -82,7 +85,13 @@ class Sidebar extends Component {
 						<p>Select by Size</p>
 						{categories.sizes.map(size => (
 							<div key={size} className="form-group form-check">
-								<input type="checkbox" className="form-check-input" onChange={this.handleClick} name="size" value={size} />
+								<input
+									type="checkbox"
+									className="form-check-input"
+									onChange={this.handleClick}
+									name="size"
+									value={size}
+								/>
 								<label className="form-check-label" htmlFor="sizes">
 									{size}
 								</label>
@@ -91,25 +100,42 @@ class Sidebar extends Component {
 						<p>Select by type</p>
 						{categories.types.map(type => (
 							<div key={type} className="form-group form-check">
-								<input type="checkbox" className="form-check-input" onChange={this.handleClick} name="type" value={type} />
+								<input
+									type="checkbox"
+									className="form-check-input"
+									onChange={this.handleClick}
+									name="type"
+									value={type}
+								/>
 								<label className="form-check-label" htmlFor="type">
 									{type}
 								</label>
 							</div>
 						))}
 					</div>
-					<button className='btn btn-default' name="submit" type="submit">Search</button>
-					<button className='btn btn-default' name="clear" type="submit" >Clear</button>
-				</form >
-
-			</div >
+					<button
+						className="btn btn-primary btn-sm"
+						name="submit"
+						type="submit"
+					>
+						Search
+					</button>
+					<button
+						className="btn btn-secondary btn-sm"
+						name="clear"
+						type="submit"
+					>
+						Clear
+					</button>
+				</form>
+			</div>
 		)
 	}
 }
 
 const mapDispatch = dispatch => {
 	return {
-		getCategories: (categories) => dispatch(getCategories(categories))
+		getCategories: categories => dispatch(getCategories(categories))
 	}
 }
 

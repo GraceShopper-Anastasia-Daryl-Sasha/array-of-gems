@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { editProduct } from '../store/action-creators'
+import { editProduct } from '../../store/action-creators'
 import ProductForm from './productform'
+import AdminSidebar from './adminSidebar'
 
 class UpdateProduct extends Component {
 	render() {
 		const { product } = this.props
 		return (
-			<div id="form">
-				<h3>Update Product</h3>
-				<div className="form">
-					<ProductForm
-						product={product}
-						handleSubmit={this.props.handleSubmit}
-					/>
+			<div id="admin">
+				<div className="row">
+					<AdminSidebar />
+					<div className="admin-view">
+						<h3>Update Product</h3>
+
+						<div className="form">
+							<ProductForm
+								product={product}
+								handleSubmit={this.props.handleSubmit}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		)

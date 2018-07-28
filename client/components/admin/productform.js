@@ -9,53 +9,57 @@ const ProductForm = props => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className="form">
-			<div className="form-group">
-				<label htmlFor="title">Product title: </label>
-				<input
-					type="text"
-					className="form-control"
-					defaultValue={product.title}
-					name="title"
-					value={props.title}
-					required
-				/>
-			</div>
-
-			<div className="form-group">
-				<label htmlFor="description">Description: </label>
-				<textarea
-					className="form-control"
-					name="description"
-					defaultValue={product.description}
-					value={props.description}
-					rows="3"
-				/>
-			</div>
-			{!product.photos ? (
-				<div className="form-group">
-					<label htmlFor="title">Images: </label>
+		<form onSubmit={handleSubmit}>
+			<div className="form-row">
+				<div className="form-group col-sm-12">
+					<label htmlFor="title">Product title: </label>
 					<input
 						type="text"
 						className="form-control"
-						name="image1"
-						value={props.image1}
-					/>
-					<input
-						type="text"
-						className="form-control"
-						name="image2"
-						value={props.image2}
-					/>
-					<input
-						type="text"
-						className="form-control"
-						name="image3"
-						value={props.image3}
+						defaultValue={product.title}
+						name="title"
+						value={props.title}
+						required
 					/>
 				</div>
-			) : null}
-
+			</div>
+			<div className="form-row">
+				<div className="form-group col-sm-12">
+					<label htmlFor="description">Description: </label>
+					<textarea
+						className="form-control"
+						name="description"
+						defaultValue={product.description}
+						value={props.description}
+						rows="3"
+					/>
+				</div>
+			</div>
+			<div className="form-row">
+				{!product.photos && (
+					<div className="form-group col-sm-12">
+						<label htmlFor="title">Images: </label>
+						<input
+							type="text"
+							className="form-control"
+							name="image1"
+							value={props.image1}
+						/>
+						<input
+							type="text"
+							className="form-control"
+							name="image2"
+							value={props.image2}
+						/>
+						<input
+							type="text"
+							className="form-control"
+							name="image3"
+							value={props.image3}
+						/>
+					</div>
+				)}
+			</div>
 			<div className="form-row">
 				<div className="form-group col-sm-5">
 					<label htmlFor="title">Price: </label>
@@ -82,7 +86,7 @@ const ProductForm = props => {
 				</div>
 			</div>
 			<div className="form-row">
-				<div className="form-group col-sm-3">
+				<div className="form-group col-sm-4">
 					<label htmlFor="title">Type: </label>
 					<input
 						type="text"
