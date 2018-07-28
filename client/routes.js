@@ -6,12 +6,14 @@ import { MainHome, Login, Signup, UserHome } from './components'
 import AllProducts from './components/allProducts-home'
 import SingleProduct from './components/singleProduct-home'
 import { me } from './store'
-import AdminView from './components/adminview'
-import NewProduct from './components/newproduct'
-import AdminSingleProduct from './components/adminsingleproduct'
-import UpdateProduct from './components/updateproduct'
 import Cart from './components/cart'
 import Reviews from './components/reviews'
+
+import AdminView from './components/admin/adminview'
+import AdminManageProducts from './components/admin/adminmanageproducts'
+import NewProduct from './components/admin/newproduct'
+import AdminSingleProduct from './components/admin/adminsingleproduct'
+import UpdateProduct from './components/admin/updateproduct'
 
 /**
  * COMPONENT
@@ -43,11 +45,16 @@ class Routes extends Component {
 							{isAdmin && (
 								<Switch>
 									<Route path="/admin" component={AdminView} />
+									<Route
+										path="/admin-mange-products"
+										component={AdminManageProducts}
+									/>
 									<Route path="/new-product" component={NewProduct} />
 									<Route
 										path="/admin-single-product/:id"
 										component={AdminSingleProduct}
 									/>
+
 									<Route path="/update-product/:id" component={UpdateProduct} />
 								</Switch>
 							)}

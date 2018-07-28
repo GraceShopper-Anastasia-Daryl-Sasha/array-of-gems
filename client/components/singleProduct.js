@@ -107,9 +107,9 @@ const mapState = state => {
 }
 
 const mapDispatch = (dispatch, ownProps) => {
-  return {
-    addToCart: (newProduct) => dispatch(addToCart(newProduct))
-  }
+	return {
+		addToCart: newProduct => dispatch(addToCart(newProduct))
+	}
 }
 
 export default connect(mapState, mapDispatch)(SingleProduct)

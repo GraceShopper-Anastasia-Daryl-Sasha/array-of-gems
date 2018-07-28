@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const SingleProductCard = (props) => {
+const SingleProductCard = props => {
 	const { product } = props
-
 
 	return (
 		<div className="product">
@@ -11,11 +10,18 @@ const SingleProductCard = (props) => {
 				<img src={product.photos[0].image} />
 			</div>
 			<div className="product-info">
-				<a>{product.title}</a> <br />
-				<a>Price: ${product.price}</a>
+				<p>
+					{product.title}
+					<br />
+					Price: ${product.price}
+				</p>
 			</div>
-			<div className='product-buttons'>
-				<button><Link to={`/products/${product.id}`}>More Info</Link></button>
+			<div className="product-buttons">
+				<Link to={`/products/${product.id}`}>
+					<button type="submit" className="btn btn-primary btn-sm search-btn">
+						Select Options
+					</button>
+				</Link>
 			</div>
 		</div>
 	)

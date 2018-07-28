@@ -95,7 +95,7 @@ export const postProduct = (product, history) => {
 		try {
 			const { data } = await axios.post('/api/products', product)
 			dispatch(createProduct(data))
-			history.push('/admin')
+			history.push('/admin-mange-products')
 		} catch (err) {
 			console.log('Product was not created...', err)
 		}
@@ -122,7 +122,7 @@ export const removeProduct = (productId, history) => {
 		try {
 			await axios.delete(`/api/products/${productId}`)
 			dispatch(deleteProduct(productId))
-			history.push('/admin')
+			history.push('/admin-mange-products')
 		} catch (err) {
 			console.log('There was an error removing product', err)
 		}
