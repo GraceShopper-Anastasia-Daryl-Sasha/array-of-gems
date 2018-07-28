@@ -62,7 +62,8 @@ const reviewReducer = (state = {}, action) => {
 	}
 }
 const orderProducts = {
-	products: []
+	products: [],
+	orderTotal: 0
 };
 
 const orderReducer = (state = orderProducts, action) => {
@@ -73,13 +74,13 @@ const orderReducer = (state = orderProducts, action) => {
 		case ADD_TO_CART: {
 			let updatedProducts = [...state.products];
 			let isIncluded = false, productToUpdate;
+
 			state.products.map(product => {
 				if (product.id === action.product.id) {
 					isIncluded = true;
 					productToUpdate = product
 				}
 			})
-
 
 			if (state.products.length > 0 && isIncluded === true) {
 				action.product.quantity = productToUpdate.quantity + action.product.quantity
@@ -88,9 +89,15 @@ const orderReducer = (state = orderProducts, action) => {
 			} else {
 				updatedProducts.push(action.product)
 			}
+			let total = 0;
+			updatedProducts.map(product => {
+				total = total + Number(product.subtotal)
+			})
+
 			return {
 				...state,
-				products: updatedProducts
+				products: updatedProducts,
+				orderTotal: total
 			}
 		}
 		// case UPDATE_CART: {

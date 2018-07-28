@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import CartTotal from './cartTotal'
+
 const CartTable = (props) => {
-    const { products } = props
-    let orderTotal = 0;
-    products.map(product => {
-        orderTotal = orderTotal + Number(product.subtotal)
-    })
+    const { products, orderTotal } = props
 
     return (
 
@@ -33,7 +31,7 @@ const CartTable = (props) => {
                                         </td> */}
 
                             <td>
-                                <Link to={'/admin-single-product/' + product.id}>
+                                <Link to={`/products/${product.id}`}>
                                     {product.title}
                                 </Link>
                             </td>
@@ -62,6 +60,7 @@ const CartTable = (props) => {
                 <button><Link to="/products">Keep Shopping</Link></button>
                 <button>Clear Cart</button>
             </form>
+            <CartTotal />
         </div>
     )
 }

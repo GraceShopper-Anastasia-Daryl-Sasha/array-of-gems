@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Reviews from './reviews'
 import { connect } from 'react-redux';
 import history from '../history';
+import { Link } from 'react-router-dom'
 import { addToCart } from "../store/action-creators"
 
 
@@ -33,6 +34,7 @@ class SingleProduct extends Component {
     }
     this.props.addToCart(productToAdd)
     history.push('/cart')
+
   }
 
   render() {
@@ -68,6 +70,7 @@ class SingleProduct extends Component {
         }
 
 
+
         <div className="product-info">
           <h1><a>{product.title}</a></h1> <br />
           <h2>Description</h2>
@@ -93,6 +96,7 @@ class SingleProduct extends Component {
             <button type="submit">Add to Cart</button>
           </form>
         </div>
+
         <Reviews reviews={reviews} />
       </div>
 

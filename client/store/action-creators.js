@@ -46,9 +46,9 @@ const getSingleProduct = product => {
 	return { type: GET_SINGLE_PRODUCT, product }
 }
 
-export const getCart = () => {
-	return { type: GET_CART }
-}
+// export const getCart = () => {
+// 	return { type: GET_CART }
+// }
 
 export const addToCart = product => {
 	return { type: ADD_TO_CART, product }
