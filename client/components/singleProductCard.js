@@ -8,7 +8,7 @@ const SingleProductCard = (props) => {
 	return (
 		<div className="product">
 			<div className="product-image">
-				<img src={product.photos[0]} />
+				<img src={product.photos[0].image} />
 			</div>
 			<div className="product-info">
 				<a>{product.title}</a> <br />

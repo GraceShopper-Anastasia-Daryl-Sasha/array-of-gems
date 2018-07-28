@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import history from '../history';
 import { addToCart } from "../store/action-creators"
 
-
 class SingleProduct extends Component {
   constructor() {
     super()
@@ -38,6 +37,7 @@ class SingleProduct extends Component {
   render() {
     const { product } = this.props
     const { reviews } = product
+    const { user } = this.props
 
     let num = product.stock
     if (num > 10) { num = 10 }
@@ -93,10 +93,16 @@ class SingleProduct extends Component {
             <button type="submit">Add to Cart</button>
           </form>
         </div>
-        <Reviews reviews={reviews} />
+        <Reviews reviews={reviews} product={product} user={user}/>
       </div>
 
     )
+  }
+}
+
+const mapState = state => {
+  return {
+    user: state.user
   }
 }
 
@@ -106,4 +112,4 @@ const mapDispatch = (dispatch, ownProps) => {
   }
 }
 
-export default connect(null, mapDispatch)(SingleProduct)
+export default connect(mapState, mapDispatch)(SingleProduct)
