@@ -70,4 +70,14 @@ router.delete('/:id', async (req, res, next) => {
 	res.status(204).end()
 })
 
+//POST /api/products/:id/reviews
+router.post('/:id/reviews', async (req, res, next) => {
+	try {
+		const newReview = await Review.create(req.body)
+		res.status(200).json(newReview)
+	} catch (err) {
+		res.sendStatus(500)
+	}
+})
+
 module.exports = router
