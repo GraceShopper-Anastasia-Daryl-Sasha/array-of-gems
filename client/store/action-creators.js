@@ -8,10 +8,10 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const UPDATE_PHOTO = 'UPDATE_PHOTO'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+export const GET_REVIEWS = 'GET_REVIEWS'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
-export const CREATE_REVIEW = 'CREATE_REVIEW'
 
 //Action Creators
 const getProducts = products => {
@@ -58,11 +58,6 @@ export const updateCart = product => {
 	return { type: UPDATE_CART, product }
 }
 
-const createReview = review => {
-	console.log('ACTION CREATOR', review)
-	return { type: CREATE_REVIEW, review }
-}
-
 // Thunk Creators
 export const fetchProducts = () => {
 	return async dispatch => {
@@ -94,6 +89,7 @@ export const postProduct = (product, history) => {
 	return async dispatch => {
 		try {
 			const { data } = await axios.post('/api/products', product)
+			console.log('Data', data)
 			dispatch(createProduct(data))
 			history.push('/admin-mange-products')
 		} catch (err) {
@@ -125,17 +121,6 @@ export const removeProduct = (productId, history) => {
 			history.push('/admin-mange-products')
 		} catch (err) {
 			console.log('There was an error removing product', err)
-		}
-	}
-}
-
-export const postReview = (review) => {
-	return async dispatch => {
-		try {
-			const { data } = await axios.post(`/api/products/${review.productId}/reviews`, review)
-			dispatch(createReview(data))
-		} catch (err) {
-			console.log('Review was not added...', err)
 		}
 	}
 }

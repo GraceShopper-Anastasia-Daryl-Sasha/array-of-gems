@@ -7,10 +7,10 @@ import {
 	UPDATE_PRODUCT,
 	DELETE_PRODUCT,
 	GET_SINGLE_PRODUCT,
+	GET_REVIEWS,
 	ADD_TO_CART,
 	GET_CART,
-	UPDATE_CART,
-	CREATE_REVIEW
+	UPDATE_CART
 } from './action-creators'
 
 
@@ -47,22 +47,20 @@ const singleProductReducer = (state = {}, action) => {
 		case GET_SINGLE_PRODUCT: {
 			return action.product
 		}
-		case CREATE_REVIEW: {
-			return {...state, reviews: [...state, action.review]}
-		}
 		default:
 			return state
 	}
 }
 
-// const reviewReducer = (state = {}, action) => {
-// 	switch (action.type) {
-
-// 		default:
-// 			return state
-// 	}
-// }
-
+const reviewReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_REVIEWS: {
+			return action.reviews
+		}
+		default:
+			return state
+	}
+}
 const orderProducts = {
 	products: []
 };
@@ -119,6 +117,7 @@ const rootReducer = combineReducers({
 	user: user,
 	product: singleProductReducer,
 	categories: categoriesReducer,
+	reviews: reviewReducer,
 	order: orderReducer
 })
 
