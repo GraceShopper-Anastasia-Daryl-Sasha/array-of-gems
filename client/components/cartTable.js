@@ -7,20 +7,18 @@ const CartTable = (props) => {
     const { products, orderTotal } = props
 
     return (
-
         <div>
-            <h3>THIS IS YOUR CART: </h3>
+            {/* <h3>THIS IS YOUR CART: </h3> */}
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
                         {/* <th scope="col">Image</th> */}
                         <th scope="col">Product Title</th>
                         <th scope="col">Quantity</th>
-                        <th scope="col"></th>
+                        <th scope="col" />
                         <th scope="col">Price</th>
                         <th scope="col">Subtotal</th>
-                        <th scope="col"></th>
-
+                        <th scope="col" />
                     </tr>
                 </thead>
                 <tbody>
@@ -31,19 +29,21 @@ const CartTable = (props) => {
                                         </td> */}
 
                             <td>
-                                <Link to={`/products/${product.id}`}>
+                                <Link to={'/admin-single-product/' + product.id}>
                                     {product.title}
                                 </Link>
                             </td>
                             <td>{product.quantity}</td>
-                            <td><button onClick={props.handleEdit}>Edit</button></td>
+                            <td>
+                                <button onClick={props.handleEdit}>Edit</button>
+                            </td>
                             <td>${product.price}</td>
                             <td>${product.subtotal}</td>
-                            <td><button>Remove</button></td>
-
+                            <td>
+                                <button>Remove</button>
+                            </td>
                         </tr>
-                    ))
-                    }
+                    ))}
                     <tr>
                         <td />
                         <td />
@@ -53,12 +53,15 @@ const CartTable = (props) => {
                         <td />
                     </tr>
                 </tbody>
-
             </table>
             <form onSubmit={props.handleSubmit}>
-                <button type="submit" onSubmit={props.handleSubmit}>Checkout</button>
-                <button><Link to="/products">Keep Shopping</Link></button>
-                <button>Clear Cart</button>
+                <button type="submit" onSubmit={props.handleSubmit}>
+                    Checkout
+				</button>
+                <button>
+                    <Link to="/products">Keep Shopping</Link>
+                </button>
+                <button onClick={props.handleClear}>Clear Cart</button>
             </form>
             <CartTotal />
         </div>
