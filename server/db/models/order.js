@@ -4,7 +4,7 @@ const db = require('../db')
 const Order = db.define('order', {
 
     orderTotal: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         defaultValue: 0.00
     },
     quantity: {
@@ -19,7 +19,7 @@ const Order = db.define('order', {
         defaultValue: Sequelize.NOW
     },
     shippingPrice: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         default: 2.99
     }
 
