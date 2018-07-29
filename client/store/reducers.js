@@ -8,7 +8,8 @@ import {
 	DELETE_PRODUCT,
 	GET_SINGLE_PRODUCT,
 	ADD_TO_CART,
-	GET_CART,
+	CLEAR_CART,
+	REMOVE_FROM_CART,
 	UPDATE_CART,
 	CREATE_REVIEW
 } from './action-creators'
@@ -48,20 +49,12 @@ const singleProductReducer = (state = {}, action) => {
 			return action.product
 		}
 		case CREATE_REVIEW: {
-			return {...state, reviews: [...state, action.review]}
+			return { ...state, reviews: [...state, action.review] }
 		}
 		default:
 			return state
 	}
 }
-
-// const reviewReducer = (state = {}, action) => {
-// 	switch (action.type) {
-
-// 		default:
-// 			return state
-// 	}
-// }
 
 const orderProducts = {
 	products: [],
@@ -70,9 +63,6 @@ const orderProducts = {
 
 const orderReducer = (state = orderProducts, action) => {
 	switch (action.type) {
-		// case GET_CART: {
-		// 	return state
-		// }
 		case ADD_TO_CART: {
 			let updatedProducts = [...state.products];
 			let isIncluded = false, productToUpdate;
@@ -116,6 +106,33 @@ const orderReducer = (state = orderProducts, action) => {
 		// 		products: updatedProducts
 		// 	}
 		// }
+		case REMOVE_FROM_CART: {
+			console.log('ACTION', action)
+			let updatedProducts = [],
+				total = 0;
+			state.products.map(product => {
+				console.log('product', product, 'ACTION.PRODUCTID', action.productId)
+				if (product.id !== action.productId) {
+					// remove item from the cart array
+					console.log('HELLO')
+					updatedProducts.push(product)
+					total = total + product.subtotal
+				}
+			})
+
+			return {
+				...state,
+				products: updatedProducts,
+				orderTotal: total
+			}
+		}
+		case CLEAR_CART: {
+			return {
+				...state,
+				products: [],
+				orderTotal: 0,
+			}
+		}
 		default:
 			return state
 	}

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Reviews from './reviews'
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom'
-import { getCart } from "../store/action-creators.js"
-import CartTable from "./cartTable"
+import { Redirect } from 'react-router-dom'
+import CartSummary from "./cartSummary"
 
 
 class Checkout extends Component {
@@ -24,13 +22,24 @@ class Checkout extends Component {
 
     // }
 
+
     render() {
-        const { products } = this.props
-        console.log(products)
+        const { products, orderTotal } = this.props
 
         return (
             <div>
-                <h2>Checkout</h2>
+                {products.length === 0 ? (
+                    <Redirect to="/cart" />
+                ) : (
+                        <div>
+                            <span>Checkout</span>
+                            <CartSummary
+                                products={products}
+                                orderTotal={orderTotal}
+                            />
+                        </div>
+                    )
+                }
             </div>
         )
 
@@ -40,7 +49,8 @@ class Checkout extends Component {
 const mapState = (state) => {
     console.log(state)
     return {
-        products: state.order.products
+        products: state.order.products,
+        orderTotal: state.order.orderTotal
     }
 };
 

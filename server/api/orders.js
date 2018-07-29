@@ -5,11 +5,21 @@ const { Product, Review, Photo, Order, OrderProducts } = require('../db/models')
 // receive all orders 
 router.get('/', async (req, res, next) => {
     try {
+        const orders = await Product.findAll({ include: [{ all: true }] })
+        res.json(orders)
+    } catch (err) {
+        next(err)
+    }
+})
 
-        const campus = await Campus.findOne({ where: { id } })
+// GET /api/orders/:userId
+// receive all orders 
+router.get('/:userEmail', async (req, res, next) => {
+    try {
 
-        const allUserOrders = await Product.findAll({ include: [{ all: true }] })
-        res.json(allUserOrders)
+        const user = await User.findOne({ where: { email: userEmail } })
+        // const allUserOrders = await Product.findAll({ include: [{ all: true }] })
+        res.json(user)
     } catch (err) {
         next(err)
     }

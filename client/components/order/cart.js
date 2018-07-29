@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Reviews from './reviews'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import CartTable from './cartTable'
+import { clearCart, removeFromCart } from "../../store/action-creators"
 
 class Cart extends Component {
     constructor() {
@@ -19,35 +19,33 @@ class Cart extends Component {
         this.props.history.push(`/checkout`)
     }
 
-    handleEdit = evt => {
-        console.log('TARGET', this.props, 'EVENT', evt)
-        console.log('EVT', evt.target.value)
-        console.log("PRODUCT", this)
-        const { product } = this.props
-        const productToAdd = {
-            id: product.id,
-            title: product.title,
-            description: product.description,
-            price: product.price,
-            quantity: Number(this.state.quantity),
-            subtotal: this.state.quantity * product.price,
-            // image: product.photos[0]
-        }
-        this.props.addToCart(productToAdd)
-
-    }
-
-    handleEdit = evt => {
-        console.log('TARGET', this.props, 'EVENT', evt)
-        console.log('EVT', evt.target.value)
+    handleEdit = evt => (product) => {
+        evt.preventDefault();
+        const updatedProduct = { ...product }
+        updatedProduct.quantity = Number(this.state.quantity)
+        this.props.addToCart(updatedProduct)
+        history.push('/cart')
     }
 
     handleClear = evt => {
-        console.log(evt.target)
+        evt.preventDefault();
+        this.props.clearCart();
     }
 
+    // might need to make async event func
+    handleRemove = productId => evt => {
+        evt.preventDefault();
+        console.log('PRODUCTID', productId)
+        this.props.removeFromCart(productId);
+    }
+
+    handleChange = evt => {
+        evt.preventDefault();
+        console.log("HELLO WORLD", this.state)
+        console.log(evt.target.value)
+    }
     render() {
-        const { products } = this.props
+        const { products, orderTotal } = this.props
 
         return (
             <div className="cart">
@@ -66,10 +64,12 @@ class Cart extends Component {
                 ) : (
                         <CartTable
                             products={products}
+                            orderTotal={orderTotal}
                             handleChange={this.handleChange}
                             handleSubmit={this.handleSubmit}
                             handleEdit={this.handleEdit}
                             handleClear={this.handleClear}
+                            handleRemove={this.handleRemove}
                         />
                     )}
             </div>
@@ -84,4 +84,11 @@ const mapState = state => {
     }
 }
 
-export default connect(mapState, null)(Cart)
+const mapDispatch = (dispatch) => {
+    return {
+        clearCart: () => dispatch(clearCart()),
+        removeFromCart: (productId) => dispatch(removeFromCart(productId))
+    }
+}
+
+export default connect(mapState, mapDispatch)(Cart)

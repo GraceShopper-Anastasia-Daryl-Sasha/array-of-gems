@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import CartTotal from './cartTotal'
-
 const CartTable = (props) => {
     const { products, orderTotal } = props
-
+    console.log('PRODUCTS', products)
     return (
         <div>
-            {/* <h3>THIS IS YOUR CART: </h3> */}
+            <h3>ITEMS IN CART </h3>
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
-                        {/* <th scope="col">Image</th> */}
+                        <th scope="col">Image</th>
                         <th scope="col">Product Title</th>
                         <th scope="col">Quantity</th>
-                        <th scope="col" />
                         <th scope="col">Price</th>
                         <th scope="col">Subtotal</th>
                         <th scope="col" />
@@ -23,24 +20,28 @@ const CartTable = (props) => {
                 </thead>
                 <tbody>
                     {products.map(product => (
-                        <tr key={product.id}>
-                            {/* <td>
-                                            <img src={product.photos[0]} />
-                                        </td> */}
+                        <tr key={product.id} className="tr">
+                            <td>
+                                <img src={product.image} />
+                            </td>
 
                             <td>
-                                <Link to={'/admin-single-product/' + product.id}>
+                                <Link to={`/products/+${product.id}`}>
                                     {product.title}
                                 </Link>
                             </td>
-                            <td>{product.quantity}</td>
-                            <td>
-                                <button onClick={props.handleEdit}>Edit</button>
-                            </td>
+                            <td className="item-quantity-wrapper">{product.quantity}</td>
+
+                            {/* <form>
+                                    <button className="cart-item-controls decrement" onClick={props.handleEdit}> - </button>
+                                    <input className="item-quantity" name="qty[]" pattern="[0-9]*" value={product.quantity} min="0" onClick={props.handleChange} />
+                                    <button className="cart-item-controls increment" onClick={props.handleEdit}> + </button>
+                                </form>
+                            </td> */}
                             <td>${product.price}</td>
                             <td>${product.subtotal}</td>
                             <td>
-                                <button>Remove</button>
+                                <button type="btn" onClick={props.handleRemove(product.id)}>X</button>
                             </td>
                         </tr>
                     ))}
@@ -55,7 +56,7 @@ const CartTable = (props) => {
                 </tbody>
             </table>
             <form onSubmit={props.handleSubmit}>
-                <button type="submit" onSubmit={props.handleSubmit}>
+                <button type="submit">
                     Checkout
 				</button>
                 <button>
@@ -63,7 +64,6 @@ const CartTable = (props) => {
                 </button>
                 <button onClick={props.handleClear}>Clear Cart</button>
             </form>
-            <CartTotal />
         </div>
     )
 }

@@ -29,7 +29,7 @@ class SingleProduct extends Component {
       price: product.price,
       quantity: Number(this.state.quantity),
       subtotal: this.state.quantity * product.price,
-      // image: product.photos[0]
+      image: product.photos[0].image
     }
     this.props.addToCart(productToAdd)
     history.push('/cart')
