@@ -20,8 +20,11 @@ class AdminSingleProduct extends Component {
 
 	handleSubmit(evt) {
 		evt.preventDefault()
-		const photo = evt.target.image.value
-		console.log('photo ', photo)
+		const image = evt.target.image.value
+		const id = evt.target.id.value
+		console.log('photo ', image)
+		console.log('id ', id)
+		this.props.editPhoto(image, id)
 	}
 
 	render() {
@@ -78,18 +81,19 @@ class AdminSingleProduct extends Component {
 											Update
 										</button>
 									</div>
-									<div className="row">
-										<ul className="list">
-											{product.photos.map(photo => (
-												<AdminSingleImage
-													key={photo.id}
-													photo={photo}
-													handleSubmit={this.handleSubmit}
-												/>
-											))}
-										</ul>
-									</div>
 								</div>
+								<div className="row">
+									<ul className="list">
+										{product.photos.map(photo => (
+											<AdminSingleImage
+												key={photo.id}
+												photo={photo}
+												handleSubmit={this.handleSubmit}
+											/>
+										))}
+									</ul>
+								</div>
+
 								<h5>Reviews</h5>
 								{product.reviews &&
 									product.reviews.map(review => (
@@ -120,7 +124,9 @@ const mapDispatch = (dispatch, ownProps) => {
 		handleClick(id) {
 			dispatch(removeProduct(id, ownProps.history))
 		},
-		fetchProduct: () => dispatch(fetchProduct(productId))
+		fetchProduct: () => dispatch(fetchProduct(productId)),
+		editPhoto: (image, id) =>
+			dispatch(editPhoto({ productId, image, id }, ownProps.history))
 	}
 }
 

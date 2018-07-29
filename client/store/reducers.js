@@ -10,9 +10,9 @@ import {
 	ADD_TO_CART,
 	GET_CART,
 	UPDATE_CART,
-	CREATE_REVIEW
+	CREATE_REVIEW,
+	UPDATE_PHOTO
 } from './action-creators'
-
 
 //Reducer
 const productsReducer = (state = [], action) => {
@@ -44,11 +44,17 @@ const singleProductReducer = (state = {}, action) => {
 			return { ...state, ...action.product }
 		case UPDATE_PRODUCT:
 			return { ...state, ...action.product }
-		case GET_SINGLE_PRODUCT: {
+		case GET_SINGLE_PRODUCT:
 			return action.product
-		}
-		case CREATE_REVIEW: {
-			return {...state, reviews: [...state, action.review]}
+		case CREATE_REVIEW:
+			return { ...state, reviews: [...state, action.review] }
+		case UPDATE_PHOTO: {
+			console.log('Action id', action.photo.id)
+			const index = state.photos.findIndex(elem => {
+				if (elem.id === action.photo.id) return elem.id
+			})
+			console.log('Index', index)
+			return { ...state, ...state.photos.splice(index, 1, action.photo) }
 		}
 		default:
 			return state
@@ -65,7 +71,7 @@ const singleProductReducer = (state = {}, action) => {
 
 const orderProducts = {
 	products: []
-};
+}
 
 const orderReducer = (state = orderProducts, action) => {
 	switch (action.type) {
@@ -73,20 +79,25 @@ const orderReducer = (state = orderProducts, action) => {
 		// 	return state
 		// }
 		case ADD_TO_CART: {
-			let updatedProducts = [...state.products];
-			let isIncluded = false, productToUpdate;
+			let updatedProducts = [...state.products]
+			let isIncluded = false,
+				productToUpdate
 			state.products.map(product => {
 				if (product.id === action.product.id) {
-					isIncluded = true;
+					isIncluded = true
 					productToUpdate = product
 				}
 			})
 
-
 			if (state.products.length > 0 && isIncluded === true) {
-				action.product.quantity = productToUpdate.quantity + action.product.quantity
+				action.product.quantity =
+					productToUpdate.quantity + action.product.quantity
 				action.product.subtotal = action.product.quantity * action.product.price
-				updatedProducts.splice(updatedProducts[productToUpdate], 1, action.product)
+				updatedProducts.splice(
+					updatedProducts[productToUpdate],
+					1,
+					action.product
+				)
 			} else {
 				updatedProducts.push(action.product)
 			}

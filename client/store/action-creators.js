@@ -129,13 +129,31 @@ export const removeProduct = (productId, history) => {
 	}
 }
 
-export const postReview = (review) => {
+export const postReview = review => {
 	return async dispatch => {
 		try {
-			const { data } = await axios.post(`/api/products/${review.productId}/reviews`, review)
+			const { data } = await axios.post(
+				`/api/products/${review.productId}/reviews`,
+				review
+			)
 			dispatch(createReview(data))
 		} catch (err) {
 			console.log('Review was not added...', err)
+		}
+	}
+}
+
+export const editPhoto = (photo, history) => {
+	return async dispatch => {
+		try {
+			const { data } = await axios.put(`/api/photos/${photo.id}`, {
+				image: photo.image
+			})
+			console.log('updatedPhoto', data)
+			dispatch(updatePhoto(data))
+			history.push(`/admin-single-product/${data.productId}`)
+		} catch (err) {
+			console.log('Product was not updated...', err)
 		}
 	}
 }

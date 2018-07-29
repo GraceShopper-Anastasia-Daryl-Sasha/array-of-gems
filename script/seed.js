@@ -1,7 +1,14 @@
 'use strict'
 
 const db = require('../server/db')
-const { User, Review, Product, Photo } = require('../server/db/models')
+const {
+	User,
+	Review,
+	Product,
+	Photo,
+	Order,
+	OrderProducts
+} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -444,6 +451,71 @@ const photos = [
 	}
 ]
 
+// status 'Created', 'Pending', 'Shipped', 'Delivered' // default pending
+const orders = [
+	{
+		orderTotal: 31.99,
+		quantity: 2,
+		status: 'Pending',
+		datePlaced: '2018-07-23 00:00:00+00:00',
+		userId: 1
+	},
+	{
+		orderTotal: 21.74,
+		quantity: 1,
+		status: 'Created',
+		datePlaced: '2018-07-24 00:00:00+00:00',
+		userId: 3
+	},
+	{
+		orderTotal: 31.99,
+		quantity: 2,
+		status: 'Created',
+		datePlaced: '2018-07-25 00:00:00+00:00',
+		userId: 1
+	},
+	{
+		orderTotal: 29.74,
+		quantity: 2,
+		status: 'Pending',
+		datePlaced: '2018-07-24 00:00:00+00:00',
+		userId: 3
+	}
+]
+
+const orderProducts = [
+	{
+		productPrice: 14.5,
+		productQuantity: 2,
+		orderId: 1,
+		productId: 3
+	},
+	{
+		productPrice: 18.75,
+		productQuantity: 1,
+		orderId: 2,
+		productId: 5
+	},
+	{
+		productPrice: 3.75,
+		productQuantity: 2,
+		orderId: 3,
+		productId: 7
+	},
+	{
+		productPrice: 9.25,
+		productQuantity: 1,
+		orderId: 4,
+		productId: 5
+	},
+	{
+		productPrice: 17.5,
+		productQuantity: 1,
+		orderId: 4,
+		productId: 11
+	}
+]
+
 async function seed() {
 	await db.sync({ force: true })
 	console.log('db synced!')
@@ -454,20 +526,29 @@ async function seed() {
 			firstName: 'Cody',
 			lastName: 'Pug',
 			email: 'cody@email.com',
-			password: '123'
+			password: '123',
+			isGuest: false
 		}),
 		User.create({
 			firstName: 'Murph',
 			lastName: 'Soap',
 			email: 'murphy@email.com',
 			isAdmin: true,
-			password: '123'
+			password: '123',
+			isGuest: false
+		}),
+		User.create({
+			isGuest: true
 		})
 	])
 
 	await Promise.all(products.map(product => Product.create(product)))
 	await Promise.all(reviews.map(review => Review.create(review)))
 	await Promise.all(photos.map(photo => Photo.create(photo)))
+	await Promise.all(orders.map(order => Order.create(order)))
+	await Promise.all(
+		orderProducts.map(orderProduct => OrderProducts.create(orderProduct))
+	)
 	// Wowzers! We can even `await` on the right-hand side of the assignment operator
 	// and store the result that the promise resolves to in a variable! This is nice!
 	console.log(`seeded ${users.length} users`)
