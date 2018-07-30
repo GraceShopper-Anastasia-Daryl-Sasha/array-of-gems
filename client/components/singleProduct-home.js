@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import SingleProduct from './singleProduct'
 import { fetchProduct } from '../store/action-creators'
 
 class GetProduct extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchProduct()
   }
 
-  render () {
+  render() {
     const product = this.props.product
     return (
       <SingleProduct product={product} />

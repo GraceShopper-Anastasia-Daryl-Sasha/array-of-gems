@@ -17,7 +17,6 @@ class NewReview extends Component {
       [evt.target.name]: evt.target.value
     })
   }
-
   // clearField(evt) {
   //   evt.preventDefault()
   //   this.props.handleSubmit(evt)
@@ -65,9 +64,9 @@ class NewReview extends Component {
       <button type="submit" className="btn btn-info" >
         Add Review
       </button>
-    </form>
-  </div>
-  )
+        </form>
+      </div>
+    )
   }
 }
 

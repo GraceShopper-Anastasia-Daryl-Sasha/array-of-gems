@@ -129,10 +129,10 @@ const ProductForm = props => {
 						Update Product
 					</button>
 				) : (
-					<button type="submit" className="btn btn-primary">
-						Create Product
+						<button type="submit" className="btn btn-primary">
+							Create Product
 					</button>
-				)}
+					)}
 			</div>
 		</form>
 	)
