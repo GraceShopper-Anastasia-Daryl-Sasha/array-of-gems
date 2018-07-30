@@ -18,6 +18,7 @@ export const GET_ORDERS = 'GET_ORDERS'
 export const GET_ORDER = 'GET_ORDER'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 export const CLEAR_CART = 'CLEAR_CART'
+export const APPLY_DISCOUNT = 'APPLY_DISCOUNT'
 export const GET_USER_INFO = 'GET_USER_INFO'
 export const DELETE_REVIEW = 'DELETE_REVIEW'
 export const UPDATE_ROLE = 'UPDATE_ROLE'
@@ -74,6 +75,10 @@ export const clearCart = () => {
 	return { type: CLEAR_CART }
 }
 
+export const applyDiscount = (code) => {
+	return { type: APPLY_DISCOUNT, code }
+}
+
 const getUsers = users => ({
 	type: GET_USERS,
 	users
@@ -93,7 +98,6 @@ const getOrder = order => ({
 	type: GET_ORDER,
 	order
 })
-
 const deleteReview = reviewId => ({
 	type: DELETE_REVIEW,
 	id: +reviewId
@@ -183,6 +187,28 @@ export const postReview = review => {
 		}
 	}
 }
+
+export const postOrder = product => {
+	return async dispatch => {
+		try {
+			const { newOrder, lineItems } = await axios.post('/api/order')
+			dispatch(addToCart(newOrder))
+			console.log('hello')
+		} catch (err) {
+			console.log('There was an error adding to order', err)
+		}
+	}
+}
+
+// export const removeFromOrder = product => {
+// 	return async dispatch => {
+// 		try {
+// 			console.log('hello')
+// 		} catch (err) {
+// 			console.log('There was an error adding to order', err)
+// 		}
+// 	}
+// }
 
 export const editPhoto = (photo, history) => {
 	return async dispatch => {

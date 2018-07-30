@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 const CartTable = (props) => {
     const { products, orderTotal } = props
+    console.log('PRODUCTS', props)
     return (
         <div>
             <h3>ITEMS IN CART </h3>
@@ -19,13 +20,13 @@ const CartTable = (props) => {
                 </thead>
                 <tbody>
                     {products.map(product => (
-                        <tr key={product.id} className="tr">
+                        <tr key={product.productId} className="tr">
                             <td>
                                 <img src={product.image} />
                             </td>
 
                             <td>
-                                <Link to={`/products/+${product.id}`}>
+                                <Link to={`/products/${product.productId}`}>
                                     {product.title}
                                 </Link>
                             </td>
@@ -61,7 +62,9 @@ const CartTable = (props) => {
                 <button>
                     <Link to="/products">Keep Shopping</Link>
                 </button>
-                <button onClick={props.handleClear}>Clear Cart</button>
+                <button onClick={props.handleClear}>
+                    Clear Cart
+                </button>
             </form>
         </div>
     )

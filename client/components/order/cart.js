@@ -40,14 +40,16 @@ class Cart extends Component {
     }
     render() {
         if (!localStorage.getItem('cart')) {
-            localStorage.setItem('cart', JSON.stringify({
-                products: [],
-                orderTotal: 0
-            }))
+            localStorage.setItem(
+                'cart',
+                JSON.stringify({
+                    products: [],
+                    orderTotal: 0
+                })
+            )
         }
         const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
-
-        const localStorageObj = JSON.parse(localStorage.getItem('cart'))
+        // const localStorageObj = JSON.parse(localStorage.getItem('cart'))
         return (
             <div className="cart">
                 <h2>Cart</h2>
