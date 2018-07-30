@@ -18,6 +18,16 @@ class NewReview extends Component {
     })
   }
 
+  // clearField(evt) {
+  //   evt.preventDefault()
+  //   this.props.handleSubmit(evt)
+  //   this.setState({
+  //     title: '',
+  //     rating: 0,
+  //     comment: ''
+  //   })
+  // }
+
   render () {
 
   return (

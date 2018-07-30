@@ -29,7 +29,7 @@ class Reviews extends Component {
         <br />
       {
         isLoggedIn && (
-          <NewReview product={product} handleSubmit={this.props.handleSubmit} />
+          <NewReview product={product} handleSubmit={this.props.handleSubmit}/>
         )
       }
       </div>
