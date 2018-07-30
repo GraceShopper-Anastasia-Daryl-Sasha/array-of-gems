@@ -46,7 +46,12 @@ class NewReview extends Component {
         value={this.state.comment}
         rows="3"
       />
-      <button type="submit" className="btn btn-info">
+      {
+        this.state.comment.length < 10 && this.state.comment.length > 0 ? <div>
+          The comments must be longer than 10 characters.
+        </div> : null
+      }
+      <button type="submit" className="btn btn-info" disabled={false}>
         Add Review
       </button>
     </form>
