@@ -41,8 +41,10 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 						{/* The navbar will show these links before you log in */}
 						<Link to="/login">Login</Link>
 						<Link to="/signup">Sign Up</Link>
-						<button><Link to='/cart'><img src={'http://simpleicon.com/wp-content/uploads/Shopping-Cart-10.png'} /></Link></button>
-						<span>0</span>
+						<Link to="/cart">
+							<img src="https://banner2.kisspng.com/20171217/337/shopping-cart-png-5a364b75338266.010470061513507701211.jpg" />
+							<span>0</span>
+						</Link>
 					</div>
 				)}
 		</nav>
