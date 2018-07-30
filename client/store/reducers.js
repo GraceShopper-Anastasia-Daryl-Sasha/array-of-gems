@@ -68,6 +68,15 @@ const singleProductReducer = (state = {}, action) => {
 const orderReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ADD_TO_CART: {
+			if (!localStorage.getItem('cart')) {
+				localStorage.setItem(
+					'cart',
+					JSON.stringify({
+						products: [],
+						orderTotal: 0
+					})
+				)
+			}
 			const cart = JSON.parse(localStorage.getItem('cart'))
 			console.log('CART', cart)
 			let updatedProducts = cart.products
@@ -75,12 +84,6 @@ const orderReducer = (state = {}, action) => {
 				productToUpdate
 			let total = 0
 
-			// if (!localStorage.getItem('cart')) {
-			// 	localStorage.setItem('cart', JSON.stringify({
-			// 		products: [],
-			// 		orderTotal: 0
-			// 	}))
-			// }
 			cart.products.map(product => {
 				if (product.id === action.product.id) {
 					isIncluded = true
