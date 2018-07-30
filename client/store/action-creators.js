@@ -18,7 +18,9 @@ export const GET_ORDERS = 'GET_ORDERS'
 export const GET_ORDER = 'GET_ORDER'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 export const CLEAR_CART = 'CLEAR_CART'
-// export const CLEAR_CATEGORIES = 'CLEAR_CATEGORIES'
+export const GET_USER_INFO = 'GET_USER_INFO'
+export const DELETE_REVIEW = 'DELETE_REVIEW'
+export const UPDATE_ROLE = 'UPDATE_ROLE'
 
 //Action Creators
 const getProducts = products => {
@@ -28,9 +30,6 @@ const getProducts = products => {
 export const getCategories = categories => {
 	return { type: GET_SELECTED_CATEGORIES, categories }
 }
-// export const removeCategories = () => {
-// 	return {type: }
-// }
 
 const createProduct = product => ({
 	type: CREATE_PRODUCT,
@@ -80,6 +79,11 @@ const getUsers = users => ({
 	users
 })
 
+const getUserInfo = user => ({
+	type: GET_USER_INFO,
+	user
+})
+
 const getOrders = orders => ({
 	type: GET_ORDERS,
 	orders
@@ -90,6 +94,15 @@ const getOrder = order => ({
 	order
 })
 
+const deleteReview = reviewId => ({
+	type: DELETE_REVIEW,
+	id: +reviewId
+})
+
+const updateRole = user => ({
+	type: UPDATE_ROLE,
+	user
+})
 // Thunk Creators
 export const fetchProducts = () => {
 	return async dispatch => {
@@ -171,27 +184,6 @@ export const postReview = review => {
 	}
 }
 
-// export const addToOrder = product => {
-// 	return async dispatch => {
-// 		try {
-// 			const newProduct = await axios.post('/api/order')
-// 			console.log('hello')
-// 		} catch (err) {
-// 			console.log('There was an error adding to order', err)
-// 		}
-// 	}
-// }
-
-// export const removeFromOrder = product => {
-// 	return async dispatch => {
-// 		try {
-// 			console.log('hello')
-// 		} catch (err) {
-// 			console.log('There was an error adding to order', err)
-// 		}
-// 	}
-// }
-
 export const editPhoto = (photo, history) => {
 	return async dispatch => {
 		try {
@@ -218,6 +210,17 @@ export const fetchUsers = () => {
 	}
 }
 
+export const fetchUser = userId => {
+	return async dispatch => {
+		try {
+			const { data } = await axios.get(`/api/users/admin/${userId}`)
+			dispatch(getUserInfo(data))
+		} catch (err) {
+			console.log("Couldn't find the user", err)
+		}
+	}
+}
+
 export const fetchOrders = () => {
 	return async dispatch => {
 		try {
@@ -236,6 +239,33 @@ export const fetchOrder = orderId => {
 			dispatch(getOrder(data))
 		} catch (err) {
 			console.log('Could not find order', err)
+		}
+	}
+}
+
+export const removeReview = (info, history) => {
+	return async dispatch => {
+		try {
+			console.log('INFO ', info)
+			await axios.delete(`/api/users/admin/reviews/${info.reviewId}`)
+			dispatch(deleteReview(info.reviewId))
+			history.push(`/admin-single-user/${info.userId}`)
+		} catch (err) {
+			console.log('There was an error removing review', err)
+		}
+	}
+}
+
+export const editRole = (role, history) => {
+	return async dispatch => {
+		try {
+			console.log('Edit role', role)
+			const { data } = await axios.put(`/api/users/admin/${role.id}`, role)
+			console.log('DATA: ', data)
+			dispatch(updateRole(data))
+			history.push(`/admin-single-user/${role.id}`)
+		} catch (err) {
+			console.log('Product was not updated...', err)
 		}
 	}
 }

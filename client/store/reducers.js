@@ -3,7 +3,6 @@ import user from './user'
 import {
 	GET_PRODUCTS,
 	GET_SELECTED_CATEGORIES,
-	// CLEAR_CATEGORIES,
 	CREATE_PRODUCT,
 	UPDATE_PRODUCT,
 	DELETE_PRODUCT,
@@ -11,12 +10,14 @@ import {
 	ADD_TO_CART,
 	CLEAR_CART,
 	REMOVE_FROM_CART,
-	UPDATE_CART,
 	CREATE_REVIEW,
 	UPDATE_PHOTO,
 	GET_USERS,
 	GET_ORDERS,
-	GET_ORDER
+	GET_ORDER,
+	GET_USER_INFO,
+	DELETE_REVIEW,
+	UPDATE_ROLE
 } from './action-creators'
 
 //Reducer
@@ -199,6 +200,32 @@ const singleOrderReducer = (state = {}, action) => {
 	}
 }
 
+const singleUserReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_USER_INFO:
+			return action.user
+		case DELETE_REVIEW: {
+			const index = state.reviews.findIndex(elem => {
+				if (elem.id === action.id) return elem.id
+			})
+			return {
+				...state,
+				reviews: [
+					...state.reviews.slice(0, index),
+					...state.reviews.slice(index + 1)
+				]
+			}
+		}
+		case UPDATE_ROLE: {
+			console.log('Action', action.user)
+			return { ...state, ...action.user }
+		}
+
+		default:
+			return state
+	}
+}
+
 const rootReducer = combineReducers({
 	products: productsReducer,
 	user: user,
@@ -207,7 +234,8 @@ const rootReducer = combineReducers({
 	order: orderReducer,
 	users: usersReducer,
 	orders: ordersReducer,
-	orderview: singleOrderReducer
+	orderview: singleOrderReducer,
+	userInfo: singleUserReducer
 })
 
 export default rootReducer
