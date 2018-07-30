@@ -11,3 +11,15 @@ router.get('/', async (req, res, next) => {
 		next(err)
 	}
 })
+
+// GET /api/orders/:orderId
+router.get('/:orderId', async (req, res, next) => {
+	try {
+		const orders = await Order.findById(req.params.orderId, {
+			include: [{ all: true }]
+		})
+		res.json(orders)
+	} catch (err) {
+		next(err)
+	}
+})

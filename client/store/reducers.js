@@ -11,7 +11,10 @@ import {
 	GET_CART,
 	UPDATE_CART,
 	CREATE_REVIEW,
-	UPDATE_PHOTO
+	UPDATE_PHOTO,
+	GET_USERS,
+	GET_ORDERS,
+	GET_ORDER
 } from './action-creators'
 
 //Reducer
@@ -125,12 +128,42 @@ const orderReducer = (state = orderProducts, action) => {
 	}
 }
 
+const usersReducer = (state = [], action) => {
+	switch (action.type) {
+		case GET_USERS:
+			return action.users
+		default:
+			return state
+	}
+}
+
+const ordersReducer = (state = [], action) => {
+	switch (action.type) {
+		case GET_ORDERS:
+			return action.orders
+		default:
+			return state
+	}
+}
+
+const singleOrderReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_ORDER:
+			return action.order
+		default:
+			return state
+	}
+}
+
 const rootReducer = combineReducers({
 	products: productsReducer,
 	user: user,
 	product: singleProductReducer,
 	categories: categoriesReducer,
-	order: orderReducer
+	order: orderReducer,
+	users: usersReducer,
+	orders: ordersReducer,
+	orderview: singleOrderReducer
 })
 
 export default rootReducer

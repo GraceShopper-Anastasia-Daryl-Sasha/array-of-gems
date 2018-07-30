@@ -14,7 +14,9 @@ import AdminManageProducts from './components/admin/adminmanageproducts'
 import NewProduct from './components/admin/newproduct'
 import AdminSingleProduct from './components/admin/adminsingleproduct'
 import UpdateProduct from './components/admin/updateproduct'
-
+import AdminManageUsers from './components/admin/adminmanageusers'
+import AdminManageOrders from './components/admin/adminmanageorders'
+import AdminSingleOrder from './components/admin/adminsingleorder'
 /**
  * COMPONENT
  */
@@ -46,13 +48,25 @@ class Routes extends Component {
 								<Switch>
 									<Route path="/admin" component={AdminView} />
 									<Route
-										path="/admin-mange-products"
+										path="/admin-manage-products"
 										component={AdminManageProducts}
+									/>
+									<Route
+										path="/admin-manage-users"
+										component={AdminManageUsers}
+									/>
+									<Route
+										path="/admin-manage-orders"
+										component={AdminManageOrders}
 									/>
 									<Route path="/new-product" component={NewProduct} />
 									<Route
 										path="/admin-single-product/:id"
 										component={AdminSingleProduct}
+									/>
+									<Route
+										path="/admin-single-order/:id"
+										component={AdminSingleOrder}
 									/>
 
 									<Route path="/update-product/:id" component={UpdateProduct} />

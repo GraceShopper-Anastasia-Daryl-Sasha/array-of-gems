@@ -12,6 +12,9 @@ export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
 export const CREATE_REVIEW = 'CREATE_REVIEW'
+export const GET_USERS = 'GET_USERS'
+export const GET_ORDERS = 'GET_ORDERS'
+export const GET_ORDER = 'GET_ORDER'
 
 //Action Creators
 const getProducts = products => {
@@ -62,6 +65,21 @@ const createReview = review => {
 	console.log('ACTION CREATOR', review)
 	return { type: CREATE_REVIEW, review }
 }
+
+const getUsers = users => ({
+	type: GET_USERS,
+	users
+})
+
+const getOrders = orders => ({
+	type: GET_ORDERS,
+	orders
+})
+
+const getOrder = order => ({
+	type: GET_ORDER,
+	order
+})
 
 // Thunk Creators
 export const fetchProducts = () => {
@@ -154,6 +172,39 @@ export const editPhoto = (photo, history) => {
 			history.push(`/admin-single-product/${data.productId}`)
 		} catch (err) {
 			console.log('Product was not updated...', err)
+		}
+	}
+}
+
+export const fetchUsers = () => {
+	return async dispatch => {
+		try {
+			const { data } = await axios.get('/api/users/admin')
+			dispatch(getUsers(data))
+		} catch (err) {
+			console.log('Something went wrong...', err)
+		}
+	}
+}
+
+export const fetchOrders = () => {
+	return async dispatch => {
+		try {
+			const { data } = await axios.get('/api/orders')
+			dispatch(getOrders(data))
+		} catch (err) {
+			console.log('Something went wrong...', err)
+		}
+	}
+}
+
+export const fetchOrder = orderId => {
+	return async dispatch => {
+		try {
+			const { data } = await axios.get(`/api/orders/${orderId}`)
+			dispatch(getOrder(data))
+		} catch (err) {
+			console.log('Could not find order', err)
 		}
 	}
 }
