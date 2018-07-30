@@ -3,13 +3,15 @@ import user from './user'
 import {
 	GET_PRODUCTS,
 	GET_SELECTED_CATEGORIES,
-	// CLEAR_CATEGORIES,
 	CREATE_PRODUCT,
 	UPDATE_PRODUCT,
 	DELETE_PRODUCT,
 	GET_SINGLE_PRODUCT,
 	CREATE_REVIEW,
 	UPDATE_PHOTO,
+	GET_USER_INFO,
+	DELETE_REVIEW,
+	UPDATE_ROLE,
 	GET_USERS,
 	GET_ORDERS,
 	GET_ORDER,
@@ -87,6 +89,32 @@ const singleOrderReducer = (state = {}, action) => {
 	}
 }
 
+const singleUserReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_USER_INFO:
+			return action.user
+		case DELETE_REVIEW: {
+			const index = state.reviews.findIndex(elem => {
+				if (elem.id === action.id) return elem.id
+			})
+			return {
+				...state,
+				reviews: [
+					...state.reviews.slice(0, index),
+					...state.reviews.slice(index + 1)
+				]
+			}
+		}
+		case UPDATE_ROLE: {
+			console.log('Action', action.user)
+			return { ...state, ...action.user }
+		}
+
+		default:
+			return state
+	}
+}
+
 const rootReducer = combineReducers({
 	products: productsReducer,
 	user: user,
@@ -95,7 +123,8 @@ const rootReducer = combineReducers({
 	order: orderReducer,
 	users: usersReducer,
 	orders: ordersReducer,
-	orderview: singleOrderReducer
+	orderview: singleOrderReducer,
+	userInfo: singleUserReducer
 })
 
 export default rootReducer

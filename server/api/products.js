@@ -1,8 +1,19 @@
 const router = require('express').Router()
 const { Product, Review, Photo } = require('../db/models')
 
+// function isAuthenticated(req, res, next) {
+// 	console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
+// 	const { dataValues } = req.user
+// 	console.log('WHAT DOES REQ LOOK LIKE', dataValues.isAdmin)
+// 	if (dataValues.isAdmin) {
+// 		return true
+// 	}
+// 	res.redirect('/')
+// }
+
 // GET /api/products
 router.get('/', async (req, res, next) => {
+	// console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
 	try {
 		const allProducts = await Product.findAll({ include: [{ all: true }] })
 		res.json(allProducts)
@@ -62,6 +73,7 @@ router.put('/:id', async (req, res, next) => {
 
 // DELETE /api/products/:id
 router.delete('/:id', async (req, res, next) => {
+	// console.log('WHAT DOES REQ LOOK LIKE DELETE', req._passport)
 	await Product.destroy({
 		where: {
 			id: req.params.id

@@ -17,6 +17,7 @@ import UpdateProduct from './components/admin/updateproduct'
 import AdminManageUsers from './components/admin/adminmanageusers'
 import AdminManageOrders from './components/admin/adminmanageorders'
 import AdminSingleOrder from './components/admin/adminsingleorder'
+import AdminSingleUser from './components/admin/adminsingleuser'
 /**
  * COMPONENT
  */
@@ -68,6 +69,10 @@ class Routes extends Component {
 									<Route
 										path="/admin-single-order/:id"
 										component={AdminSingleOrder}
+									/>
+									<Route
+										path="/admin-single-user/:id"
+										component={AdminSingleUser}
 									/>
 
 									<Route path="/update-product/:id" component={UpdateProduct} />
