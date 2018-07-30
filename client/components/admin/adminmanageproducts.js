@@ -69,10 +69,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
 	return {
-		fetchProducts: () => {
-			const thunk = fetchProducts()
-			dispatch(thunk)
-		}
+		fetchProducts: () => dispatch(fetchProducts())
 	}
 }
 

@@ -2,30 +2,28 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-
-    orderTotal: {
-        type: Sequelize.DOUBLE,
-        defaultValue: 0.00
-    },
-    quantity: {
-        type: Sequelize.INTEGER
-    },
-    status: {
-        type: Sequelize.ENUM('Created', 'Pending', 'Shipped', 'Delivered'),
-        defaultValue: 'Pending'
-    },
-    datePlaced: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-    },
-    shippingPrice: {
-        type: Sequelize.DOUBLE,
-        default: 2.99
-    },
-    discountCode: {
-        type: Sequelize.STRING
-    }
-
+	orderTotal: {
+		type: Sequelize.DOUBLE,
+		defaultValue: 0.0
+	},
+	quantity: {
+		type: Sequelize.INTEGER
+	},
+	status: {
+		type: Sequelize.ENUM('Created', 'Pending', 'Shipped', 'Delivered'),
+		defaultValue: 'Pending'
+	},
+	datePlaced: {
+		type: Sequelize.DATE,
+		defaultValue: Sequelize.NOW
+	},
+	shippingPrice: {
+		type: Sequelize.DOUBLE,
+		default: 2.99
+	},
+	discountCode: {
+		type: Sequelize.STRING
+	}
 })
 
 // ...purchase items in the cart, so that I can get the items I want
@@ -36,8 +34,6 @@ const Order = db.define('order', {
 // - Orders must contain line items that capture the price, current product ID and quantity
 // - If a user completes an order, that order should keep the price of the item at the time when they checked out even if the price of the product later changes
 
-
 // methods
-
 
 module.exports = Order
