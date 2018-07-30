@@ -59,7 +59,6 @@ export const updateCart = product => {
 }
 
 const createReview = review => {
-	console.log('ACTION CREATOR', review)
 	return { type: CREATE_REVIEW, review }
 }
 

@@ -48,20 +48,13 @@ const singleProductReducer = (state = {}, action) => {
 			return action.product
 		}
 		case CREATE_REVIEW: {
-			return {...state, reviews: [...state, action.review]}
+			return {...state, reviews: [...state.reviews, action.review]}
 		}
 		default:
 			return state
 	}
 }
 
-// const reviewReducer = (state = {}, action) => {
-// 	switch (action.type) {
-
-// 		default:
-// 			return state
-// 	}
-// }
 
 const orderProducts = {
 	products: []

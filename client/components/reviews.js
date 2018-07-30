@@ -55,6 +55,7 @@ const mapDispatch = (dispatch, ownProps) => {
       dispatch(postReview(
         {title, rating, comment, userId, productId}
       ))
+      this.formRef.reset()
     }
   }
 }

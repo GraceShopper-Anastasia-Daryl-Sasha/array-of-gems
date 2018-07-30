@@ -51,7 +51,7 @@ class NewReview extends Component {
           The comments must be longer than 10 characters.
         </div> : null
       }
-      <button type="submit" className="btn btn-info" disabled={false}>
+      <button type="submit" className="btn btn-info" >
         Add Review
       </button>
     </form>
