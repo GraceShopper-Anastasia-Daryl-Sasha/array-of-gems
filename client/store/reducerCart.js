@@ -18,10 +18,12 @@ export const orderReducer = (state = {}, action) => {
                 )
             }
             const cart = JSON.parse(localStorage.getItem('cart'))
-            let updatedProducts = cart.products,
+            console.log('CART', cart)
+            let updatedProducts = [...cart.products],
                 isIncluded = false,
                 productToUpdate,
                 total = 0
+
 
             cart.products.map(product => {
                 if (product.productId === action.product.productId) {
