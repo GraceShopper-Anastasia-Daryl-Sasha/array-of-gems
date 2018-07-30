@@ -12,9 +12,12 @@ import {
 	CLEAR_CART,
 	REMOVE_FROM_CART,
 	UPDATE_CART,
-	CREATE_REVIEW
+	CREATE_REVIEW,
+	UPDATE_PHOTO,
+	GET_USERS,
+	GET_ORDERS,
+	GET_ORDER
 } from './action-creators'
-
 
 //Reducer
 const productsReducer = (state = [], action) => {
@@ -32,12 +35,8 @@ const productsReducer = (state = [], action) => {
 
 const categoriesReducer = (state = [], action) => {
 	switch (action.type) {
-		case GET_SELECTED_CATEGORIES: {
+		case GET_SELECTED_CATEGORIES:
 			return action.categories
-		}
-		// case CLEAR_CATEGORIES: {
-		// 	return action.categories
-		// }
 		default:
 			return state
 	}
@@ -49,26 +48,32 @@ const singleProductReducer = (state = {}, action) => {
 			return { ...state, ...action.product }
 		case UPDATE_PRODUCT:
 			return { ...state, ...action.product }
-		case GET_SINGLE_PRODUCT: {
+		case GET_SINGLE_PRODUCT:
 			return action.product
-		}
-		case CREATE_REVIEW: {
-			return { ...state, reviews: [...state, action.review] }
+		case CREATE_REVIEW:
+			return { ...state, reviews: [...state.reviews, action.review] }
+		case UPDATE_PHOTO: {
+			console.log('Action id', action.photo.id)
+			const index = state.photos.findIndex(elem => {
+				if (elem.id === action.photo.id) return elem.id
+			})
+			console.log('Index', index)
+			return { ...state, ...state.photos.splice(index, 1, action.photo) }
 		}
 		default:
 			return state
 	}
 }
 
-
 const orderReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ADD_TO_CART: {
-			const cart = JSON.parse(localStorage.getItem('cart'));
+			const cart = JSON.parse(localStorage.getItem('cart'))
 			console.log('CART', cart)
-			let updatedProducts = cart.products;
-			let isIncluded = false, productToUpdate;
-			let total = 0;
+			let updatedProducts = cart.products
+			let isIncluded = false,
+				productToUpdate
+			let total = 0
 
 			// if (!localStorage.getItem('cart')) {
 			// 	localStorage.setItem('cart', JSON.stringify({
@@ -78,15 +83,20 @@ const orderReducer = (state = {}, action) => {
 			// }
 			cart.products.map(product => {
 				if (product.id === action.product.id) {
-					isIncluded = true;
+					isIncluded = true
 					productToUpdate = product
 				}
 			})
 
 			if (cart.products.length > 0 && isIncluded === true) {
-				action.product.quantity = productToUpdate.quantity + action.product.quantity
+				action.product.quantity =
+					productToUpdate.quantity + action.product.quantity
 				action.product.subtotal = action.product.quantity * action.product.price
-				updatedProducts.splice(updatedProducts[productToUpdate], 1, action.product)
+				updatedProducts.splice(
+					updatedProducts[productToUpdate],
+					1,
+					action.product
+				)
 			} else {
 				updatedProducts.push(action.product)
 			}
@@ -96,10 +106,13 @@ const orderReducer = (state = {}, action) => {
 			})
 
 			localStorage.removeItem('cart')
-			localStorage.setItem('cart', JSON.stringify({
-				products: updatedProducts,
-				orderTotal: total
-			}))
+			localStorage.setItem(
+				'cart',
+				JSON.stringify({
+					products: updatedProducts,
+					orderTotal: total
+				})
+			)
 
 			return {
 				...state,
@@ -109,7 +122,7 @@ const orderReducer = (state = {}, action) => {
 		}
 		case REMOVE_FROM_CART: {
 			let updatedProducts = [],
-				total = 0;
+				total = 0
 			state.products.map(product => {
 				if (product.id !== action.productId) {
 					updatedProducts.push(product)
@@ -119,10 +132,13 @@ const orderReducer = (state = {}, action) => {
 
 			localStorage.removeItem('cart')
 			if (updatedProducts.length > 0) {
-				localStorage.setItem('cart', JSON.stringify({
-					products: updatedProducts,
-					orderTotal: total
-				}))
+				localStorage.setItem(
+					'cart',
+					JSON.stringify({
+						products: updatedProducts,
+						orderTotal: total
+					})
+				)
 			}
 
 			return {
@@ -133,21 +149,50 @@ const orderReducer = (state = {}, action) => {
 		}
 		case CLEAR_CART: {
 			localStorage.removeItem('cart')
-			localStorage.setItem('cart', JSON.stringify({
-				products: [],
-				orderTotal: 0
-			}))
+			localStorage.setItem(
+				'cart',
+				JSON.stringify({
+					products: [],
+					orderTotal: 0
+				})
+			)
 
 			return {
 				...state,
 				products: [],
-				orderTotal: 0,
+				orderTotal: 0
 			}
 		}
 		default: {
 			return state
 		}
+	}
+}
 
+const usersReducer = (state = [], action) => {
+	switch (action.type) {
+		case GET_USERS:
+			return action.users
+		default:
+			return state
+	}
+}
+
+const ordersReducer = (state = [], action) => {
+	switch (action.type) {
+		case GET_ORDERS:
+			return action.orders
+		default:
+			return state
+	}
+}
+
+const singleOrderReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_ORDER:
+			return action.order
+		default:
+			return state
 	}
 }
 
@@ -156,7 +201,10 @@ const rootReducer = combineReducers({
 	user: user,
 	product: singleProductReducer,
 	categories: categoriesReducer,
-	order: orderReducer
+	order: orderReducer,
+	users: usersReducer,
+	orders: ordersReducer,
+	orderview: singleOrderReducer
 })
 
 export default rootReducer

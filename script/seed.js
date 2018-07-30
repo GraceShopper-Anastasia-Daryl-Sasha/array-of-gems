@@ -1,7 +1,14 @@
 'use strict'
 
 const db = require('../server/db')
-const { User, Review, Product, Photo, Order, OrderProducts } = require('../server/db/models')
+const {
+	User,
+	Review,
+	Product,
+	Photo,
+	Order,
+	OrderProducts
+} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -444,7 +451,6 @@ const photos = [
 	}
 ]
 
-
 // status 'Created', 'Pending', 'Shipped', 'Delivered' // default pending
 const orders = [
 	{
@@ -466,7 +472,7 @@ const orders = [
 		quantity: 2,
 		status: 'Created',
 		datePlaced: '2018-07-25 00:00:00+00:00',
-		userId: 1
+		userId: 2
 	},
 	{
 		orderTotal: 29.74,
@@ -536,7 +542,9 @@ async function seed() {
 	await Promise.all(reviews.map(review => Review.create(review)))
 	await Promise.all(photos.map(photo => Photo.create(photo)))
 	await Promise.all(orders.map(order => Order.create(order)))
-	await Promise.all(orderProducts.map(orderProduct => OrderProducts.create(orderProduct)))
+	await Promise.all(
+		orderProducts.map(orderProduct => OrderProducts.create(orderProduct))
+	)
 	// Wowzers! We can even `await` on the right-hand side of the assignment operator
 	// and store the result that the promise resolves to in a variable! This is nice!
 	console.log(`seeded ${users.length} users`)

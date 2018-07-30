@@ -11,6 +11,13 @@ const AdminSingleImage = props => {
 					<div className="form-group">
 						<form onSubmit={handleSubmit}>
 							<input
+								type="number"
+								className="form-control"
+								name="id"
+								value={photo.id}
+								readOnly
+							/>
+							<input
 								type="text"
 								className="form-control"
 								name="image"
