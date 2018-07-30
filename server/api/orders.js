@@ -62,7 +62,6 @@ router.post('/', async (req, res, next) => {
             )
         )
 
-        // lineItems: lineItems, user: newGuestUser, user: userInfo, user: userAccount || newUserAccount   }
         res.status(200).json({ order: newOrder, lineItems: lineItems })
     } catch (err) {
         console.log(err)
