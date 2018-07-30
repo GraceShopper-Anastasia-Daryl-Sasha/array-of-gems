@@ -22,7 +22,8 @@ class NewReview extends Component {
 
   return (
     <div className="form-group">
-    <form className="form" onSubmit={this.props.handleSubmit} onChange ={this.handleInputChange}>
+    <form className="form" onSubmit={
+      this.props.handleSubmit} onChange ={this.handleInputChange}>
     <h3>Leave a Review</h3>
     <label>Title:</label>
       <input
