@@ -37,18 +37,14 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 					</Link>
 				</div>
 			) : (
-				<div className="navLinks">
-					{/* The navbar will show these links before you log in */}
-					<Link to="/login">Login</Link>
-					<Link to="/signup">Sign Up</Link>
-					<img
-						src={
-							'http://simpleicon.com/wp-content/uploads/Shopping-Cart-10.png'
-						}
-					/>
-					<span>0</span>
-				</div>
-			)}
+					<div className="navLinks">
+						{/* The navbar will show these links before you log in */}
+						<Link to="/login">Login</Link>
+						<Link to="/signup">Sign Up</Link>
+						<button><Link to='/cart'><img src={'http://simpleicon.com/wp-content/uploads/Shopping-Cart-10.png'} /></Link></button>
+						<span>0</span>
+					</div>
+				)}
 		</nav>
 		{/* <hr /> */}
 	</div>

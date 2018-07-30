@@ -29,7 +29,7 @@ class SingleProduct extends Component {
       price: product.price,
       quantity: Number(this.state.quantity),
       subtotal: this.state.quantity * product.price,
-      // image: product.photos[0]
+      image: product.photos[0].image
     }
     this.props.addToCart(productToAdd)
     history.push('/cart')
@@ -55,60 +55,60 @@ class SingleProduct extends Component {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <Link to="/">Home</Link>
-					</li>
-					<li className="breadcrumb-item active" aria-current="page">
-						<Link to="/products">Products</Link>
-					</li>
-				</ol>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            <Link to="/products">Products</Link>
+          </li>
+        </ol>
 
         <div className="row ">
-					<div className="col-sm">
-        {
-          product.photos ?
-            <div className="single-product-images">
-              <div id="main-product-photo">
-                <img src={product.photos[0].image} />
-              </div>
+          <div className="col-sm">
+            {
+              product.photos ?
+                <div className="single-product-images">
+                  <div id="main-product-photo">
+                    <img src={product.photos[0].image} />
+                  </div>
 
-              <div id="thumbnails">
-                {
-                  product.photos.map(photo => {
-                    return <img key={photo.id} src={photo.image} />
-                  })
-                }
-              </div>
-            </div> : (
-              console.log('loading')
-            )}
-        </div>
-        <div className="col-sm">
-          <h1>{product.title}</h1>
-          <h2>Description</h2>
-          <p>{product.description}</p>
-          <p>
-            <strong>Price:</strong> ${product.price}
-          </p>
-          <p><strong>Size:</strong> {product.size}
-          </p>
+                  <div id="thumbnails">
+                    {
+                      product.photos.map(photo => {
+                        return <img key={photo.id} src={photo.image} />
+                      })
+                    }
+                  </div>
+                </div> : (
+                  console.log('loading')
+                )}
+          </div>
+          <div className="col-sm">
+            <h1>{product.title}</h1>
+            <h2>Description</h2>
+            <p>{product.description}</p>
+            <p>
+              <strong>Price:</strong> ${product.price}
+            </p>
+            <p><strong>Size:</strong> {product.size}
+            </p>
 
-        <div className="product-buttons">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-            <label>Quantity: </label>
-            <select name="quantity" className="form-control" onChange={this.handleChange}>
-              {
-                quantityArr.map(i => (
-                  <option key={i} value={i}>{i}</option>
-                ))}
-            </select>
+            <div className="product-buttons">
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <label>Quantity: </label>
+                  <select name="quantity" className="form-control" onChange={this.handleChange}>
+                    {
+                      quantityArr.map(i => (
+                        <option key={i} value={i}>{i}</option>
+                      ))}
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-primary search-btn">Add to Cart</button>
+              </form>
             </div>
-            <button type="submit" className="btn btn-primary search-btn">Add to Cart</button>
-          </form>
+          </div>
         </div>
+        <Reviews reviews={reviews} product={product} user={user} />
       </div>
-    </div>
-        <Reviews reviews={reviews} product={product} user={user}/>
-    </div>
     )
   }
 }
@@ -120,9 +120,9 @@ const mapState = state => {
 }
 
 const mapDispatch = (dispatch) => {
-	return {
-		addToCart: newProduct => dispatch(addToCart(newProduct))
-	}
+  return {
+    addToCart: newProduct => dispatch(addToCart(newProduct))
+  }
 }
 
 export default connect(mapState, mapDispatch)(SingleProduct)
