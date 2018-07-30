@@ -9,16 +9,20 @@ class Checkout extends Component {
         super()
     }
 
-    // handleSubmit = (evt) => {
-    //     evt.preventDefault()
-    //     console.log("TARGET", this.state)
-    //     // await this.props.placeOrder(this.state);
-    //     this.props.history.push(`/checkout`)
-    // }
+    handleSubmit = (evt) => {
+        evt.preventDefault()
+        const newOrder = {
+
+        }
+        console.log("TARGET", this.state)
+        // await this.props.placeOrder(this.state);
+        // this.props.history.push(`/checkout`)
+    }
 
     render() {
         const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
-        console.log("PROPS", this.props)
+        const { user } = this.props
+        console.log('USER PROPS', this.props.user)
 
         return (
             <div>
@@ -28,20 +32,20 @@ class Checkout extends Component {
                         <div>
                             <div>
                                 {
-                                    !this.props.user && (
-                                        <form>
-                                            <label>Please provide email or <Link to='/login'>Login</Link>: </label>
+                                    !user.id
+                                        ?
+                                        < form >
+                                            <label>Please <Link to='/login'>Login</Link> or continue as guest: </label>
                                             <input />
                                             <button>Submit</button>
                                         </form>
-                                    )
-
+                                        :
+                                        <div>
+                                            <label>Welcome {user.firstName} {user.lastName}</label>
+                                            <button onClick={this.handleSubmit}>Submit Order</button>
+                                        </div>
                                 }
-                                <form>
-                                    <label>Please provide email or <Link to='/login'>Login</Link>: </label>
-                                    <input />
-                                    <button>Submit</button>
-                                </form>
+
                             </div>
                             <div>
                                 <OrderSummary
@@ -54,7 +58,7 @@ class Checkout extends Component {
                         </div>
                     )
                 }
-                <button>Checkout?</button>
+
             </div>
         )
 

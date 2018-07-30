@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const CartTable = (props) => {
     const { products, orderTotal } = props
-    console.log('PRODUCTS', products)
+    console.log('PRODUCTS', props)
     return (
         <div>
             <h3>ITEMS IN CART </h3>

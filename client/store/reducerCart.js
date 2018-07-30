@@ -108,12 +108,21 @@ export const orderReducer = (state = {}, action) => {
         }
         case APPLY_DISCOUNT: {
             const cart = JSON.parse(localStorage.getItem('cart'))
-            const newTotal = (cart.orderTotal / 2).toFixed(2)
-            console.log("ORIGINAL TOTAL", cart.orderTotal, "newTotal", newTotal)
+            const newTotal = ((cart.orderTotal / 2).toFixed(2))
+
+            localStorage.removeItem('cart')
+            localStorage.setItem(
+                'cart',
+                JSON.stringify({
+                    products: cart.products,
+                    orderTotal: newTotal,
+                    code: action.code,
+                })
+            )
+
             return {
                 ...state,
-                orderTotal: newTotal,
-                code: action.code
+                orderTotal: JSON.parse(localStorage.getItem('cart')).orderTotal
             }
         }
         default: {

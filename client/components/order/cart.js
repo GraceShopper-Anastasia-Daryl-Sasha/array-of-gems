@@ -49,7 +49,6 @@ class Cart extends Component {
             )
         }
         const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
-
         // const localStorageObj = JSON.parse(localStorage.getItem('cart'))
         return (
             <div className="cart">

@@ -7,23 +7,29 @@ import { applyDiscount } from "../../store/action-creators"
 class OrderSummary extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            message: ""
+        }
         // this.input = React.createRef();
     }
 
     handleSubmit = (evt) => {
         evt.preventDefault();
         const code = this._input.value
-        if (code === "Boone") {
+        const isCodeApplied = JSON.parse(localStorage.getItem('cart')).code
+        if (code === "Boone" && !isCodeApplied) {
             this.props.applyDiscount(code);
+            this.setState({ message: "Code has been successfully applied." })
+        } else if (code === "Boone" && isCodeApplied) {
+            this.setState({ message: 'That code has already been applied' })
         } else {
-            console.log("That code is not valid")
+            this.setState({ message: "Code is not valid." })
         }
-        // this.input
     }
 
     render() {
-        const { products, orderTotal } = this.props
-
+        const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
+        console.log('ORDER SUMMARY', products)
         return (
             <div>
                 <h3>ITEMS IN CART </h3>
@@ -37,7 +43,7 @@ class OrderSummary extends Component {
                     </thead>
                     <tbody>
                         {products.map(product => (
-                            <tr key={product.id} className="tr">
+                            <tr key={product.productId} className="tr">
                                 <td><img src={product.image} /></td>
                                 <td>{product.quantity} x {product.title}</td>
                                 <td>${product.subtotal}</td>
@@ -55,10 +61,15 @@ class OrderSummary extends Component {
                     </label>
                     <input type="submit" value="Apply" />
                 </form>
+                <span>{this.state.message}</span>
             </div>
         )
     }
 
+}
+
+const mapState = (state) => {
+    discountedTotal = state.orderTotal
 }
 
 const mapDispatch = (dispatch) => {

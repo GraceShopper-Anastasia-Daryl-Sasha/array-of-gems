@@ -31,7 +31,6 @@ class SingleProduct extends Component {
       subtotal: (this.state.quantity * product.price).toFixed(2),
       image: product.photos[0].image
     }
-    console.log(productToAdd)
     this.props.addToCart(productToAdd)
     history.push('/cart')
   }
