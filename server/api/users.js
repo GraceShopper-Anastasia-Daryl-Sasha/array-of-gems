@@ -25,3 +25,12 @@ router.get('/admin', async (req, res, next) => {
 		next(err)
 	}
 })
+// admin should access all info about users
+router.get('/admin', async (req, res, next) => {
+  try {
+    const users = await User.findAll()
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})

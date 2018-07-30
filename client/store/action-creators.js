@@ -8,6 +8,7 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const UPDATE_PHOTO = 'UPDATE_PHOTO'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+export const GET_REVIEWS = 'GET_REVIEWS'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
@@ -15,6 +16,9 @@ export const CREATE_REVIEW = 'CREATE_REVIEW'
 export const GET_USERS = 'GET_USERS'
 export const GET_ORDERS = 'GET_ORDERS'
 export const GET_ORDER = 'GET_ORDER'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const CLEAR_CART = 'CLEAR_CART'
+// export const CLEAR_CATEGORIES = 'CLEAR_CATEGORIES'
 
 //Action Creators
 const getProducts = products => {
@@ -24,6 +28,9 @@ const getProducts = products => {
 export const getCategories = categories => {
 	return { type: GET_SELECTED_CATEGORIES, categories }
 }
+// export const removeCategories = () => {
+// 	return {type: }
+// }
 
 const createProduct = product => ({
 	type: CREATE_PRODUCT,
@@ -49,8 +56,8 @@ const getSingleProduct = product => {
 	return { type: GET_SINGLE_PRODUCT, product }
 }
 
-export const getCart = () => {
-	return { type: GET_CART }
+const createReview = review => {
+	return { type: CREATE_REVIEW, review }
 }
 
 export const addToCart = product => {
@@ -61,9 +68,11 @@ export const updateCart = product => {
 	return { type: UPDATE_CART, product }
 }
 
-const createReview = review => {
-	console.log('ACTION CREATOR', review)
-	return { type: CREATE_REVIEW, review }
+export const removeFromCart = productId => {
+	return { type: REMOVE_FROM_CART, productId }
+}
+export const clearCart = () => {
+	return { type: CLEAR_CART }
 }
 
 const getUsers = users => ({
@@ -112,8 +121,9 @@ export const postProduct = (product, history) => {
 	return async dispatch => {
 		try {
 			const { data } = await axios.post('/api/products', product)
+			console.log('Data', data)
 			dispatch(createProduct(data))
-			history.push('/admin-mange-products')
+			history.push('/admin-manage-products')
 		} catch (err) {
 			console.log('Product was not created...', err)
 		}
@@ -140,7 +150,7 @@ export const removeProduct = (productId, history) => {
 		try {
 			await axios.delete(`/api/products/${productId}`)
 			dispatch(deleteProduct(productId))
-			history.push('/admin-mange-products')
+			history.push('/admin-manage-products')
 		} catch (err) {
 			console.log('There was an error removing product', err)
 		}
@@ -160,6 +170,27 @@ export const postReview = review => {
 		}
 	}
 }
+
+// export const addToOrder = product => {
+// 	return async dispatch => {
+// 		try {
+// 			const newProduct = await axios.post('/api/order')
+// 			console.log('hello')
+// 		} catch (err) {
+// 			console.log('There was an error adding to order', err)
+// 		}
+// 	}
+// }
+
+// export const removeFromOrder = product => {
+// 	return async dispatch => {
+// 		try {
+// 			console.log('hello')
+// 		} catch (err) {
+// 			console.log('There was an error adding to order', err)
+// 		}
+// 	}
+// }
 
 export const editPhoto = (photo, history) => {
 	return async dispatch => {

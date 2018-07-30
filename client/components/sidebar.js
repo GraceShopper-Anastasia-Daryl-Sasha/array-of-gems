@@ -14,9 +14,16 @@ class Sidebar extends Component {
 	}
 
 	handleSubmit = evt => {
-		console.log(evt.target.name)
+		console.log('EVT.TARGET.NAME', evt.target.name)
 		evt.preventDefault()
-		const selected = this.state
+		let selected = {};
+		evt.target.name === 'submit'
+			? selected = this.state
+			: selected = {
+				color: [],
+				type: [],
+				size: []
+			}
 		this.props.getCategories(selected)
 	}
 
@@ -39,7 +46,17 @@ class Sidebar extends Component {
 				[evt.target.name]: newCategoryArr
 			})
 		}
+		console.log('STATE', this.state)
 	}
+
+	// handleClear = evt => {
+	// 	const selected = {
+	// 		color: [],
+	// 		type: [],
+	// 		size: []
+	// 	}
+	// 	this.props.getCategories(selected)
+	// }
 
 	render() {
 		const allProducts = this.props.products
@@ -63,7 +80,7 @@ class Sidebar extends Component {
 
 		return (
 			<div id="sidebar">
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit} name='submit'>
 					<div className="options">
 						<h5>Select Options</h5>
 						<p>Select by Color</p>
@@ -120,14 +137,13 @@ class Sidebar extends Component {
 					>
 						Search
 					</button>
-					<button
-						className="btn btn-secondary btn-sm"
-						name="clear"
-						type="submit"
-					>
-						Clear
-					</button>
+
 				</form>
+				<button onClick={this.handleSubmit}
+					className="btn btn-secondary btn-sm"
+					name="clear"
+					type="submit"
+				>Clear</button>
 			</div>
 		)
 	}

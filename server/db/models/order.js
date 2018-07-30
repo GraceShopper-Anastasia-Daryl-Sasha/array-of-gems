@@ -19,7 +19,10 @@ const Order = db.define('order', {
 	},
 	shippingPrice: {
 		type: Sequelize.DOUBLE,
-		defaultValue: 2.99
+		default: 2.99
+	},
+	discountCode: {
+		type: Sequelize.STRING
 	}
 })
 

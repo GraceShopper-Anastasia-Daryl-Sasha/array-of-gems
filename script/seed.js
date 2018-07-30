@@ -465,21 +465,21 @@ const orders = [
 		quantity: 1,
 		status: 'Created',
 		datePlaced: '2018-07-24 00:00:00+00:00',
-		userId: 3
+		userId: 2
 	},
 	{
 		orderTotal: 31.99,
 		quantity: 2,
 		status: 'Created',
 		datePlaced: '2018-07-25 00:00:00+00:00',
-		userId: 1
+		userId: 2
 	},
 	{
 		orderTotal: 29.74,
 		quantity: 2,
 		status: 'Pending',
 		datePlaced: '2018-07-24 00:00:00+00:00',
-		userId: 3
+		userId: 2
 	}
 ]
 
@@ -515,7 +515,6 @@ const orderProducts = [
 		productId: 11
 	}
 ]
-
 async function seed() {
 	await db.sync({ force: true })
 	console.log('db synced!')
@@ -536,9 +535,6 @@ async function seed() {
 			isAdmin: true,
 			password: '123',
 			isGuest: false
-		}),
-		User.create({
-			isGuest: true
 		})
 	])
 
