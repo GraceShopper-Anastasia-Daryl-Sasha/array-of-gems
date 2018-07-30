@@ -80,7 +80,6 @@ router.post('/', async (req, res, next) => {
 				})
 			)
 		)
-
 		res.status(200).json({ order: newOrder, lineItems: lineItems })
 	} catch (err) {
 		console.log(err)

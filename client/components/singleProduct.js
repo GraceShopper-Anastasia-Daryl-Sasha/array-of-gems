@@ -23,22 +23,22 @@ class SingleProduct extends Component {
     evt.preventDefault();
     const { product } = this.props
     const productToAdd = {
-      id: product.id,
+      productId: product.id,
       title: product.title,
       description: product.description,
-      price: product.price,
+      price: product.price.toFixed(2),
       quantity: Number(this.state.quantity),
-      subtotal: this.state.quantity * product.price,
+      subtotal: (this.state.quantity * product.price).toFixed(2),
       image: product.photos[0].image
     }
+    console.log(productToAdd)
     this.props.addToCart(productToAdd)
     history.push('/cart')
   }
 
   render() {
-    const { product } = this.props
+    const { product, user } = this.props
     const { reviews } = product
-    const { user } = this.props
 
     let num = product.stock
     if (num > 10) {
