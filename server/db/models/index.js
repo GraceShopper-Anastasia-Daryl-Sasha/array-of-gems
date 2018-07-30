@@ -18,8 +18,8 @@ Product.hasMany(Photo)
 Order.belongsToMany(Product, { through: 'OrderProducts' })
 Product.belongsToMany(Order, { through: 'OrderProducts' })
 
-User.hasMany(Order)
 Order.belongsTo(User)
+User.hasMany(Order)
 
 module.exports = {
 	Order,

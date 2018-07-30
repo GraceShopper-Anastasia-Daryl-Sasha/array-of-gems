@@ -9,10 +9,6 @@ class Cart extends Component {
         super()
     }
 
-    // handleChange = (evt) => {
-    //     console.log(evt.target.value)
-    // }
-
     handleSubmit = (evt) => {
         evt.preventDefault()
         // await this.props.placeOrder(this.state);
@@ -35,18 +31,23 @@ class Cart extends Component {
     // might need to make async event func
     handleRemove = productId => evt => {
         evt.preventDefault();
-        console.log('PRODUCTID', productId)
         this.props.removeFromCart(productId);
     }
 
     handleChange = evt => {
         evt.preventDefault();
-        console.log("HELLO WORLD", this.state)
         console.log(evt.target.value)
     }
     render() {
-        const { products, orderTotal } = this.props
+        if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', JSON.stringify({
+                products: [],
+                orderTotal: 0
+            }))
+        }
+        const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
 
+        const localStorageObj = JSON.parse(localStorage.getItem('cart'))
         return (
             <div className="cart">
                 <h2>Cart</h2>

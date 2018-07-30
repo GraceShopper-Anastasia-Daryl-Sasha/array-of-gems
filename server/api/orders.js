@@ -1,41 +1,71 @@
 const router = require('express').Router()
-const { Product, Review, Photo, Order, OrderProducts } = require('../db/models')
+const { Product, Review, Photo, Order, OrderProducts, User } = require('../db/models')
 
 // GET /api/orders  
 // receive all orders 
 router.get('/', async (req, res, next) => {
     try {
-        const orders = await Product.findAll({ include: [{ all: true }] })
-        res.json(orders)
+        const allOrders = await Order.findAll({ include: [{ all: true }] })
+        res.json(allOrders)
     } catch (err) {
         next(err)
     }
 })
 
-// GET /api/orders/:userId
-// receive all orders 
-router.get('/:userEmail', async (req, res, next) => {
-    try {
-
-        const user = await User.findOne({ where: { email: userEmail } })
-        // const allUserOrders = await Product.findAll({ include: [{ all: true }] })
-        res.json(user)
-    } catch (err) {
-        next(err)
-    }
-})
+// // GET /api/orders/:userEmail
+// // receive all orders for specific user
+// router.get('/:userEmail', async (req, res, next) => {
+//     try {
+//         // will need to update since we don't 
+//         const email = req.params.userEmail
+//         const orders = await Order.findAll({
+//             include: [{
+//                 model: User,
+//                 where: { email }
+//             }]
+//         })
+//         res.json(orders)
+//     } catch (err) {
+//         next(err)
+//     }
+// })
 
 // create new order
+// POST /api/orders
 router.post('/', async (req, res, next) => {
     try {
-        const newProduct = await Product.create(req.body.product)
-        const photos = await Promise.all(
-            req.body.photos.map(photo =>
-                Photo.create({ image: photo, productId: newProduct.id })
+        // let userInfo = {};
+        const email = req.body.userEmail
+        let userAccount = await User.findOne({ where: { email } })
+        if (!userAccount) {
+            userAccount = await User.create({ email })
+        }
+        const newOrder = await Order.create({
+            "orderTotal": req.body.order.orderTotal,
+            "quantity": req.body.order.quantity,
+            "status": req.body.order.status,
+            "userId": userAccount.id,
+            "shippingPrice": req.body.shippingPrice
+        })
+
+        const lineItems = await Promise.all(
+            req.body.cart.map(product =>
+                OrderProducts.create({
+                    "productPrice": product.price,
+                    "discountedPrice": product.discountedPrice,
+                    "productQuantity": product.quantity,
+                    "productId": product.productId,
+                    "orderId": newOrder.id,
+                    "isDiscounted": product.isDiscounted,
+                    "regularPrice": product.regularPrice
+                })
             )
         )
-        res.status(200).json({ product: newProduct, photos: photos })
+
+        // lineItems: lineItems, user: newGuestUser, user: userInfo, user: userAccount || newUserAccount   }
+        res.status(200).json({ order: newOrder, lineItems: lineItems })
     } catch (err) {
+        console.log(err)
         res.sendStatus(500)
     }
 })
@@ -43,31 +73,13 @@ router.post('/', async (req, res, next) => {
 // PUT /api/orders/:id
 // update order information 
 
-router.put('/:id', async (req, res, next) => {
-    try {
-        const [numberOfAffectedRows, affectedRows] = await Product.update(
-            req.body,
-            {
-                where: {
-                    id: req.params.id
-                },
-                returning: true,
-                plain: true
-            }
-        )
-        res.status(200).json(affectedRows)
-    } catch (err) {
-        res.sendStatus(500)
-    }
-})
+// router.put('/:id', async (req, res, next) => {
+//     try {
 
-router.delete('/:id', async (req, res, next) => {
-    await Product.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).catch(next)
-    res.status(204).end()
-})
+//         res.status(200).json()
+//     } catch (err) {
+//         res.sendStatus(500)
+//     }
+// })
 
 module.exports = router

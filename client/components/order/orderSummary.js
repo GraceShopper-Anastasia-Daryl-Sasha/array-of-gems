@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-const CartTable = (props) => {
+const OrderSummary = (props) => {
     const { products, orderTotal } = props
     console.log('PRODUCTS', products)
     return (
@@ -27,8 +27,14 @@ const CartTable = (props) => {
             </table>
             <span>Total:</span>
             <span>${orderTotal}</span>
+            <form >
+                {/* coupons within stripe only allow for recurring subscriptions, will need to handle otherwise */}
+                <label >Discount Code</label>
+                <input />
+                <button>Apply</button>
+            </form>
         </div>
     )
 }
 
-export default CartTable
+export default OrderSummary

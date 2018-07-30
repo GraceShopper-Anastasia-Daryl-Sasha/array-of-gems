@@ -3,6 +3,7 @@ import user from './user'
 import {
 	GET_PRODUCTS,
 	GET_SELECTED_CATEGORIES,
+	// CLEAR_CATEGORIES,
 	CREATE_PRODUCT,
 	UPDATE_PRODUCT,
 	DELETE_PRODUCT,
@@ -34,6 +35,9 @@ const categoriesReducer = (state = [], action) => {
 		case GET_SELECTED_CATEGORIES: {
 			return action.categories
 		}
+		// case CLEAR_CATEGORIES: {
+		// 	return action.categories
+		// }
 		default:
 			return state
 	}
@@ -56,69 +60,70 @@ const singleProductReducer = (state = {}, action) => {
 	}
 }
 
-const orderProducts = {
-	products: [],
-	orderTotal: 0
-};
 
-const orderReducer = (state = orderProducts, action) => {
+const orderReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ADD_TO_CART: {
-			let updatedProducts = [...state.products];
+			const cart = JSON.parse(localStorage.getItem('cart'));
+			console.log('CART', cart)
+			let updatedProducts = cart.products;
 			let isIncluded = false, productToUpdate;
+			let total = 0;
 
-			state.products.map(product => {
+			// if (!localStorage.getItem('cart')) {
+			// 	localStorage.setItem('cart', JSON.stringify({
+			// 		products: [],
+			// 		orderTotal: 0
+			// 	}))
+			// }
+			cart.products.map(product => {
 				if (product.id === action.product.id) {
 					isIncluded = true;
 					productToUpdate = product
 				}
 			})
 
-			if (state.products.length > 0 && isIncluded === true) {
+			if (cart.products.length > 0 && isIncluded === true) {
 				action.product.quantity = productToUpdate.quantity + action.product.quantity
 				action.product.subtotal = action.product.quantity * action.product.price
 				updatedProducts.splice(updatedProducts[productToUpdate], 1, action.product)
 			} else {
 				updatedProducts.push(action.product)
 			}
-			let total = 0;
+
 			updatedProducts.map(product => {
 				total = total + Number(product.subtotal)
 			})
 
-			return {
-				...state,
+			localStorage.removeItem('cart')
+			localStorage.setItem('cart', JSON.stringify({
 				products: updatedProducts,
 				orderTotal: total
+			}))
+
+			return {
+				...state,
+				products: JSON.parse(localStorage.getItem('cart')).products,
+				orderTotal: JSON.parse(localStorage.getItem('cart')).orderTotal
 			}
 		}
-		// case UPDATE_CART: {
-		// 	const updatedProducts = state.products.map(product => {
-		// 		if (product.id !== action.product.id) {
-		// 			console.log("if", product)
-		// 			updatedProducts.push(product)
-		// 		} else {
-		// 			product.quantity = action.product.quantity
-		// 		}
-		// 	})
-		// 	return {
-		// 		...state,
-		// 		products: updatedProducts
-		// 	}
-		// }
 		case REMOVE_FROM_CART: {
-			console.log('ACTION', action)
 			let updatedProducts = [],
 				total = 0;
 			state.products.map(product => {
-				console.log('product', product, 'ACTION.PRODUCTID', action.productId)
 				if (product.id !== action.productId) {
-					// remove item from the cart array
-					console.log('HELLO')
 					updatedProducts.push(product)
 					total = total + product.subtotal
 				}
 			})
+
+			localStorage.removeItem('cart')
+			if (updatedProducts.length > 0) {
+				localStorage.setItem('cart', JSON.stringify({
+					products: updatedProducts,
+					orderTotal: total
+				}))
+			}
 
 			return {
 				...state,
@@ -127,14 +132,22 @@ const orderReducer = (state = orderProducts, action) => {
 			}
 		}
 		case CLEAR_CART: {
+			localStorage.removeItem('cart')
+			localStorage.setItem('cart', JSON.stringify({
+				products: [],
+				orderTotal: 0
+			}))
+
 			return {
 				...state,
 				products: [],
 				orderTotal: 0,
 			}
 		}
-		default:
+		default: {
 			return state
+		}
+
 	}
 }
 

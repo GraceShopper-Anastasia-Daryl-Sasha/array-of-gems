@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import CartSummary from "./cartSummary"
+import OrderSummary from "./orderSummary"
 
 
 class Checkout extends Component {
@@ -10,6 +10,11 @@ class Checkout extends Component {
 
     }
 
+    // applyCode = (evt) => {
+    //     evt.preventDefault(),
+    //         console.log("TARGET", evt.target.value)
+    //         console.log("sta")
+    // }
     // handleChange = (evt) => {
     //     console.log(evt.target.value)
     // }
@@ -24,7 +29,7 @@ class Checkout extends Component {
 
 
     render() {
-        const { products, orderTotal } = this.props
+        const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
 
         return (
             <div>
@@ -32,11 +37,16 @@ class Checkout extends Component {
                     <Redirect to="/cart" />
                 ) : (
                         <div>
-                            <span>Checkout</span>
-                            <CartSummary
-                                products={products}
-                                orderTotal={orderTotal}
-                            />
+                            <div>
+
+                            </div>
+                            <div>
+                                <OrderSummary
+                                    products={products}
+                                    orderTotal={orderTotal}
+                                    applyCode={this.applyCode}
+                                />
+                            </div>
                         </div>
                     )
                 }
@@ -46,12 +56,21 @@ class Checkout extends Component {
     }
 }
 
-const mapState = (state) => {
-    console.log(state)
-    return {
-        products: state.order.products,
-        orderTotal: state.order.orderTotal
-    }
-};
+// const mapState = (state) => {
+//     console.log(state)
+//     return {
+//         products: state.order.products,
+//         orderTotal: state.order.orderTotal
+//     }
+// };
 
-export default connect(mapState, null)(Checkout)
+const mapDispatch = (dispatch) => {
+    return {
+        handleSubmit(evt) {
+            evt.preventDefault()
+            // const order = 
+        }
+    }
+}
+
+export default connect(null, null)(Checkout)
