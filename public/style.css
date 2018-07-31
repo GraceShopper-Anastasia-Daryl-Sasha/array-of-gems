@@ -109,12 +109,12 @@ form div {
 
 /* Sidebar Start */
 #sidebar {
-	margin-left: 1.5em;
-	width: 20%;
+	margin-left: 2em;
+	width: 15%;
 }
 
 #sidebar button {
-	margin-left: 1.5em;
+	margin-left: 1em;
 }
 
 #sidebar h5 {
@@ -179,6 +179,7 @@ form div {
 	flex-wrap: wrap;
 	align-items: center;
 	width: 100%;
+	margin-left: 10%;
 }
 
 .product {
@@ -189,6 +190,15 @@ form div {
 	justify-content: center;
 	align-items: center;
 	/* border: 1px solid rgb(150, 148, 148); */
+}
+
+@media screen and (max-width: 768px) {
+	.products {
+		margin-left: 0;
+	}
+	.product {
+		max-width: calc(100% * (1 / 2));
+	}
 }
 
 .product-image {

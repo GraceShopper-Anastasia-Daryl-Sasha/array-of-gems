@@ -13,7 +13,7 @@ const { Product, Review, Photo } = require('../db/models')
 
 // GET /api/products
 router.get('/', async (req, res, next) => {
-	// console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
+	console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
 	try {
 		const allProducts = await Product.findAll({ include: [{ all: true }] })
 		res.json(allProducts)
@@ -73,13 +73,16 @@ router.put('/:id', async (req, res, next) => {
 
 // DELETE /api/products/:id
 router.delete('/:id', async (req, res, next) => {
-	// console.log('WHAT DOES REQ LOOK LIKE DELETE', req.user)
-	await Product.destroy({
-		where: {
-			id: req.params.id
-		}
-	}).catch(next)
-	res.status(204).end()
+	console.log('WHAT DOES REQ LOOK LIKE DELETE', req.user)
+	if (req.user && req.user.isAdmin) {
+		console.log('Admin')
+	}
+	// await Product.destroy({
+	// 	where: {
+	// 		id: req.params.id
+	// 	}
+	// }).catch(next)
+	// res.status(204).end()
 })
 
 //POST /api/products/:id/reviews
