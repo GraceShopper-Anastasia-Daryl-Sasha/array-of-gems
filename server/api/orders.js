@@ -52,19 +52,18 @@ router.get('/:orderId', async (req, res, next) => {
 // create new order
 // POST /api/orders
 router.post('/', async (req, res, next) => {
+	console.log('INSIDE ROUTE', req.user)
 	try {
-		// let userInfo = {};
 		const email = req.body.userEmail
 		let userAccount = await User.findOne({ where: { email } })
 		if (!userAccount) {
 			userAccount = await User.create({ email })
 		}
-		const newOrder = await Order.create({
-			orderTotal: req.body.order.orderTotal,
-			quantity: req.body.order.quantity,
-			status: req.body.order.status,
-			userId: userAccount.id,
-			shippingPrice: req.body.shippingPrice
+
+		const newO = await Order.create({
+			"orderTotal": req.body.order.orderTotal,
+			"quantity": req.body.order.quantity,
+			"userId": userAccount.id
 		})
 
 		const lineItems = await Promise.all(
@@ -74,13 +73,13 @@ router.post('/', async (req, res, next) => {
 					discountedPrice: product.discountedPrice,
 					productQuantity: product.quantity,
 					productId: product.productId,
-					orderId: newOrder.id,
+					orderId: newO.id,
 					isDiscounted: product.isDiscounted,
 					regularPrice: product.regularPrice
 				})
 			)
 		)
-		res.status(200).json({ order: newOrder, lineItems: lineItems })
+		res.status(200).json({ order: newO, lineItems: lineItems, userAccount: userAccount })
 	} catch (err) {
 		console.log(err)
 		res.sendStatus(500)

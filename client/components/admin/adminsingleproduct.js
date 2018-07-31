@@ -22,8 +22,6 @@ class AdminSingleProduct extends Component {
 		evt.preventDefault()
 		const image = evt.target.image.value
 		const id = evt.target.id.value
-		console.log('photo ', image)
-		console.log('id ', id)
 		this.props.editPhoto(image, id)
 	}
 

@@ -188,27 +188,17 @@ export const postReview = review => {
 	}
 }
 
-export const postOrder = product => {
+export const postOrder = (product, history) => {
 	return async dispatch => {
 		try {
-			const { newOrder, lineItems } = await axios.post('/api/order')
+			const newOrder = await axios.post('/api/orders', product)
 			dispatch(addToCart(newOrder))
-			console.log('hello')
+			history.push(`/myAccount`)
 		} catch (err) {
 			console.log('There was an error adding to order', err)
 		}
 	}
 }
-
-// export const removeFromOrder = product => {
-// 	return async dispatch => {
-// 		try {
-// 			console.log('hello')
-// 		} catch (err) {
-// 			console.log('There was an error adding to order', err)
-// 		}
-// 	}
-// }
 
 export const editPhoto = (photo, history) => {
 	return async dispatch => {
