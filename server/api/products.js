@@ -73,7 +73,7 @@ router.put('/:id', async (req, res, next) => {
 
 // DELETE /api/products/:id
 router.delete('/:id', async (req, res, next) => {
-	// console.log('WHAT DOES REQ LOOK LIKE DELETE', req._passport)
+	// console.log('WHAT DOES REQ LOOK LIKE DELETE', req.user)
 	await Product.destroy({
 		where: {
 			id: req.params.id
