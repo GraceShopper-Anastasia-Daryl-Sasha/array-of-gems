@@ -2,16 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import OrderSummary from './orderSummary'
-import { postOrder, clearCart } from '../../store/action-creators'
+import { postOrder, clearCart, checkingOut } from '../../store/action-creators'
 import CheckoutForm from './checkoutForm'
 import { Elements, StripeProvider } from 'react-stripe-elements'
 
 class Checkout extends Component {
 	constructor() {
 		super()
-		this.state = { complete: false }
+		this.state = {
+			complete: false
+		}
 		this.submit = this.submit.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleClick = this.handleClick.bind(this)
 	}
 
 	async submit(ev) {
@@ -37,6 +40,12 @@ class Checkout extends Component {
 		this.props.clearCart()
 	}
 
+	handleClick() {
+		const check = true
+		console.log('check', check)
+		checkingOut({ userCheckingOut: check })
+	}
+
 	render() {
 		const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
 		const { user } = this.props
@@ -55,7 +64,11 @@ class Checkout extends Component {
 										<h5>
 											Please
 											<Link to="/login">
-												<button type="submit" className="btn btn-info">
+												<button
+													type="submit"
+													onClick={this.handleClick}
+													className="btn btn-info"
+												>
 													Login
 												</button>
 											</Link>{' '}
@@ -114,7 +127,8 @@ const mapState = state => {
 const mapDispatch = (dispatch, ownProps) => {
 	return {
 		postOrder: newOrder => dispatch(postOrder(newOrder, ownProps.history)),
-		clearCart: () => dispatch(clearCart())
+		clearCart: () => dispatch(clearCart()),
+		checkingOut: check => dispatch(checkingOut(check))
 	}
 }
 

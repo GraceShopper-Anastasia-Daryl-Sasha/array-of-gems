@@ -23,6 +23,7 @@ export const GET_USER_INFO = 'GET_USER_INFO'
 export const DELETE_REVIEW = 'DELETE_REVIEW'
 export const UPDATE_ROLE = 'UPDATE_ROLE'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const IS_CHECKINGOUT = 'IS_CHECKINGOUT'
 
 //Action Creators
 const getProducts = products => {
@@ -112,6 +113,11 @@ const updateRole = user => ({
 const updateOrder = order => ({
 	type: UPDATE_ORDER,
 	order
+})
+
+export const checkingOut = isCheckingOut => ({
+	type: IS_CHECKINGOUT,
+	isCheckingOut
 })
 // Thunk Creators
 export const fetchProducts = () => {
