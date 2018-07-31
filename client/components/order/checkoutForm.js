@@ -1,25 +1,43 @@
-import React, { Component } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import React from 'react';
+import axios from 'axios'
+import StripeCheckout from 'react-stripe-checkout';
 
-class CheckoutForm extends Component {
-    constructor(props) {
-        super(props);
-        this.submit = this.submit.bind(this);
-    }
+const STRIPE_PUBLISHABLE = process.env.NODE_ENV === 'production'
+? 'pk_live_HSz1ohl8wTtwMuqIosX4Tyg8'
+: 'pk_test_HSz1ohl8wTtwMuqIosX4Tyg8'
 
-    async submit(evt) {
-        // User clicked submit
-    }
+const currency = 'USD'
+const fromDollarToCents = amount => Number(amount) * 100;
 
-    render() {
-        return (
-            <div className="checkout">
-                <p>Would you like to complete the purchase?</p>
-                <CardElement />
-                <button onClick={this.submit}>Send</button>
-            </div>
-        );
-    }
+const successPayment = data => {
+    alert('Payment Successful')
 }
 
-export default injectStripe(CheckoutForm);
+const errorPayment = data => {
+    alert('Unsuccessful Payment')
+}
+
+const onToken = (amount, description) =>
+    token =>
+    axios.post('/api/stripe',
+    {
+        description,
+        source: token.id,
+        currency,
+        amount: fromDollarToCents(amount)
+    })
+    .then(successPayment)
+    .catch(errorPayment)
+
+const CheckoutForm = ({name, description, amount}) =>
+   <StripeCheckout
+    name={name}
+    description={description}
+    amount={fromDollarToCents(amount)}
+    token={onToken(amount, description)}
+    currency={currency}
+    stripeKey={STRIPE_PUBLISHABLE}
+   />
+
+
+export default CheckoutForm

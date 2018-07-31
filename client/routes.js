@@ -41,6 +41,7 @@ class Routes extends Component {
 					<Route path="/signup" component={Signup} />
 					<Route path="/cart" component={Cart} />
 					<Route path="/checkout" component={Checkout} />
+					<Route path="/" component={MainHome} />
 					{isLoggedIn && (
 						<Switch>
 							{/* Routes placed here are only available after logging in */}
@@ -60,7 +61,7 @@ class Routes extends Component {
 							)}
 						</Switch>
 					)}
-					<Route  path="/" component={MainHome} />
+					<Route path="/" component={MainHome} />
 				</Switch>
 			</div>
 		)
