@@ -56,7 +56,7 @@ const getSingleProduct = product => {
 	return { type: GET_SINGLE_PRODUCT, product }
 }
 
-const createReview = review => {
+export const createReview = review => {
 	return { type: CREATE_REVIEW, review }
 }
 
