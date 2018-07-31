@@ -85,14 +85,11 @@ class Checkout extends Component {
 									<h4>
 										Welcome {user.firstName} {user.lastName}
 									</h4>
-									<StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
-										<div className="paymentInfo">
-											<h3>Enter Payment Information</h3>
-											<Elements>
-												<CheckoutForm />
-											</Elements>
-										</div>
-									</StripeProvider>
+									<CheckoutForm
+										name={user.firstName + '' + user.lastName}
+										description={user.firstName + "'s Order"}
+										amount={orderTotal}
+									/>
 									<button
 										type="submit"
 										className="btn btn-info"

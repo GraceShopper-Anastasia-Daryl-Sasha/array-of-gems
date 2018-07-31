@@ -7,7 +7,16 @@ import { clearCart, removeFromCart } from '../../store/action-creators'
 class Cart extends Component {
 	constructor() {
 		super()
+		this.state = {
+			products: []
+		}
 	}
+
+	// componentDidMount() {
+	// 	this.setState({
+	// 		products: JSON.parse(localStorage.getItem('cart'))
+	// 	})
+	// }
 
 	handleSubmit = evt => {
 		evt.preventDefault()
@@ -49,6 +58,7 @@ class Cart extends Component {
 			)
 		}
 		const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
+		console.log('INSIDE CART', this.props.products, 'PRODUCTS FROM LOCAL STORAGE', products)
 		// const localStorageObj = JSON.parse(localStorage.getItem('cart'))
 		return (
 			<div className="cart">
@@ -65,16 +75,16 @@ class Cart extends Component {
 						</Link>
 					</div>
 				) : (
-					<CartTable
-						products={products}
-						orderTotal={orderTotal}
-						handleChange={this.handleChange}
-						handleSubmit={this.handleSubmit}
-						handleEdit={this.handleEdit}
-						handleClear={this.handleClear}
-						handleRemove={this.handleRemove}
-					/>
-				)}
+						<CartTable
+							products={products}
+							orderTotal={orderTotal}
+							handleChange={this.handleChange}
+							handleSubmit={this.handleSubmit}
+							handleEdit={this.handleEdit}
+							handleClear={this.handleClear}
+							handleRemove={this.handleRemove}
+						/>
+					)}
 			</div>
 		)
 	}
