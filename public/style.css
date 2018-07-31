@@ -331,7 +331,7 @@ form div {
 
 /* Cart Start */
 .cart {
-	width: 80%;
+	width: 100%;
 	margin-left: 10em;
 	padding: 2em;
 }
@@ -342,6 +342,17 @@ form div {
 
 .cart-table button {
 	margin-right: 1em;
+}
+
+.cart-login {
+	margin-left: 20em;
+}
+/* .cart-login a {
+	font-size: 1.25rem;
+} */
+
+.cart-login button {
+	margin-left: 1em;
 }
 
 /* Cart End */
