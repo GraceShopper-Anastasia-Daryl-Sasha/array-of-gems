@@ -15,6 +15,7 @@ module.exports = app
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
 if (process.env.NODE_ENV === 'test') {
+	// PAYMENT_SERVER_URL = 'https://localhost:8080'
 	after('close the session store', () => sessionStore.stopExpiringSessions())
 }
 
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
+
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
@@ -41,6 +43,7 @@ passport.deserializeUser(async (id, done) => {
 })
 
 const createApp = () => {
+
 	// logging middleware
 	app.use(morgan('dev'))
 
@@ -62,6 +65,7 @@ const createApp = () => {
 	)
 	app.use(passport.initialize())
 	app.use(passport.session())
+
 
 	// auth and api routes
 	app.use('/auth', require('./auth'))
