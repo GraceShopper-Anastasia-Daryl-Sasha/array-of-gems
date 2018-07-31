@@ -75,7 +75,8 @@ class AdminSingleOrder extends Component {
 													</Link>
 												</td>
 												<td>
-													{orderview.quantity / orderview.products.length}
+													{/* {orderview.quantity / orderview.products.length} */}
+													{product.OrderProducts.productQuantity}
 												</td>
 												<td>${product.price}</td>
 												<td />

@@ -26,7 +26,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 			{isLoggedIn ? (
 				<div className="navLinks">
 					{/* The navbar will show these links after you log in */}
-					<Link to="/myAccount">My Account</Link>
+					<Link to="/home">My Account</Link>
 					{isAdmin && <Link to="/admin">Dashboard</Link>}
 					<a href="#" onClick={handleClick}>
 						Logout
@@ -37,16 +37,16 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
 					</Link>
 				</div>
 			) : (
-					<div className="navLinks">
-						{/* The navbar will show these links before you log in */}
-						<Link to="/login">Login</Link>
-						<Link to="/signup">Sign Up</Link>
-						<Link to="/cart">
-							<img src="https://banner2.kisspng.com/20171217/337/shopping-cart-png-5a364b75338266.010470061513507701211.jpg" />
-							<span>0</span>
-						</Link>
-					</div>
-				)}
+				<div className="navLinks">
+					{/* The navbar will show these links before you log in */}
+					<Link to="/login">Login</Link>
+					<Link to="/signup">Sign Up</Link>
+					<Link to="/cart">
+						<img src="https://banner2.kisspng.com/20171217/337/shopping-cart-png-5a364b75338266.010470061513507701211.jpg" />
+						<span>0</span>
+					</Link>
+				</div>
+			)}
 		</nav>
 		{/* <hr /> */}
 	</div>

@@ -109,12 +109,12 @@ form div {
 
 /* Sidebar Start */
 #sidebar {
-	margin-left: 1.5em;
-	width: 20%;
+	margin-left: 2em;
+	width: 15%;
 }
 
 #sidebar button {
-	margin-left: 1.5em;
+	margin-left: 1em;
 }
 
 #sidebar h5 {
@@ -179,6 +179,7 @@ form div {
 	flex-wrap: wrap;
 	align-items: center;
 	width: 100%;
+	margin-left: 10%;
 }
 
 .product {
@@ -189,6 +190,15 @@ form div {
 	justify-content: center;
 	align-items: center;
 	/* border: 1px solid rgb(150, 148, 148); */
+}
+
+@media screen and (max-width: 768px) {
+	.products {
+		margin-left: 0;
+	}
+	.product {
+		max-width: calc(100% * (1 / 2));
+	}
 }
 
 .product-image {
@@ -249,10 +259,47 @@ form div {
 /* Cart Start */
 .cart {
 	width: 80%;
-	margin-left: 5em;
+	margin-left: 10em;
+	padding: 2em;
+}
+
+.order-summary {
+	margin-left: 1em;
+}
+
+.cart-table button {
+	margin-right: 1em;
 }
 
 /* Cart End */
+
+/* My Account Start */
+
+.my-account {
+	width: 70%;
+}
+
+.my-account img {
+	width: 60px;
+	height: 60px;
+}
+
+.my-account table {
+	width: 100%;
+}
+
+.login {
+	width: 70%;
+	margin-top: 5em;
+	margin-left: 10em;
+	padding: 2.5em;
+}
+
+.login button {
+	margin-left: 1em;
+}
+
+/* My Account End */
 
 /* Admin Start */
 #admin {
@@ -301,27 +348,19 @@ form div {
 	padding: 1em;
 }
 
-
 #admin-single-product img {
 	width: 100%;
 	height: 100%;
 }
 
-/* WE NEED TO FIX THIS - I JUST WANTED TO MAKE THE IMAGE SMALLER SOMEHOW */
-.tr img {
-	width: 75%;
-	height: 50%;
-}
-
 .cart-item-controls {
-margin: 5px; 
+	margin: 5px;
 }
 
-.item-quantity-wrapper .item-quantity{
+.item-quantity-wrapper .item-quantity {
 	border: none;
 	background-color: inherit;
 	width: 30px;
-
 }
 
 .list {
@@ -343,6 +382,10 @@ margin: 5px;
 .card {
 	margin-left: 0;
 	width: 15em;
+}
+
+.card-reviews {
+	width: 100%;
 }
 
 /* Admin End */
