@@ -39,35 +39,45 @@ router.get('/:productId', async (req, res, next) => {
 
 // POST /api/products
 router.post('/', async (req, res, next) => {
-	try {
-		const newProduct = await Product.create(req.body.product)
-		const photos = await Promise.all(
-			req.body.photos.map(photo =>
-				Photo.create({ image: photo, productId: newProduct.id })
+	if (req.user && req.user.isAdmin) {
+		console.log('Admin')
+		try {
+			const newProduct = await Product.create(req.body.product)
+			const photos = await Promise.all(
+				req.body.photos.map(photo =>
+					Photo.create({ image: photo, productId: newProduct.id })
+				)
 			)
-		)
-		res.status(200).json({ product: newProduct, photos: photos })
-	} catch (err) {
-		res.sendStatus(500)
+			res.status(200).json({ product: newProduct, photos: photos })
+		} catch (err) {
+			res.sendStatus(500)
+		}
+	} else {
+		console.log("You're not authorized...")
 	}
 })
 
 // PUT /api/products/:id
 router.put('/:id', async (req, res, next) => {
-	try {
-		const [numberOfAffectedRows, affectedRows] = await Product.update(
-			req.body,
-			{
-				where: {
-					id: req.params.id
-				},
-				returning: true,
-				plain: true
-			}
-		)
-		res.status(200).json(affectedRows)
-	} catch (err) {
-		res.sendStatus(500)
+	if (req.user && req.user.isAdmin) {
+		console.log('Admin')
+		try {
+			const [numberOfAffectedRows, affectedRows] = await Product.update(
+				req.body,
+				{
+					where: {
+						id: req.params.id
+					},
+					returning: true,
+					plain: true
+				}
+			)
+			res.status(200).json(affectedRows)
+		} catch (err) {
+			res.sendStatus(500)
+		}
+	} else {
+		console.log("You're not authorized...")
 	}
 })
 
@@ -76,13 +86,15 @@ router.delete('/:id', async (req, res, next) => {
 	console.log('WHAT DOES REQ LOOK LIKE DELETE', req.user)
 	if (req.user && req.user.isAdmin) {
 		console.log('Admin')
+		await Product.destroy({
+			where: {
+				id: req.params.id
+			}
+		}).catch(next)
+		res.status(204).end()
+	} else {
+		console.log("You're not authorized...")
 	}
-	// await Product.destroy({
-	// 	where: {
-	// 		id: req.params.id
-	// 	}
-	// }).catch(next)
-	// res.status(204).end()
 })
 
 //POST /api/products/:id/reviews
