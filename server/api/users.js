@@ -26,6 +26,7 @@ router.get('/admin', async (req, res, next) => {
 	}
 })
 
+// GET /users/admin/userid
 router.get('/admin/:id', async (req, res, next) => {
 	try {
 		const user = await User.findById(req.params.id, {
