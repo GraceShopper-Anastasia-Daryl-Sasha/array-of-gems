@@ -15,6 +15,7 @@ import {
 	GET_USERS,
 	GET_ORDERS,
 	GET_ORDER,
+	UPDATE_ORDER
 } from './action-creators'
 import { orderReducer } from './reducerCart'
 
@@ -84,6 +85,8 @@ const singleOrderReducer = (state = {}, action) => {
 	switch (action.type) {
 		case GET_ORDER:
 			return action.order
+		case UPDATE_ORDER:
+			return { ...state, ...action.order }
 		default:
 			return state
 	}

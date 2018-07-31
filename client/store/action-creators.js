@@ -22,6 +22,7 @@ export const APPLY_DISCOUNT = 'APPLY_DISCOUNT'
 export const GET_USER_INFO = 'GET_USER_INFO'
 export const DELETE_REVIEW = 'DELETE_REVIEW'
 export const UPDATE_ROLE = 'UPDATE_ROLE'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
 
 //Action Creators
 const getProducts = products => {
@@ -106,6 +107,11 @@ const deleteReview = reviewId => ({
 const updateRole = user => ({
 	type: UPDATE_ROLE,
 	user
+})
+
+const updateOrder = order => ({
+	type: UPDATE_ORDER,
+	order
 })
 // Thunk Creators
 export const fetchProducts = () => {
@@ -248,10 +254,10 @@ export const fetchOrders = () => {
 	}
 }
 
-export const fetchOrder = orderId => {
+export const fetchOrder = id => {
 	return async dispatch => {
 		try {
-			const { data } = await axios.get(`/api/orders/${orderId}`)
+			const { data } = await axios.get(`/api/orders/${id}`)
 			dispatch(getOrder(data))
 		} catch (err) {
 			console.log('Could not find order', err)
@@ -277,11 +283,25 @@ export const editRole = (role, history) => {
 		try {
 			console.log('Edit role', role)
 			const { data } = await axios.put(`/api/users/admin/${role.id}`, role)
-			console.log('DATA: ', data)
+			// console.log('DATA: ', data)
 			dispatch(updateRole(data))
 			history.push(`/admin-single-user/${role.id}`)
 		} catch (err) {
 			console.log('Product was not updated...', err)
+		}
+	}
+}
+
+export const editOrder = (order, history) => {
+	return async dispatch => {
+		try {
+			console.log('Order', order)
+			const { data } = await axios.put(`/api/orders/${order.id}`, order)
+			console.log('updatedOrder', data)
+			dispatch(updateOrder(data))
+			history.push(`/admin-single-order/${order.id}`)
+		} catch (err) {
+			console.log('Order was not updated...', err)
 		}
 	}
 }
