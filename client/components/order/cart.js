@@ -12,11 +12,11 @@ class Cart extends Component {
 		}
 	}
 
-	componentDidMount() {
-		this.setState({
-			products: JSON.parse(localStorage.getItem('cart'))
-		})
-	}
+	// componentDidMount() {
+	// 	this.setState({
+	// 		products: JSON.parse(localStorage.getItem('cart'))
+	// 	})
+	// }
 
 	handleSubmit = evt => {
 		evt.preventDefault()

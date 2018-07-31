@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 const CartTable = props => {
 	const { products, orderTotal } = props
-	console.log('PRODUCTS', props)
 	return (
 		<div className="my-account">
 			<h3>Items in your cart</h3>
@@ -44,7 +43,7 @@ const CartTable = props => {
 								<button
 									type="button"
 									className="btn btn-danger"
-									onClick={props.handleRemove(product.id)}
+									onClick={props.handleRemove(product.productId)}
 								>
 									X
 								</button>

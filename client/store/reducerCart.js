@@ -18,7 +18,6 @@ export const orderReducer = (state = {}, action) => {
 				)
 			}
 			const cart = JSON.parse(localStorage.getItem('cart'))
-			console.log('CART', cart)
 
 			let updatedProducts = cart.products,
 				isIncluded = false,
@@ -27,7 +26,6 @@ export const orderReducer = (state = {}, action) => {
 
 			cart.products.map(product => {
 				if (product.productId === action.product.productId) {
-					// console.log('PRODUCT', product.productId, 'actionId', action.product.productId)
 					isIncluded = true
 					productToUpdate = product
 				}
@@ -39,7 +37,6 @@ export const orderReducer = (state = {}, action) => {
 				productToUpdate.subtotal = (
 					productToUpdate.quantity * productToUpdate.price
 				).toFixed(2)
-				console.log(productToUpdate)
 				updatedProducts.splice(
 					updatedProducts.indexOf(productToUpdate),
 					1,
@@ -71,27 +68,30 @@ export const orderReducer = (state = {}, action) => {
 		case REMOVE_FROM_CART: {
 			let updatedProducts = [],
 				total = 0
-			state.products.map(product => {
+
+			const cart = JSON.parse(localStorage.getItem('cart'))
+			JSON.parse(localStorage.getItem('cart')).products.map(product => {
 				if (product.productId !== action.productId) {
 					updatedProducts.push(product)
-					total = total + product.subtotal
+					total = Number(total) + Number(product.subtotal)
 				}
 			})
 
 			localStorage.removeItem('cart')
-			if (updatedProducts.length > 0) {
+			// total = total.toFixed(2)
+			if (cart.products.length > 0) {
 				localStorage.setItem(
 					'cart',
 					JSON.stringify({
 						products: updatedProducts,
-						orderTotal: total.toFixed(2)
+						orderTotal: total
 					})
 				)
 			}
 			return {
 				...state,
-				products: updatedProducts,
-				orderTotal: total.toFixed(2)
+				products: JSON.parse(localStorage.getItem('cart')).products,
+				orderTotal: JSON.parse(localStorage.getItem('cart')).orderTotal
 			}
 		}
 		case CLEAR_CART: {
