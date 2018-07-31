@@ -32,7 +32,7 @@ export const me = () => async dispatch => {
 
 export const auth = (email, password, method) => async dispatch => {
 	let res
-	let isGuest = false;
+	let isGuest = false
 	try {
 		res = await axios.post(`/auth/${method}`, { email, password, isGuest })
 	} catch (authError) {
@@ -44,6 +44,8 @@ export const auth = (email, password, method) => async dispatch => {
 		console.log('res.data', res.data)
 		if (res.data.isAdmin) {
 			history.push('/admin')
+		} else if (res.data.IsLoggedIn) {
+			history.push('/cart')
 		} else {
 			history.push('/home')
 		}
@@ -65,7 +67,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function (state = defaultUser, action) {
+export default function(state = defaultUser, action) {
 	switch (action.type) {
 		case GET_USER:
 			return action.user

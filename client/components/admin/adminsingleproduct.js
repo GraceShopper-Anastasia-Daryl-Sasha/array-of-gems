@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import {
 	fetchProduct,
 	removeProduct,
-	editPhoto
+	editPhoto,
+	editProduct
 } from '../../store/action-creators'
 import AdminSingleImage from './adminsingleimage'
 import AdminSidebar from './adminSidebar'
@@ -13,6 +14,7 @@ class AdminSingleProduct extends Component {
 	constructor() {
 		super()
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handlePrice = this.handlePrice.bind(this)
 	}
 	componentDidMount() {
 		this.props.fetchProduct()
@@ -23,6 +25,14 @@ class AdminSingleProduct extends Component {
 		const image = evt.target.image.value
 		const id = evt.target.id.value
 		this.props.editPhoto(image, id)
+	}
+
+	handlePrice(evt) {
+		evt.preventDefault()
+		const stock = evt.target.stock.value
+		console.log('Qty ', stock)
+		console.log('Qty type ', typeof stock)
+		this.props.editProduct(+stock)
 	}
 
 	render() {
@@ -48,7 +58,7 @@ class AdminSingleProduct extends Component {
 								<p>Type: {product.type}</p>
 								<p>Size: {product.size}</p>
 								<p>Color: {product.color}</p>
-								<p>Stock: {product.stock}</p>
+								<p>Price: {product.price}</p>
 								<Link to={'/update-product/' + product.id}>
 									<button type="button" className="btn btn-info">
 										Edit Product
@@ -61,25 +71,23 @@ class AdminSingleProduct extends Component {
 								>
 									Delete Product
 								</button>
-								<div className="form-row">
-									<div className="form-group col-sm-4">
-										<label htmlFor="price">Price: </label>
-										<input
-											type="number"
-											className="form-control"
-											defaultValue={product.price}
-											name="price"
-											value={this.props.price}
-										/>
-										<button
-											type="button"
-											className="btn btn-info"
-											onSubmit={this.handleSubmit}
-										>
-											Update
-										</button>
+								<form onSubmit={this.handlePrice}>
+									<div className="form-row">
+										<div className="form-group col-sm-4">
+											<label htmlFor="price">Stock: </label>
+											<input
+												type="number"
+												className="form-control"
+												defaultValue={product.stock}
+												name="stock"
+												value={this.props.stock}
+											/>
+											<button type="submit" className="btn btn-info">
+												Update
+											</button>
+										</div>
 									</div>
-								</div>
+								</form>
 								<div className="row">
 									<ul className="list">
 										{product.photos.map(photo => (
@@ -124,7 +132,9 @@ const mapDispatch = (dispatch, ownProps) => {
 		},
 		fetchProduct: () => dispatch(fetchProduct(productId)),
 		editPhoto: (image, id) =>
-			dispatch(editPhoto({ productId, image, id }, ownProps.history))
+			dispatch(editPhoto({ productId, image, id }, ownProps.history)),
+		editProduct: stock =>
+			dispatch(editProduct({ productId, product: { stock } }, ownProps.history))
 	}
 }
 

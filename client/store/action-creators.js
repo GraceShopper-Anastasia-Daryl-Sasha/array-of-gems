@@ -22,6 +22,8 @@ export const APPLY_DISCOUNT = 'APPLY_DISCOUNT'
 export const GET_USER_INFO = 'GET_USER_INFO'
 export const DELETE_REVIEW = 'DELETE_REVIEW'
 export const UPDATE_ROLE = 'UPDATE_ROLE'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const IS_CHECKINGOUT = 'IS_CHECKINGOUT'
 
 //Action Creators
 const getProducts = products => {
@@ -75,7 +77,7 @@ export const clearCart = () => {
 	return { type: CLEAR_CART }
 }
 
-export const applyDiscount = (code) => {
+export const applyDiscount = code => {
 	return { type: APPLY_DISCOUNT, code }
 }
 
@@ -106,6 +108,16 @@ const deleteReview = reviewId => ({
 const updateRole = user => ({
 	type: UPDATE_ROLE,
 	user
+})
+
+const updateOrder = order => ({
+	type: UPDATE_ORDER,
+	order
+})
+
+export const checkingOut = isCheckingOut => ({
+	type: IS_CHECKINGOUT,
+	isCheckingOut
 })
 // Thunk Creators
 export const fetchProducts = () => {
@@ -151,11 +163,11 @@ export const editProduct = (product, history) => {
 	return async dispatch => {
 		try {
 			const updatedProduct = await axios.put(
-				`/api/products/${product.id}`,
-				product
+				`/api/products/${product.productId}`,
+				product.product
 			)
 			dispatch(updateProduct(updatedProduct))
-			history.push(`/admin-single-product/${product.id}`)
+			history.push(`/admin-single-product/${product.productId}`)
 		} catch (err) {
 			console.log('Product was not updated...', err)
 		}
@@ -248,10 +260,10 @@ export const fetchOrders = () => {
 	}
 }
 
-export const fetchOrder = orderId => {
+export const fetchOrder = id => {
 	return async dispatch => {
 		try {
-			const { data } = await axios.get(`/api/orders/${orderId}`)
+			const { data } = await axios.get(`/api/orders/${id}`)
 			dispatch(getOrder(data))
 		} catch (err) {
 			console.log('Could not find order', err)
@@ -277,11 +289,25 @@ export const editRole = (role, history) => {
 		try {
 			console.log('Edit role', role)
 			const { data } = await axios.put(`/api/users/admin/${role.id}`, role)
-			console.log('DATA: ', data)
+			// console.log('DATA: ', data)
 			dispatch(updateRole(data))
 			history.push(`/admin-single-user/${role.id}`)
 		} catch (err) {
 			console.log('Product was not updated...', err)
+		}
+	}
+}
+
+export const editOrder = (order, history) => {
+	return async dispatch => {
+		try {
+			console.log('Order', order)
+			const { data } = await axios.put(`/api/orders/${order.id}`, order)
+			console.log('updatedOrder', data)
+			dispatch(updateOrder(data))
+			history.push(`/admin-single-order/${order.id}`)
+		} catch (err) {
+			console.log('Order was not updated...', err)
 		}
 	}
 }

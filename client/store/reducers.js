@@ -15,6 +15,8 @@ import {
 	GET_USERS,
 	GET_ORDERS,
 	GET_ORDER,
+	UPDATE_ORDER,
+	IS_CHECKINGOUT
 } from './action-creators'
 import { orderReducer } from './reducerCart'
 
@@ -84,6 +86,8 @@ const singleOrderReducer = (state = {}, action) => {
 	switch (action.type) {
 		case GET_ORDER:
 			return action.order
+		case UPDATE_ORDER:
+			return { ...state, ...action.order }
 		default:
 			return state
 	}
@@ -115,6 +119,15 @@ const singleUserReducer = (state = {}, action) => {
 	}
 }
 
+const checkoutReducer = (state = {}, action) => {
+	switch (action.type) {
+		case IS_CHECKINGOUT:
+			return action.isCheckingOut
+		default:
+			return state
+	}
+}
+
 const rootReducer = combineReducers({
 	products: productsReducer,
 	user: user,
@@ -124,7 +137,8 @@ const rootReducer = combineReducers({
 	users: usersReducer,
 	orders: ordersReducer,
 	orderview: singleOrderReducer,
-	userInfo: singleUserReducer
+	userInfo: singleUserReducer,
+	isCheckingOut: checkoutReducer
 })
 
 export default rootReducer

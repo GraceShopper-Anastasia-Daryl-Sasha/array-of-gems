@@ -36,6 +36,13 @@ label {
 	display: block;
 }
 
+.red {
+	color: #992e62;
+}
+
+.blue {
+	color: #2e6299;
+}
 /* Universal Styles - Main Container */
 
 .main-container {
@@ -54,7 +61,11 @@ nav {
 	width: 100%;
 	height: 80px;
 	color: white;
-	border-bottom: solid 1px #333;
+	/* border-bottom: solid 1px #333; */
+	/* -webkit-box-shadow: 0 8px 6px -6px #999;
+	-moz-box-shadow: 0 8px 6px -6px #999;
+	box-shadow: 0 8px 6px -6px #999; */
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 	background-color: white;
 	font-size: 14px;
 	font-weight: bold;
@@ -71,11 +82,6 @@ nav {
 	height: 50px;
 	margin-left: 2em;
 }
-/* .logo h3 {
-	-webkit-margin-before: 0;
-	-webkit-margin-after: 0;
-	margin-left: 0;
-} */
 
 .navLinks {
 	margin: 1em;
@@ -98,6 +104,50 @@ nav a {
 
 .search-btn {
 	margin-left: 0.25em;
+}
+
+@media screen and (max-width: 1254px) {
+	.logo {
+		margin-left: 0.5em;
+	}
+	.logo img {
+		width: 20px;
+		height: 20px;
+		margin-left: 0.25em;
+	}
+	.logo h3 {
+		font-size: 16px;
+	}
+	.search {
+		margin-left: 0;
+	}
+	nav a {
+		display: inline-block;
+		margin: 0.25em;
+	}
+}
+
+@media screen and (min-width: 1254px) and (max-width: 1413px) {
+	.logo {
+		margin-left: 2.5em;
+	}
+	.logo img {
+		width: 30px;
+		height: 30px;
+		margin-left: 0.5em;
+	}
+	.logo h3 {
+		font-size: 20px;
+	}
+	.search {
+		margin-left: 5em;
+	}
+}
+
+@media screen and (min-width: 1414px) {
+	.logo {
+		margin-left: 15%;
+	}
 }
 
 /* LOGIN FORM */
@@ -201,6 +251,10 @@ form div {
 	}
 }
 
+.my-carousel img {
+	transition: opacity ease-in 0.5s;
+}
+
 .product-image {
 	display: flex;
 	justify-content: center;
@@ -242,23 +296,42 @@ form div {
 	padding: 10px;
 }
 
-/*
-.product-info {
-  display: flex;
-  flex-direction: column wrap;
-  justify-content: center;
-  align-items: center;
-} */
-
 .product-buttons {
 	display: flex;
 	justify-content: space-around;
-	padding: 0.5rem;
+	padding: 0.5em;
+}
+
+.product-add-to-cart {
+	margin: 0;
+}
+
+.reviews {
+	width: 50%;
+	padding: 2.5em;
+	margin-left: 30%;
+}
+
+.review-item img {
+	width: 20px;
+	height: 20px;
+}
+
+.review {
+	margin-top: 2em;
+}
+
+@media screen and (max-width: 1024px) {
+	.reviews {
+		width: 90%;
+		padding: 2.5em;
+		margin-left: 2%;
+	}
 }
 
 /* Cart Start */
 .cart {
-	width: 80%;
+	width: 100%;
 	margin-left: 10em;
 	padding: 2em;
 }
@@ -269,6 +342,17 @@ form div {
 
 .cart-table button {
 	margin-right: 1em;
+}
+
+.cart-login {
+	margin-left: 20em;
+}
+/* .cart-login a {
+	font-size: 1.25rem;
+} */
+
+.cart-login button {
+	margin-left: 1em;
 }
 
 /* Cart End */

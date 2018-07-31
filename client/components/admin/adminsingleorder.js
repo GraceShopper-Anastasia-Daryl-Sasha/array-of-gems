@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchOrder } from '../../store/action-creators'
+import { fetchOrder, editOrder } from '../../store/action-creators'
 import AdminSidebar from './adminSidebar'
 
 class AdminSingleOrder extends Component {
@@ -45,10 +45,10 @@ class AdminSingleOrder extends Component {
 												defaultValue={orderview.status}
 												name="status"
 											>
-												<option value="reated">Created</option>
-												<option value="pending">Pending</option>
-												<option value="shipped">Shipped</option>
-												<option value="delivered">Delivered</option>
+												<option value="Created">Created</option>
+												<option value="Pending">Pending</option>
+												<option value="Shipped">Shipped</option>
+												<option value="Delivered">Delivered</option>
 											</select>
 										</div>
 										<button type="submit" className="btn btn-info">
@@ -112,12 +112,14 @@ const mapState = state => {
 }
 
 const mapDispatch = (dispatch, ownProps) => {
-	const orderId = ownProps.match.params.id
+	const id = ownProps.match.params.id
 	return {
-		fetchOrder: () => dispatch(fetchOrder(orderId)),
+		fetchOrder: () => dispatch(fetchOrder(id)),
 		handleSubmit(evt) {
 			evt.preventDefault()
-			console.log('status ', evt.target.status.value)
+			const status = evt.target.status.value
+			// console.log('status ', evt.target.status.value)
+			dispatch(editOrder({ id, status }, ownProps.history))
 		}
 	}
 }

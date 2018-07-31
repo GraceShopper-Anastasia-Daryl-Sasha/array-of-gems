@@ -1,12 +1,5 @@
 const router = require('express').Router()
-const {
-	Product,
-	Review,
-	Photo,
-	Order,
-	OrderProducts,
-	User
-} = require('../db/models')
+const { Order, OrderProducts, User } = require('../db/models')
 
 // GET /api/orders
 // receive all orders
@@ -31,24 +24,6 @@ router.get('/:orderId', async (req, res, next) => {
 	}
 })
 
-// // GET /api/orders/:userEmail
-// // receive all orders for specific user
-// router.get('/:userEmail', async (req, res, next) => {
-//     try {
-//         // will need to update since we don't
-//         const email = req.params.userEmail
-//         const orders = await Order.findAll({
-//             include: [{
-//                 model: User,
-//                 where: { email }
-//             }]
-//         })
-//         res.json(orders)
-//     } catch (err) {
-//         next(err)
-//     }
-// })
-
 // create new order
 // POST /api/orders
 router.post('/', async (req, res, next) => {
@@ -61,9 +36,9 @@ router.post('/', async (req, res, next) => {
 		}
 
 		const newO = await Order.create({
-			"orderTotal": req.body.order.orderTotal,
-			"quantity": req.body.order.quantity,
-			"userId": userAccount.id
+			orderTotal: req.body.order.orderTotal,
+			quantity: req.body.order.quantity,
+			userId: userAccount.id
 		})
 
 		const lineItems = await Promise.all(
@@ -79,7 +54,9 @@ router.post('/', async (req, res, next) => {
 				})
 			)
 		)
-		res.status(200).json({ order: newO, lineItems: lineItems, userAccount: userAccount })
+		res
+			.status(200)
+			.json({ order: newO, lineItems: lineItems, userAccount: userAccount })
 	} catch (err) {
 		console.log(err)
 		res.sendStatus(500)
@@ -87,15 +64,27 @@ router.post('/', async (req, res, next) => {
 })
 
 // PUT /api/orders/:id
-// update order information
-
-// router.put('/:id', async (req, res, next) => {
-//     try {
-
-//         res.status(200).json()
-//     } catch (err) {
-//         res.sendStatus(500)
-//     }
-// })
+router.put('/:id', async (req, res, next) => {
+	if (req.user && req.user.isAdmin) {
+		console.log('Admin')
+		try {
+			const [numberOfAffectedRows, affectedRows] = await Order.update(
+				req.body,
+				{
+					where: {
+						id: req.params.id
+					},
+					returning: true,
+					plain: true
+				}
+			)
+			res.status(200).json(affectedRows)
+		} catch (err) {
+			res.sendStatus(500)
+		}
+	} else {
+		console.log("You're not authorized...")
+	}
+})
 
 module.exports = router
