@@ -34,12 +34,11 @@ class Routes extends Component {
 			<div className="main-container">
 				<Switch>
 					{/* Routes placed here are available to all visitors */}
-					<Route exact path="/" component={MainHome} />
+					<Route path="/products/:productId/reviews" component={Reviews} />
+					<Route path="/products/:productId" component={SingleProduct} />
+					<Route path="/products" component={AllProducts} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />
-					<Route exact path="/products" component={AllProducts} />
-					<Route path="/products/:productId" component={SingleProduct} />
-					<Route path="/products/:productId/reviews" component={Reviews} />
 					<Route path="/cart" component={Cart} />
 					<Route path="/checkout" component={Checkout} />
 					{isLoggedIn && (
@@ -48,40 +47,20 @@ class Routes extends Component {
 							<Route path="/home" component={UserHome} />
 							{isAdmin && (
 								<Switch>
-									<Route path="/admin" component={AdminView} />
-									<Route
-										path="/admin-manage-products"
-										component={AdminManageProducts}
-									/>
-									<Route
-										path="/admin-manage-users"
-										component={AdminManageUsers}
-									/>
-									<Route
-										path="/admin-manage-orders"
-										component={AdminManageOrders}
-									/>
-									<Route path="/new-product" component={NewProduct} />
-									<Route
-										path="/admin-single-product/:id"
-										component={AdminSingleProduct}
-									/>
-									<Route
-										path="/admin-single-order/:id"
-										component={AdminSingleOrder}
-									/>
-									<Route
-										path="/admin-single-user/:id"
-										component={AdminSingleUser}
-									/>
-
+									<Route path="/admin-single-product/:id" component={AdminSingleProduct} />
+									<Route path="/admin-single-order/:id" component={AdminSingleOrder} />
+									<Route path="/admin-single-user/:id" component={AdminSingleUser} />
 									<Route path="/update-product/:id" component={UpdateProduct} />
+									<Route path="/admin-manage-products" component={AdminManageProducts}/>
+									<Route path="/admin-manage-users" component={AdminManageUsers} />
+									<Route path="/admin-manage-orders" component={AdminManageOrders} />
+									<Route path="/new-product" component={NewProduct} />
+									<Route path="/admin" component={AdminView} />
 								</Switch>
 							)}
 						</Switch>
 					)}
-					{/* Displays our Login component as a fallback */}
-					<Route component={MainHome} />
+					<Route  path="/" component={MainHome} />
 				</Switch>
 			</div>
 		)
