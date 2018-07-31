@@ -19,28 +19,31 @@ export const orderReducer = (state = {}, action) => {
 			}
 			const cart = JSON.parse(localStorage.getItem('cart'))
 			console.log('CART', cart)
-			let updatedProducts = [...cart.products],
+
+			let updatedProducts = cart.products,
 				isIncluded = false,
 				productToUpdate,
 				total = 0
 
 			cart.products.map(product => {
 				if (product.productId === action.product.productId) {
+					// console.log('PRODUCT', product.productId, 'actionId', action.product.productId)
 					isIncluded = true
 					productToUpdate = product
 				}
 			})
 
 			if (cart.products.length > 0 && isIncluded === true) {
-				action.product.quantity =
+				productToUpdate.quantity =
 					productToUpdate.quantity + action.product.quantity
-				action.product.subtotal = (
-					action.product.quantity * action.product.price
+				productToUpdate.subtotal = (
+					productToUpdate.quantity * productToUpdate.price
 				).toFixed(2)
+				console.log(productToUpdate)
 				updatedProducts.splice(
-					updatedProducts[productToUpdate],
+					updatedProducts.indexOf(productToUpdate),
 					1,
-					action.product
+					productToUpdate
 				)
 			} else {
 				updatedProducts.push(action.product)
