@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NewReview from './newReview'
 import { postReview } from '../store/action-creators'
 
+
 class Reviews extends Component {
 
   render () {
@@ -29,7 +30,7 @@ class Reviews extends Component {
         <br />
       {
         isLoggedIn && (
-          <NewReview product={product} handleSubmit={this.props.handleSubmit}/>
+          <NewReview product={product} handleSubmit={this.props.handleSubmit} />
         )
       }
       </div>
