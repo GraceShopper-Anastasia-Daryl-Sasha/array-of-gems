@@ -1,6 +1,6 @@
 const router = require('express').Router()
 router.use(require("body-parser").text());
-const stripe = require("stripe")("sk_test_TwTTlid3GeOG6YPydOjARw4I");
+const stripe = require("stripe")('apiKey_getFromSecrets');
 
 module.exports = router
 
