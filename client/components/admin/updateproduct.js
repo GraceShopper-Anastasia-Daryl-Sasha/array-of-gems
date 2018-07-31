@@ -35,7 +35,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = (dispatch, ownProps) => {
-	const id = ownProps.match.params.id
+	const productId = ownProps.match.params.id
 	return {
 		handleSubmit(evt) {
 			evt.preventDefault()
@@ -50,14 +50,16 @@ const mapDispatch = (dispatch, ownProps) => {
 			dispatch(
 				editProduct(
 					{
-						id,
-						title,
-						description,
-						price,
-						stock,
-						type,
-						size,
-						color
+						productId,
+						product: {
+							title,
+							description,
+							price,
+							stock,
+							type,
+							size,
+							color
+						}
 					},
 					ownProps.history
 				)

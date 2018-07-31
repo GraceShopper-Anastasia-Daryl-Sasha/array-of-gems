@@ -75,7 +75,7 @@ export const clearCart = () => {
 	return { type: CLEAR_CART }
 }
 
-export const applyDiscount = (code) => {
+export const applyDiscount = code => {
 	return { type: APPLY_DISCOUNT, code }
 }
 
@@ -151,11 +151,11 @@ export const editProduct = (product, history) => {
 	return async dispatch => {
 		try {
 			const updatedProduct = await axios.put(
-				`/api/products/${product.id}`,
-				product
+				`/api/products/${product.productId}`,
+				product.product
 			)
 			dispatch(updateProduct(updatedProduct))
-			history.push(`/admin-single-product/${product.id}`)
+			history.push(`/admin-single-product/${product.productId}`)
 		} catch (err) {
 			console.log('Product was not updated...', err)
 		}

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Product, Review, Photo } = require('../db/models')
+const { Product, Review, Photo, User } = require('../db/models')
 
 // function isAuthenticated(req, res, next) {
 // 	console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
 	try {
 		const singleProduct = await Product.findById(req.params.productId, {
-			include: [{ model: Review }, { model: Photo }]
+			include: [{ model: Review, include: [{ model: User }] }, { model: Photo }]
 		})
 		if (!singleProduct) {
 			res.sendStatus(404)
