@@ -110,7 +110,6 @@ const singleUserReducer = (state = {}, action) => {
 			}
 		}
 		case UPDATE_ROLE: {
-			console.log('Action', action.user)
 			return { ...state, ...action.user }
 		}
 

@@ -41,7 +41,6 @@ export const auth = (email, password, method) => async dispatch => {
 
 	try {
 		dispatch(getUser(res.data))
-		console.log('res.data', res.data)
 		if (res.data.isAdmin) {
 			history.push('/admin')
 		} else if (res.data.IsLoggedIn) {
@@ -67,7 +66,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function (state = defaultUser, action) {
 	switch (action.type) {
 		case GET_USER:
 			return action.user
