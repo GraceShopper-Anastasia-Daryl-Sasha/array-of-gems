@@ -27,7 +27,6 @@ router.get('/:orderId', async (req, res, next) => {
 // create new order
 // POST /api/orders
 router.post('/', async (req, res, next) => {
-	console.log('INSIDE ROUTE', req.user)
 	try {
 		const email = req.body.userEmail
 		let userAccount = await User.findOne({ where: { email } })

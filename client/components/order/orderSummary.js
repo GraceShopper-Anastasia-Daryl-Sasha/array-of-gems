@@ -29,7 +29,6 @@ class OrderSummary extends Component {
 
 	render() {
 		const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
-		console.log('ORDER SUMMARY', products)
 		return (
 			<div className="cart">
 				<h3>Items in your cart</h3>
@@ -55,7 +54,8 @@ class OrderSummary extends Component {
 						))}
 					</tbody>
 				</table>
-				<p>Total: ${orderTotal}</p>
+				<p>Shipping: $2.99</p>
+				<p>Total: ${(Number(orderTotal) + 2.99)}</p>
 				<form onSubmit={this.handleSubmit}>
 					{/* coupons within stripe only allow for recurring subscriptions, will need to handle otherwise */}
 					<label>Discount Code</label>
