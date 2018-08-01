@@ -31,10 +31,6 @@ const AllProducts = (props) => {
 		})
 	}
 
-	if (categories.length >= 1 && activeProducts.length === 0) {
-		console.log("NO PRODUCTS")
-	}
-
 	return (
 		<div className="products-box" >
 			<Sidebar products={products} categories={categories} />

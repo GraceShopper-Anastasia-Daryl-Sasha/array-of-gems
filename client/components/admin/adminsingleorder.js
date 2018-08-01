@@ -118,7 +118,6 @@ const mapDispatch = (dispatch, ownProps) => {
 		handleSubmit(evt) {
 			evt.preventDefault()
 			const status = evt.target.status.value
-			// console.log('status ', evt.target.status.value)
 			dispatch(editOrder({ id, status }, ownProps.history))
 		}
 	}

@@ -28,8 +28,6 @@ class Routes extends Component {
 
 	render() {
 		const { isLoggedIn, isAdmin } = this.props
-		console.log('IsLoggedIn', isLoggedIn)
-		console.log('Is admin', isAdmin)
 		return (
 			<div className="main-container">
 				<Switch>
@@ -52,7 +50,7 @@ class Routes extends Component {
 									<Route path="/admin-single-order/:id" component={AdminSingleOrder} />
 									<Route path="/admin-single-user/:id" component={AdminSingleUser} />
 									<Route path="/update-product/:id" component={UpdateProduct} />
-									<Route path="/admin-manage-products" component={AdminManageProducts}/>
+									<Route path="/admin-manage-products" component={AdminManageProducts} />
 									<Route path="/admin-manage-users" component={AdminManageUsers} />
 									<Route path="/admin-manage-orders" component={AdminManageOrders} />
 									<Route path="/new-product" component={NewProduct} />
