@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import SearchBar from './searchBar'
-import Carousel from 'react-image-carousel'
+import Carousel from './Carousel'
 import { connect } from 'react-redux'
 import { fetchProducts } from '../store/action-creators'
-
-const images = [
-	'https://cdn.shopify.com/s/files/1/0885/3178/t/9/assets/1626x600_tradition_gemstones.jpg?13357309008435823644',
-	'https://www.energymuse.com/blog/wp-content/uploads/2015/09/purplegemstones-1050x700.jpg',
-	'http://lifematspro.com/wp-content/uploads/2016/04/Amethyst-Crystal-Healing_image1.jpg',
-	'https://cdn7.bigcommerce.com/s-91397/images/stencil/original/products/1422/3021/Fluorite_gemstones_white_magick_alchemy_1__68418.1362590063.jpg?c=2&imbypass=on',
-	'https://www.sagegoddess.com/wp-content/uploads/2017/03/Broken-Gemstones-Sage-Goddess-Blog-FB-Share-1024x538.jpg.optimal.jpg'
-]
 
 class MainHome extends Component {
 	componentDidMount() {
@@ -24,15 +15,7 @@ class MainHome extends Component {
 		const recentProducts = products.splice(0, 6)
 		return (
 			<div className="main-home">
-				<div className="my-carousel">
-					<Carousel
-						images={images}
-						// thumb={true}
-						loop={true}
-						autoplay={4000}
-					/>
-				</div>
-
+				<Carousel />
 				<div className="products-container">
 					<h2>Recent Products</h2>
 					<div className="products">
