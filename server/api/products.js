@@ -1,19 +1,8 @@
 const router = require('express').Router()
 const { Product, Review, Photo, User } = require('../db/models')
 
-// function isAuthenticated(req, res, next) {
-// 	console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
-// 	const { dataValues } = req.user
-// 	console.log('WHAT DOES REQ LOOK LIKE', dataValues.isAdmin)
-// 	if (dataValues.isAdmin) {
-// 		return true
-// 	}
-// 	res.redirect('/')
-// }
-
 // GET /api/products
 router.get('/', async (req, res, next) => {
-	console.log('WHAT DOES REQ LOOK LIKE GET', req.user)
 	try {
 		const allProducts = await Product.findAll({ include: [{ all: true }] })
 		res.json(allProducts)
@@ -40,7 +29,6 @@ router.get('/:productId', async (req, res, next) => {
 // POST /api/products
 router.post('/', async (req, res, next) => {
 	if (req.user && req.user.isAdmin) {
-		console.log('Admin')
 		try {
 			const newProduct = await Product.create(req.body.product)
 			const photos = await Promise.all(
@@ -60,7 +48,6 @@ router.post('/', async (req, res, next) => {
 // PUT /api/products/:id
 router.put('/:id', async (req, res, next) => {
 	if (req.user && req.user.isAdmin) {
-		console.log('Admin')
 		try {
 			const [numberOfAffectedRows, affectedRows] = await Product.update(
 				req.body,
@@ -83,9 +70,7 @@ router.put('/:id', async (req, res, next) => {
 
 // DELETE /api/products/:id
 router.delete('/:id', async (req, res, next) => {
-	console.log('WHAT DOES REQ LOOK LIKE DELETE', req.user)
 	if (req.user && req.user.isAdmin) {
-		console.log('Admin')
 		await Product.destroy({
 			where: {
 				id: req.params.id

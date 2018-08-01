@@ -4,9 +4,13 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './reducers'
 
-const middleware = composeWithDevTools(
-	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-)
+// Use for development
+// const middleware = composeWithDevTools(
+// 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+// )
+
+// Use for production
+const middleware = composeWithDevTools(applyMiddleware(thunkMiddleware))
 const store = createStore(rootReducer, middleware)
 
 export default store
