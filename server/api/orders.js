@@ -27,7 +27,6 @@ router.get('/:orderId', async (req, res, next) => {
 // create new order
 // POST /api/orders
 router.post('/', async (req, res, next) => {
-	console.log('INSIDE ROUTE', req.user)
 	try {
 		const email = req.body.userEmail
 		let userAccount = await User.findOne({ where: { email } })
@@ -58,7 +57,7 @@ router.post('/', async (req, res, next) => {
 			.status(200)
 			.json({ order: newO, lineItems: lineItems, userAccount: userAccount })
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 		res.sendStatus(500)
 	}
 })
@@ -66,7 +65,6 @@ router.post('/', async (req, res, next) => {
 // PUT /api/orders/:id
 router.put('/:id', async (req, res, next) => {
 	if (req.user && req.user.isAdmin) {
-		console.log('Admin')
 		try {
 			const [numberOfAffectedRows, affectedRows] = await Order.update(
 				req.body,

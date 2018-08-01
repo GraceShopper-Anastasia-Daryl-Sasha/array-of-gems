@@ -6,7 +6,6 @@ import { postReview } from '../store/action-creators'
 class Reviews extends Component {
 	render() {
 		const { reviews, isLoggedIn, product } = this.props
-		console.log('reviews', reviews)
 
 		function mapStars(rating) {
 			let stars = []

@@ -204,8 +204,8 @@ export const postOrder = (product, history) => {
 	return async dispatch => {
 		try {
 			const newOrder = await axios.post('/api/orders', product)
-			dispatch(addToCart(newOrder))
-			history.push(`/myAccount`)
+			// dispatch(addToCart(newOrder))
+			// history.push(`/home`)
 		} catch (err) {
 			console.log('There was an error adding to order', err)
 		}

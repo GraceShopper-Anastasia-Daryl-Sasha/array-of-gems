@@ -10,7 +10,6 @@ class MyAccount extends Component {
 
 	render() {
 		const { userInfo } = this.props
-		console.log('myAccountUser')
 		if (Object.keys(userInfo).length < 1) {
 			return <div>Data is loading...</div>
 		} else {
@@ -43,8 +42,8 @@ class MyAccount extends Component {
 							</tbody>
 						</table>
 					) : (
-						<p>You haven't made any orders yet!</p>
-					)}
+							<p>You haven't made any orders yet!</p>
+						)}
 				</div>
 			)
 		}
@@ -60,7 +59,6 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
 	const userId = ownProps.id
-	console.log('My account, userId ', userId)
 	return {
 		fetchUser: () => dispatch(fetchUser(userId))
 	}

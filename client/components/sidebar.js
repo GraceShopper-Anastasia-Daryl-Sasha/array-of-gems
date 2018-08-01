@@ -14,16 +14,15 @@ class Sidebar extends Component {
 	}
 
 	handleSubmit = evt => {
-		console.log('EVT.TARGET.NAME', evt.target.name)
 		evt.preventDefault()
 		let selected = {}
 		evt.target.name === 'submit'
 			? (selected = this.state)
 			: (selected = {
-					color: [],
-					type: [],
-					size: []
-			  })
+				color: [],
+				type: [],
+				size: []
+			})
 		this.props.getCategories(selected)
 	}
 
@@ -46,17 +45,7 @@ class Sidebar extends Component {
 				[evt.target.name]: newCategoryArr
 			})
 		}
-		console.log('STATE', this.state)
 	}
-
-	// handleClear = evt => {
-	// 	const selected = {
-	// 		color: [],
-	// 		type: [],
-	// 		size: []
-	// 	}
-	// 	this.props.getCategories(selected)
-	// }
 
 	render() {
 		const allProducts = this.props.products

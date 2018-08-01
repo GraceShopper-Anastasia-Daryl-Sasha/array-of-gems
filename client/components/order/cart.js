@@ -43,10 +43,6 @@ class Cart extends Component {
 		this.props.removeFromCart(productId)
 	}
 
-	handleChange = evt => {
-		evt.preventDefault()
-		console.log(evt.target.value)
-	}
 	render() {
 		if (!localStorage.getItem('cart')) {
 			localStorage.setItem(
@@ -58,8 +54,6 @@ class Cart extends Component {
 			)
 		}
 		const { products, orderTotal } = JSON.parse(localStorage.getItem('cart'))
-		console.log('INSIDE CART', this.props.products, 'PRODUCTS FROM LOCAL STORAGE', products)
-		// const localStorageObj = JSON.parse(localStorage.getItem('cart'))
 		return (
 			<div className="cart">
 				<h2>Cart</h2>

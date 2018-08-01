@@ -2,7 +2,6 @@ import React from 'react'
 
 const ProductForm = props => {
 	const { handleSubmit, product } = props
-	console.log()
 	let isCreate = true
 	if (product.title !== '') {
 		isCreate = false

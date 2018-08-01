@@ -30,8 +30,6 @@ class AdminSingleProduct extends Component {
 	handlePrice(evt) {
 		evt.preventDefault()
 		const stock = evt.target.stock.value
-		console.log('Qty ', stock)
-		console.log('Qty type ', typeof stock)
 		this.props.editProduct(+stock)
 	}
 
